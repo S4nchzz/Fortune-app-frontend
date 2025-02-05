@@ -6,7 +6,5 @@
         android:orientation="horizontal"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading_animation"
-        app:lottie_autoPlay="true"
-        android:background="@color/transparent"
-        app:lottie_scale="@integer/material_motion_duration_long_2">
+        app:lottie_autoPlay="true">
 </com.airbnb.lottie.LottieAnimationView>

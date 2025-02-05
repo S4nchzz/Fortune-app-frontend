@@ -33,7 +33,6 @@ object AuthService {
                 Log.e("LOGIN_RESPONSE_FAILURE", t.toString())
                 callBack(false, false)
             }
-
         })
     }
 }

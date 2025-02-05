@@ -71,4 +71,5 @@ dependencies {
     implementation(libs.converter.scalars)
 
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.lottie)
 }

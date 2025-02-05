@@ -1,6 +1,9 @@
 package com.fortune.app.auth
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -30,36 +33,39 @@ class LoginActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btn_login).setOnClickListener {
-            val nif_nie: String = findViewById<EditText>(R.id.login_data_nifnie).text.toString()
-            val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
+            loginServerResponse()
+        }
+    }
 
-            val alertDialog = AlertDialog.Builder(this)
-                .setView(R.layout.alert_dialog)
-                .create()
+    private fun loginServerResponse() {
+        val nif_nie: String = findViewById<EditText>(R.id.login_data_nifnie).text.toString()
+        val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
 
-            alertDialog.setCancelable(false)
-            alertDialog.show()
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(R.layout.alert_dialog)
+            .create()
 
-            CoroutineScope(Dispatchers.IO).launch {
-                AuthService.login(nif_nie, password) { loginCredentials, hasDigitalSign ->
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.setCancelable(false)
+        alertDialog.show()
 
-                    // Coroutine que modifica las vistas generadas del hilo main por el alert
-                    CoroutineScope(Dispatchers.Main).launch {
-                        alertDialog.dismiss()
-                        if (loginCredentials && !hasDigitalSign) {
-                            val openPinView = Intent(this@LoginActivity, PinActivity::class.java)
-                            startActivity(openPinView)
-                        } else if (hasDigitalSign) {
-                            // LOAD MAIN APP
-                        } else {
-                            Toast.makeText(this@LoginActivity, "Login incorrecto", Toast.LENGTH_SHORT).show() // Modificar por alguna animacion
-                        }
+        CoroutineScope(Dispatchers.IO).launch {
+            AuthService.login(nif_nie, password) { loginCredentials, hasDigitalSign ->
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    alertDialog.dismiss()
+                    if (loginCredentials && !hasDigitalSign) {
+                        val openPinView = Intent(this@LoginActivity, PinActivity::class.java)
+                        startActivity(openPinView)
+                    } else if (hasDigitalSign) {
+                        // LOAD MAIN APP
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Login incorrecto", Toast.LENGTH_SHORT).show() // Modificar por alguna animacion
                     }
                 }
             }
         }
     }
-
     private fun adjustScreenInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.ac_login)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
