@@ -8,5 +8,5 @@ object RetroFitInstance {
     val retroFit = Retrofit.Builder()
         .baseUrl(BuildConfig.API_URL)
         .addConverterFactory(GsonConverterFactory.create())
-        .build()
+        .build();
 }
