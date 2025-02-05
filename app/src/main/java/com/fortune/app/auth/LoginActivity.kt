@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -32,15 +33,27 @@ class LoginActivity : AppCompatActivity() {
             val nif_nie: String = findViewById<EditText>(R.id.login_data_nifnie).text.toString()
             val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
 
+            val alertDialog = AlertDialog.Builder(this)
+                .setView(R.layout.alert_dialog)
+                .create()
+
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+
             CoroutineScope(Dispatchers.IO).launch {
                 AuthService.login(nif_nie, password) { loginCredentials, hasDigitalSign ->
-                    if (loginCredentials && !hasDigitalSign) {
-                        val openPinView = Intent(this@LoginActivity, PinActivity::class.java)
-                        startActivity(openPinView)
-                    } else if (hasDigitalSign) {
-                        // LOAD MAIN APP
-                    } else {
-                        Toast.makeText(this@LoginActivity, "Login incorrecto", Toast.LENGTH_SHORT).show() // Modificar por alguna animacion
+
+                    // Coroutine que modifica las vistas generadas del hilo main por el alert
+                    CoroutineScope(Dispatchers.Main).launch {
+                        alertDialog.dismiss()
+                        if (loginCredentials && !hasDigitalSign) {
+                            val openPinView = Intent(this@LoginActivity, PinActivity::class.java)
+                            startActivity(openPinView)
+                        } else if (hasDigitalSign) {
+                            // LOAD MAIN APP
+                        } else {
+                            Toast.makeText(this@LoginActivity, "Login incorrecto", Toast.LENGTH_SHORT).show() // Modificar por alguna animacion
+                        }
                     }
                 }
             }

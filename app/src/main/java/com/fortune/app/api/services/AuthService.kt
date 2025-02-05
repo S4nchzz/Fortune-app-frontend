@@ -30,7 +30,7 @@ object AuthService {
             }
 
             override fun onFailure(call: Call<LoginCredentialsResponseModal>, t: Throwable) {
-                Log.e("LOGIN_e", t.toString())
+                Log.e("LOGIN_RESPONSE_FAILURE", t.toString())
                 callBack(false, false)
             }
 
