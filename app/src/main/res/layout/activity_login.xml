@@ -24,7 +24,7 @@
             android:layout_height="0dp"
             android:orientation="vertical">
         <EditText
-                android:id="@+id/login_data_nifnie"
+                android:id="@+id/login_data_dniNie"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
-                android:hint="NIF/NIE"
+                android:hint="DNI/NIE"
                 android:textColorHint="@color/disabled1"/>
         <EditText
                 android:id="@+id/login_data_password"

@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerServerRequest() {
-        val nifnie: String = findViewById<EditText>(R.id.register_data_nifnie).text.toString()
+        val dniNie: String = findViewById<EditText>(R.id.register_data_dniNie).text.toString()
         val email: String = findViewById<EditText>(R.id.register_data_email).text.toString()
         val password: String = findViewById<EditText>(R.id.register_data_password).text.toString()
 
@@ -44,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
         alertDialog.show()
 
         CoroutineScope(Dispatchers.IO).launch {
-            AuthService.register(nifnie, email, password) { user ->
+            AuthService.register(dniNie, email, password) { user ->
                 CoroutineScope(Dispatchers.Main).launch {
                     alertDialog.dismiss()
                     user?.digitalSign?.let {

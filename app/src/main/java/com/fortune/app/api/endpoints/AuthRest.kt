@@ -10,8 +10,8 @@ import retrofit2.http.Query
 
 interface AuthRest {
     @GET("${BuildConfig.API_URL}/user/login")
-    fun login(@Query("nif_nie") nif_nie: String, @Query("password") password: String): Call<LoginCredentialsResponseModal>
+    fun login(@Query("dni_nie") dni_nie: String, @Query("password") password: String): Call<UserModal>
 
     @POST("${BuildConfig.API_URL}/user/register")
-    fun register(@Query("nif_nie") nif_nie: String, @Query("email") email: String, @Query("password") password: String): Call<UserModal>
+    fun register(@Query("dni_nie") dni_nie: String, @Query("email") email: String, @Query("password") password: String): Call<UserModal>
 }

@@ -18,6 +18,7 @@ import com.fortune.app.R
 import com.fortune.app.api.services.AuthService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -34,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginServerRequest() {
-        val nif_nie: String = findViewById<EditText>(R.id.login_data_nifnie).text.toString()
+        val dni_nie: String = findViewById<EditText>(R.id.login_data_dniNie).text.toString()
         val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
 
         val alertDialog = AlertDialog.Builder(this)
@@ -46,17 +47,17 @@ class LoginActivity : AppCompatActivity() {
         alertDialog.show()
 
         CoroutineScope(Dispatchers.IO).launch {
-            AuthService.login(nif_nie, password) { loginCredentials, hasDigitalSign ->
-
+            AuthService.login(dni_nie, password) { user ->
                 CoroutineScope(Dispatchers.Main).launch {
                     alertDialog.dismiss()
-                    if (loginCredentials && !hasDigitalSign) {
-                        val openPinView = Intent(this@LoginActivity, PinActivity::class.java)
-                        startActivity(openPinView)
-                    } else if (hasDigitalSign) {
-                        // LOAD MAIN APP
-                    } else {
-                        Toast.makeText(this@LoginActivity, "Login incorrecto", Toast.LENGTH_SHORT).show() // Modificar por alguna animacion
+                    if (user != null) {
+                        user.digitalSign?.let {
+                            //Open main app view
+                        } ?: run {
+                            val openPinActivity = Intent(this@LoginActivity, PinActivity::class.java)
+                            startActivity(openPinActivity)
+                        }
+
                     }
                 }
             }
