@@ -45,12 +45,14 @@ class RegisterActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             AuthService.register(nifnie, email, password) { user ->
-                alertDialog.dismiss()
-                user?.digitalSign?.let {
-                    // Open main view app
-                } ?: run {
-                    val intent = Intent(this@RegisterActivity, PinActivity::class.java)
-                    startActivity(intent)
+                CoroutineScope(Dispatchers.Main).launch {
+                    alertDialog.dismiss()
+                    user?.digitalSign?.let {
+                        // Open main view app
+                    } ?: run {
+                        val intent = Intent(this@RegisterActivity, PinActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
         }
