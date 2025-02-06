@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.auth.LoginActivity
+import com.fortune.app.auth.RegisterActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_login).setOnClickListener {
             val openLogin: Intent = Intent(this, LoginActivity::class.java)
             startActivity(openLogin)
+        }
+
+        findViewById<Button>(R.id.btn_sing_up).setOnClickListener {
+            val openRegister: Intent = Intent(this, RegisterActivity::class.java)
+            startActivity(openRegister)
         }
     }
 

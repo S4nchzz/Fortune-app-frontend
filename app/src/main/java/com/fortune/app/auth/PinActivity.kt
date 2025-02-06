@@ -16,6 +16,14 @@ import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 
 class PinActivity : AppCompatActivity() {
+    private val pinValues: List<Int> = listOf(
+        R.id.firma_box_1,
+        R.id.firma_box_2,
+        R.id.firma_box_3,
+        R.id.firma_box_4,
+        R.id.firma_box_5
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,17 +31,17 @@ class PinActivity : AppCompatActivity() {
         adjustScreenInsets()
 
         manageSignFocus();
+
+        findViewById<Button>(R.id.btn_confirm_pin).setOnClickListener {
+            pinCreationServerRequest()
+        }
+    }
+
+    private fun pinCreationServerRequest() {
+
     }
 
     private fun manageSignFocus() {
-        val pinValues: List<Int> = listOf(
-            R.id.firma_box_1,
-            R.id.firma_box_2,
-            R.id.firma_box_3,
-            R.id.firma_box_4,
-            R.id.firma_box_5
-        )
-
         for (i in 0 until pinValues.size - 1) {
             val et1 = findViewById<EditText>(pinValues[i])
             val et2 = findViewById<EditText>(pinValues[i + 1])

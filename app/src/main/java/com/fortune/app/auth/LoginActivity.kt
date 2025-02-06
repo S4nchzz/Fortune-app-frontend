@@ -28,16 +28,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         adjustScreenInsets()
 
-        findViewById<Button>(R.id.btn_sing_up).setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-
         findViewById<Button>(R.id.btn_login).setOnClickListener {
-            loginServerResponse()
+            loginServerRequest()
         }
     }
 
-    private fun loginServerResponse() {
+    private fun loginServerRequest() {
         val nif_nie: String = findViewById<EditText>(R.id.login_data_nifnie).text.toString()
         val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
 
