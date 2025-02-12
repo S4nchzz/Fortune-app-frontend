@@ -9,7 +9,7 @@
         android:background="@drawable/login_bg">
 
     <ImageView
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_width="150dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
@@ -55,6 +55,18 @@
                 android:hint="Password"
                 android:textColorHint="@color/disabled1"/>
 
+        <EditText
+                android:id="@+id/register_data_confirm_password"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:inputType="textPassword"
+                android:layout_gravity="center"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:hint="Confirm Password"
+                android:textColorHint="@color/disabled1"/>
+
         <LinearLayout
                 android:layout_weight="2"
                 android:layout_width="match_parent"
@@ -68,7 +80,7 @@
                     android:id="@+id/btn_register"
                     android:layout_weight="1"
                     android:layout_width="50dp"
-                    android:layout_height="55dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:text="Sign up"

@@ -3,12 +3,9 @@ package com.fortune.app.auth
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +15,7 @@ import com.fortune.app.R
 import com.fortune.app.api.services.AuthService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
 
         val alertDialog = AlertDialog.Builder(this)
-            .setView(R.layout.alert_dialog)
+            .setView(R.layout.loading_dialog)
             .create()
 
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

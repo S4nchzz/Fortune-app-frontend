@@ -4,9 +4,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -23,7 +23,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
-        adjustScreenInInsets()
+        adjustScreenInsets()
 
         findViewById<Button>(R.id.btn_register).setOnClickListener {
             registerServerRequest()
@@ -31,12 +31,18 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerServerRequest() {
-        val dniNie: String = findViewById<EditText>(R.id.register_data_dniNie).text.toString()
-        val email: String = findViewById<EditText>(R.id.register_data_email).text.toString()
-        val password: String = findViewById<EditText>(R.id.register_data_password).text.toString()
+        val dniNie: String = findViewById<EditText>(R.id.register_data_dniNie).text.toString().trim()
+        val email: String = findViewById<EditText>(R.id.register_data_email).text.toString().trim()
+        val password: String = findViewById<EditText>(R.id.register_data_password).text.toString().trim()
+        val confirmPassword: String = findViewById<EditText>(R.id.register_data_confirm_password).text.toString().trim()
+
+        if (password != confirmPassword) {
+            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            return;
+        }
 
         val alertDialog: AlertDialog = AlertDialog.Builder(this)
-            .setView(R.layout.alert_dialog)
+            .setView(R.layout.loading_dialog)
             .create()
 
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -47,18 +53,21 @@ class RegisterActivity : AppCompatActivity() {
             AuthService.register(dniNie, email, password) { user ->
                 CoroutineScope(Dispatchers.Main).launch {
                     alertDialog.dismiss()
-                    user?.digitalSign?.let {
-                        // Open main view app
-                    } ?: run {
-                        val intent = Intent(this@RegisterActivity, PinActivity::class.java)
-                        startActivity(intent)
+                    if (user != null) {
+                        user.digitalSign?.let {
+                            // Open main view
+                            Toast.makeText(this@RegisterActivity, "R correcto", Toast.LENGTH_SHORT).show()
+                        } ?: run {
+                            val intent = Intent(this@RegisterActivity, UserProfile::class.java)
+                            startActivity(intent)
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun adjustScreenInInsets() {
+    private fun adjustScreenInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.ac_register)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
