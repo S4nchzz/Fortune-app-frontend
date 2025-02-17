@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
+import com.fortune.app.api.services.UserProfileService
 
 class UserProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,16 +16,21 @@ class UserProfile : AppCompatActivity() {
         setContentView(R.layout.activity_user_profile)
         adjustScreenInsets()
 
-        if (checkData()) {
-            // open pin
-        }
-    }
-
-    private fun checkData(): Boolean {
         val name: EditText = findViewById(R.id.profile_name_data)
         val address: EditText = findViewById(R.id.profile_address_data)
         val telf: EditText = findViewById(R.id.profile_telf_data)
 
+        if (checkData(name, address, telf)) {
+            val id = intent.getLongExtra("id", -1)
+            if (id != -1L) {
+                UserProfileService.generateProfile(id, name.text.toString(), address.text.toString(), telf.text.toString()) { userProfile ->
+                    // se obtiene el userProfile y se abre el pin
+                }
+            }
+        }
+    }
+
+    private fun checkData(name: EditText, address: EditText, telf: EditText): Boolean {
         if (name.text.isEmpty() || address.text.isEmpty() || telf.text.isEmpty()) {
             return false
         }

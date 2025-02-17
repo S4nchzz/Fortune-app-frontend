@@ -59,6 +59,7 @@ class RegisterActivity : AppCompatActivity() {
                             Toast.makeText(this@RegisterActivity, "Firma encontrada", Toast.LENGTH_SHORT).show()
                         } ?: run {
                             val intent = Intent(this@RegisterActivity, UserProfile::class.java)
+                            intent.putExtra("id", user.id)
                             startActivity(intent)
                         }
                     }
