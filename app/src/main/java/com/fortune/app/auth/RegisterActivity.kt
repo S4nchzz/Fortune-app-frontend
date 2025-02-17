@@ -56,7 +56,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (user != null) {
                         user.digitalSign?.let {
                             // Open main view
-                            Toast.makeText(this@RegisterActivity, "R correcto", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterActivity, "Firma encontrada", Toast.LENGTH_SHORT).show()
                         } ?: run {
                             val intent = Intent(this@RegisterActivity, UserProfile::class.java)
                             startActivity(intent)

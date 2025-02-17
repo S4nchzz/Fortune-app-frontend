@@ -52,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
                             val openPinActivity = Intent(this@LoginActivity, PinActivity::class.java)
                             startActivity(openPinActivity)
                         }
-
                     }
                 }
             }
