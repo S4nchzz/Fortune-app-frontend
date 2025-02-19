@@ -6,6 +6,7 @@
 
     <application
             android:allowBackup="true"
+            android:name=".FApplication"
             android:dataExtractionRules="@xml/data_extraction_rules"
             android:fullBackupContent="@xml/backup_rules"
             android:icon="@mipmap/ic_launcher"
@@ -16,16 +17,16 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
-                android:name=".auth.UserProfile"
+                android:name=".ui.view.auth.UserProfile"
                 android:exported="false" />
         <activity
-                android:name=".auth.RegisterActivity"
+                android:name=".ui.view.auth.RegisterActivity"
                 android:exported="false" />
         <activity
-                android:name=".auth.PinActivity"
+                android:name=".ui.view.auth.PinActivity"
                 android:exported="false" />
         <activity
-                android:name=".auth.LoginActivity"
+                android:name=".ui.view.auth.LoginActivity"
                 android:exported="false" />
         <activity
                 android:name=".MainActivity"

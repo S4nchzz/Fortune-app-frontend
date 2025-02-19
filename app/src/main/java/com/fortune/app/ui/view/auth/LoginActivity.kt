@@ -1,4 +1,4 @@
-package com.fortune.app.auth
+package com.fortune.app.ui.view.auth
 
 import android.content.Intent
 import android.graphics.Color
@@ -6,13 +6,16 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
-import com.fortune.app.api.services.AuthService
+import com.fortune.app.data.repositories.AuthAPIRepository
+import com.fortune.app.ui.viewmodal.auth.Auth_ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginServerRequest() {
-        val dni_nie: String = findViewById<EditText>(R.id.login_data_dniNie).text.toString()
+        val identity_document: String = findViewById<EditText>(R.id.login_data_dniNie).text.toString()
         val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
 
         val alertDialog = AlertDialog.Builder(this)
@@ -41,21 +44,15 @@ class LoginActivity : AppCompatActivity() {
         alertDialog.setCancelable(false)
         alertDialog.show()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            AuthService.login(dni_nie, password) { user ->
-                CoroutineScope(Dispatchers.Main).launch {
-                    alertDialog.dismiss()
-                    if (user != null) {
-                        user.digitalSign?.let {
-                            //Open main app view
-                        } ?: run {
-                            val openPinActivity = Intent(this@LoginActivity, PinActivity::class.java)
-                            startActivity(openPinActivity)
-                        }
-                    }
-                }
-            }
+        val authViewModel: Auth_ViewModel by viewModels()
+        authViewModel.login.observe(this) { userEntity ->
+            Toast.makeText(this@LoginActivity, userEntity.email, Toast.LENGTH_SHORT).show()
         }
+
+        authViewModel.login(identity_document, password)
+
+
+
     }
     private fun adjustScreenInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.ac_login)) { v, insets ->

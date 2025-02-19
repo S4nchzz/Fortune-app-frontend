@@ -1,10 +1,6 @@
-package com.fortune.app.auth
+package com.fortune.app.ui.view.auth
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.method.KeyListener
-import android.view.KeyEvent
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge

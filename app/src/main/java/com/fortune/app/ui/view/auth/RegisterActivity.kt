@@ -1,4 +1,4 @@
-package com.fortune.app.auth
+package com.fortune.app.ui.view.auth
 
 import android.content.Intent
 import android.graphics.Color
@@ -8,17 +8,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.fortune.app.R
-import com.fortune.app.api.services.AuthService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.fortune.app.ui.viewmodal.auth.Auth_ViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
+@AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerServerRequest() {
-        val dniNie: String = findViewById<EditText>(R.id.register_data_dniNie).text.toString().trim()
+        val identity_document: String = findViewById<EditText>(R.id.register_data_dniNie).text.toString().trim()
         val email: String = findViewById<EditText>(R.id.register_data_email).text.toString().trim()
         val password: String = findViewById<EditText>(R.id.register_data_password).text.toString().trim()
         val confirmPassword: String = findViewById<EditText>(R.id.register_data_confirm_password).text.toString().trim()
@@ -49,23 +52,18 @@ class RegisterActivity : AppCompatActivity() {
         alertDialog.setCancelable(false)
         alertDialog.show()
 
-        CoroutineScope(Dispatchers.IO).launch {
-            AuthService.register(dniNie, email, password) { user ->
-                CoroutineScope(Dispatchers.Main).launch {
-                    alertDialog.dismiss()
-                    if (user != null) {
-                        user.digitalSign?.let {
-                            // Open main view
-                            Toast.makeText(this@RegisterActivity, "Firma encontrada", Toast.LENGTH_SHORT).show()
-                        } ?: run {
-                            val intent = Intent(this@RegisterActivity, UserProfile::class.java)
-                            intent.putExtra("id", user.id)
-                            startActivity(intent)
-                        }
-                    }
-                }
+        val authViewModel: Auth_ViewModel by viewModels()
+
+        authViewModel.register.observe(this) { userEntity ->
+            alertDialog.hide()
+
+            if (userEntity.digitalSign == null) {
+                val openPinActivity = Intent(this, PinActivity::class.java)
+                startActivity(openPinActivity)
             }
         }
+
+        authViewModel.register(identity_document, email, password)
     }
 
     private fun adjustScreenInsets() {

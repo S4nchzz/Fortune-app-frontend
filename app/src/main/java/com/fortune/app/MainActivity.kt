@@ -1,16 +1,16 @@
 package com.fortune.app
 
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.fortune.app.auth.LoginActivity
-import com.fortune.app.auth.RegisterActivity
+import com.fortune.app.ui.view.auth.LoginActivity
+import com.fortune.app.ui.view.auth.RegisterActivity
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
