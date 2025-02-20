@@ -1,14 +1,13 @@
-package com.fortune.app.data.repositories
+package com.fortune.app.data.repositories.remote.user
 
 import com.fortune.app.data.db.entities.UserEntity
 import com.fortune.app.data.remote.UserAPIRest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
-import retrofit2.await
 import javax.inject.Inject
 
-class AuthAPIRepository @Inject constructor(
+class UserAPIRepository @Inject constructor(
     private val retrofit: Retrofit
 ) {
     private val userAPIService = retrofit.create(UserAPIRest::class.java)
@@ -22,6 +21,18 @@ class AuthAPIRepository @Inject constructor(
     suspend fun login(identityDocument: String, password: String): UserEntity {
         return withContext(Dispatchers.IO) {
             userAPIService.login(identityDocument, password)
+        }
+    }
+
+    suspend fun createDigitalSign(user_id: Long, ds: Int): UserEntity {
+        return withContext(Dispatchers.IO) {
+            userAPIService.createDigitalSign(user_id, ds)
+        }
+    }
+
+    suspend fun updateProfileCreationStatus(userProfileStatusUpdated: UserEntity): UserEntity {
+        return withContext(Dispatchers.IO) {
+            userAPIService.updateProfileStatus(userProfileStatusUpdated.id, userProfileStatusUpdated.isProfileCreated)
         }
     }
 }

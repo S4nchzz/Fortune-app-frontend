@@ -50,18 +50,14 @@
                 android:layout_weight="2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginBottom="30dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp">
+                android:layout_marginBottom="30dp">
 
             <Button
                     android:id="@+id/btn_login"
-                    android:layout_weight="1"
-                    android:layout_width="50dp"
+                    android:layout_width="300dp"
                     android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
                     android:text="Log in"
                     android:textColor="@color/black"
                     android:textSize="20dp"

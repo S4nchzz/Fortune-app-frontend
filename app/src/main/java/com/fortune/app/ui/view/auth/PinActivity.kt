@@ -1,16 +1,22 @@
 package com.fortune.app.ui.view.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
+import com.fortune.app.ui.viewmodel.user.User_ViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PinActivity : AppCompatActivity() {
     private val pinValues: List<Int> = listOf(
         R.id.firma_box_1,
@@ -34,7 +40,18 @@ class PinActivity : AppCompatActivity() {
     }
 
     private fun pinCreationServerRequest() {
+        val userViewModel: User_ViewModel by viewModels()
+        userViewModel.digitalSign.observe(this) { userEntity ->
+            if (userEntity?.digitalSign != null) {
+                // Open main activity
+                Log.e("pinpin", userEntity.digitalSign.toString())
+            }
+        }
 
+        // Last check if the value keeps being filled
+        if (isPinCorrect()) {
+            userViewModel.createDigitalSign(getCompletePin())
+        }
     }
 
     private fun manageSignFocus() {
@@ -67,7 +84,7 @@ class PinActivity : AppCompatActivity() {
 
         findViewById<EditText>(pinValues[pinValues.size - 1]).addTextChangedListener {
             val confirmButton = findViewById<Button>(R.id.btn_confirm_pin)
-            confirmButton.isEnabled = isPinCorrect(pinValues)
+            confirmButton.isEnabled = isPinCorrect()
 
             if (confirmButton.isEnabled) {
                 confirmButton.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
@@ -78,7 +95,7 @@ class PinActivity : AppCompatActivity() {
         }
     }
 
-    private fun isPinCorrect(pinValues: List<Int>): Boolean {
+    private fun isPinCorrect(): Boolean {
         for (pin in pinValues) {
             if (findViewById<EditText>(pin).text.isEmpty()) {
                 return false
@@ -86,6 +103,16 @@ class PinActivity : AppCompatActivity() {
         }
 
         return true
+    }
+
+    private fun getCompletePin(): Int {
+        var allPinValues: String = ""
+
+        for (pin in pinValues) {
+            allPinValues += findViewById<EditText>(pin).text.toString()
+        }
+
+        return allPinValues.toInt()
     }
 
     private fun adjustScreenInsets() {

@@ -5,7 +5,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.auth.UserProfile"
+        tools:context=".ui.view.auth.UProfileActivity"
         android:orientation="vertical"
         android:background="@drawable/bg">
 
@@ -28,54 +28,53 @@
             android:layout_gravity="center"/>
 
 
-    <EditText
-            android:id="@+id/profile_name_data"
-            android:layout_weight="1"
+    <LinearLayout
+            android:layout_weight="5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:inputType="textPassword"
-            android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:hint="Nombre"
-            android:textColorHint="@color/disabled1"/>
+            android:orientation="vertical">
+        <EditText
+                android:id="@+id/profile_name_data"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:hint="Nombre"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:textColorHint="@color/disabled1"/>
 
-    <EditText
-            android:id="@+id/profile_address_data"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:inputType="textPassword"
-            android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:hint="Dirección"
-            android:textColorHint="@color/disabled1"/>
+        <EditText
+                android:id="@+id/profile_address_data"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:hint="Dirección"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:textColorHint="@color/disabled1"/>
 
-    <EditText
-            android:id="@+id/profile_telf_data"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:inputType="number"
-            android:layout_gravity="center"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:hint="Telf"
-            android:textColorHint="@color/disabled1"/>
+        <EditText
+                android:id="@+id/profile_phone_data"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:hint="Telf"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:textColorHint="@color/disabled1"/>
+    </LinearLayout>
 
     <Button
-            android:id="@+id/btn_confirm_pin"
-            android:layout_weight="1"
-            android:layout_width="200dp"
-            android:layout_height="0dp"
-            android:enabled="false"
-            android:layout_gravity="center|top"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="50dp"
+            android:id="@+id/btn_confirm_profile"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="100dp"
             android:text="Confirmar"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
             android:backgroundTint="@color/white"/>
+
 </LinearLayout>

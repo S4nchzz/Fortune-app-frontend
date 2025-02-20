@@ -17,7 +17,7 @@
             android:usesCleartextTraffic="true"
             tools:targetApi="31">
         <activity
-                android:name=".ui.view.auth.UserProfile"
+                android:name=".ui.view.auth.UProfileActivity"
                 android:exported="false" />
         <activity
                 android:name=".ui.view.auth.RegisterActivity"

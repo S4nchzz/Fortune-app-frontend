@@ -7,17 +7,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.fortune.app.R
-import com.fortune.app.ui.viewmodal.auth.Auth_ViewModel
+import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
+import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
@@ -52,18 +52,26 @@ class RegisterActivity : AppCompatActivity() {
         alertDialog.setCancelable(false)
         alertDialog.show()
 
-        val authViewModel: Auth_ViewModel by viewModels()
+        val authViewModel: User_ViewModel by viewModels()
+
+        clearUserDataDBData() // Clear data before add new one
 
         authViewModel.register.observe(this) { userEntity ->
-            alertDialog.hide()
+            alertDialog.dismiss()
 
             if (userEntity.digitalSign == null) {
-                val openPinActivity = Intent(this, PinActivity::class.java)
-                startActivity(openPinActivity)
+                val openUProfile = Intent(this, UProfileActivity::class.java)
+                startActivity(openUProfile)
             }
         }
 
         authViewModel.register(identity_document, email, password)
+    }
+
+    private fun clearUserDataDBData() {
+        val userViewModel: User_ViewModel by viewModels()
+
+        userViewModel.clearLocalUsers()
     }
 
     private fun adjustScreenInsets() {

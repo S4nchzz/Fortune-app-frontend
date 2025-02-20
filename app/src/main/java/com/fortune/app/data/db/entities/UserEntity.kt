@@ -5,12 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "fl_entity")
+@Entity(tableName = "fl_user")
 data class UserEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-
-    @ColumnInfo(name = "user_id")
-    @SerializedName("user_id") val user_id: Long,
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    @SerializedName("user_id") val id: Long,
 
     @ColumnInfo(name = "identity_document")
     @SerializedName("identityDocument") val identity_document: String,
@@ -19,5 +18,8 @@ data class UserEntity(
     @SerializedName("email") val email: String,
 
     @ColumnInfo(name = "digital_sign")
-    @SerializedName("digital_sign") val digitalSign: Int?
+    @SerializedName("digital_sign") val digitalSign: Int?,
+
+    @ColumnInfo(name = "is_profile_created")
+    @SerializedName("is_profile_created") var isProfileCreated: Boolean
 )
