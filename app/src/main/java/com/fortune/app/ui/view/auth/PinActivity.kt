@@ -1,18 +1,26 @@
 package com.fortune.app.ui.view.auth
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
+import com.fortune.app.data.entities.user.dto.UProfileDTO
+import com.fortune.app.data.entities.user.dto.UserDTO
+import com.fortune.app.ui.view.MainAppActivity
+import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
+import com.fortune.app.ui.viewmodel.bank_data.Card_ViewModel
+import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,16 +49,42 @@ class PinActivity : AppCompatActivity() {
 
     private fun pinCreationServerRequest() {
         val userViewModel: User_ViewModel by viewModels()
-        userViewModel.digitalSign.observe(this) { userEntity ->
-            if (userEntity?.digitalSign != null) {
-                // Open main activity
-                Log.e("pinpin", userEntity.digitalSign.toString())
-            }
-        }
+        val uProfileViewModel: UProfile_ViewModel by viewModels()
+        val accountViewModel: Account_ViewModel by viewModels()
 
-        // Last check if the value keeps being filled
+        val userDTO = intent.getSerializableExtra("userDTO", UserDTO::class.java)
+        val uProfileDto = intent.getSerializableExtra("uProfileDTO", UProfileDTO::class.java)
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(R.layout.loading_dialog)
+            .create()
+
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+
         if (isPinCorrect()) {
-            userViewModel.createDigitalSign(getCompletePin())
+            userViewModel.register.observe(this) {
+                uProfileViewModel.profile.observe(this) {
+                    userViewModel.digitalSign.observe(this) {
+                        accountViewModel.account.observe(this) {
+                            alertDialog.dismiss()
+
+                            val openMainView = Intent(this@PinActivity, MainAppActivity::class.java)
+                            startActivity(openMainView)
+                            finish()
+                        }
+
+                        accountViewModel.createAccount()
+                    }
+
+                    userViewModel.createDigitalSign(getCompletePin())
+                }
+
+                uProfileViewModel.createProfile(uProfileDto)
+            }
+
+            userViewModel.register(userDTO)
         }
     }
 

@@ -1,10 +1,12 @@
-package com.fortune.app.data.db.entities
+package com.fortune.app.data.entities.user
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.fortune.app.data.entities.user.UserEntity
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(
     tableName = "fl_user_profile",
@@ -38,4 +40,4 @@ data class UProfileEntity(
 
     //@ColumnInfo(name = "pfp")
     //@SerializedName("pfp") val profilePicture: ByteArray
-)
+): Serializable

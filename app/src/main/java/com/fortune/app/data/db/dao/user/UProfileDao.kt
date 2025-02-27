@@ -1,9 +1,9 @@
-package com.fortune.app.data.db.dao
+package com.fortune.app.data.db.dao.user
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.fortune.app.data.db.entities.UProfileEntity
+import com.fortune.app.data.entities.user.UProfileEntity
 
 @Dao
 abstract class UProfileDao {

@@ -1,11 +1,10 @@
-package com.fortune.app.data.db.dao
+package com.fortune.app.data.db.dao.user
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.fortune.app.data.db.entities.UserEntity
+import com.fortune.app.data.entities.user.UserEntity
 
 @Dao
 abstract class UserDao {

@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fortune.app.data.db.entities.UProfileEntity
-import com.fortune.app.data.db.entities.UserEntity
+import com.fortune.app.data.entities.user.UProfileEntity
+import com.fortune.app.data.entities.user.UserEntity
+import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.repositories.remote.user.UProfileAPIRepository
 import com.fortune.app.data.repositories.db.user.UProfileDBRepository
 import com.fortune.app.data.repositories.db.user.UserDBRepository
@@ -24,27 +25,22 @@ class UProfile_ViewModel @Inject constructor(
     private val _profile = MutableLiveData<UProfileEntity>()
     val profile: LiveData<UProfileEntity> = _profile
 
-    fun createProfile(name: String, address: String, phone: String) {
+    fun createProfile(uProfileDTO: UProfileDTO?) {
         viewModelScope.launch {
-            val user: UserEntity = userDBRepository.findUserData()
-            val entityApiSend = UProfileEntity(
-                user_id = user.id,
-                name = name,
-                address = address,
-                phone = phone,
-                online = false
-            )
+            if (uProfileDTO != null) {
+                val user: UserEntity = userDBRepository.findUserData()
 
-            val entityResponseFromAPI = uProfileAPIRepository.createProfile(entityApiSend)
-            uProfileDBRepository.saveUprofile(entityResponseFromAPI)
+                val entityResponseFromAPI = uProfileAPIRepository.createProfile(user.id, uProfileDTO.name, uProfileDTO.address, uProfileDTO.phone, false)
+                uProfileDBRepository.saveUprofile(entityResponseFromAPI)
 
-            user.isProfileCreated = true
+                user.isProfileCreated = true
 
-            val userEntityUpdated: UserEntity =
-                userAPIRepository.updateProfileCreationStatus(user)
-            userDBRepository.updateProfileStatus(userEntityUpdated)
+                val userEntityUpdated: UserEntity =
+                    userAPIRepository.updateProfileCreationStatus(user)
+                userDBRepository.updateProfileStatus(userEntityUpdated)
 
-            _profile.value = entityResponseFromAPI
+                _profile.value = entityResponseFromAPI
+            }
         }
     }
 
@@ -60,6 +56,12 @@ class UProfile_ViewModel @Inject constructor(
     fun clearLocalProfiles() {
         viewModelScope.launch {
             uProfileDBRepository.clearLocalProfiles()
+        }
+    }
+
+    fun findLocalProfileData() {
+        viewModelScope.launch {
+            _profile.value = uProfileDBRepository.findProfile()
         }
     }
 }

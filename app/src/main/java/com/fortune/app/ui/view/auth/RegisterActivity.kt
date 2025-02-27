@@ -15,11 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
+import com.fortune.app.data.entities.user.UserEntity
+import com.fortune.app.data.entities.user.dto.UserDTO
+import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,34 +46,13 @@ class RegisterActivity : AppCompatActivity() {
             return;
         }
 
-        val alertDialog: AlertDialog = AlertDialog.Builder(this)
-            .setView(R.layout.loading_dialog)
-            .create()
+        val userDTO = UserDTO(identity_document, email, password)
 
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.setCancelable(false)
-        alertDialog.show()
+        val openUProfile = Intent(this, UProfileActivity::class.java)
+        openUProfile.putExtra("userDTO", userDTO)
 
-        val authViewModel: User_ViewModel by viewModels()
-
-        clearUserDataDBData() // Clear data before add new one
-
-        authViewModel.register.observe(this) { userEntity ->
-            alertDialog.dismiss()
-
-            if (userEntity.digitalSign == null) {
-                val openUProfile = Intent(this, UProfileActivity::class.java)
-                startActivity(openUProfile)
-            }
-        }
-
-        authViewModel.register(identity_document, email, password)
-    }
-
-    private fun clearUserDataDBData() {
-        val userViewModel: User_ViewModel by viewModels()
-
-        userViewModel.clearLocalUsers()
+        startActivity(openUProfile)
+        finish()
     }
 
     private fun adjustScreenInsets() {

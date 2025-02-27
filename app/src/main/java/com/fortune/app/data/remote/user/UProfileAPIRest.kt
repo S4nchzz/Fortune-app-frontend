@@ -1,8 +1,7 @@
-package com.fortune.app.data.remote
+package com.fortune.app.data.remote.user
 
 import com.fortune.app.BuildConfig
-import com.fortune.app.data.db.entities.UProfileEntity
-import com.fortune.app.data.db.entities.UserEntity
+import com.fortune.app.data.entities.user.UProfileEntity
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query

@@ -1,7 +1,7 @@
 package com.fortune.app.data.repositories.db.user
 
 import com.fortune.app.data.db.AppDatabase
-import com.fortune.app.data.db.entities.UProfileEntity
+import com.fortune.app.data.entities.user.UProfileEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

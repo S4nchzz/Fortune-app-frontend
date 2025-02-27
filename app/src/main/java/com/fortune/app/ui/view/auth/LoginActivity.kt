@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
+import com.fortune.app.ui.view.MainAppActivity
+import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,35 +48,16 @@ class LoginActivity : AppCompatActivity() {
         alertDialog.show()
 
         val authViewModel: User_ViewModel by viewModels()
-        authViewModel.login.observe(this) { userEntity ->
+
+        authViewModel.login.observe(this) {
             alertDialog.dismiss()
 
-            if (userEntity.digitalSign == null && !userEntity.isProfileCreated) {
-                val openProfileView = Intent(this@LoginActivity, UProfileActivity::class.java)
-                startActivity(openProfileView)
-            } else if (userEntity.digitalSign == null) {
-                val uProfileViewModel: UProfile_ViewModel by viewModels()
-
-                // Ensure that when the user already has a profile save it in the database
-                uProfileViewModel.profile.observe(this) {
-                    val openPinActivity = Intent(this@LoginActivity, PinActivity::class.java)
-                    startActivity(openPinActivity)
-                }
-
-                uProfileViewModel.migrateProfileFromAPI(userEntity.id)
-
-            } else {
-                // Open main view
-            }
+            val openMainAppActivity = Intent(this@LoginActivity, MainAppActivity::class.java)
+            startActivity(openMainAppActivity)
+            finish()
         }
 
-        clearUserDataDBData() // Clear data before add new one
         authViewModel.login(identity_document, password)
-    }
-
-    private fun clearUserDataDBData() {
-        val userViewModel: User_ViewModel by viewModels()
-        userViewModel.clearLocalUsers()
     }
     
     private fun adjustScreenInsets() {

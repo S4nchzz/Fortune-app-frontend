@@ -11,10 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
+import com.fortune.app.data.entities.user.dto.UProfileDTO
+import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class UProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +34,14 @@ class UProfileActivity : AppCompatActivity() {
 
     private fun handleGenerateProfile(name: String, address: String, phone: String) {
         if (checkData(name, address, phone)) {
-            val uProfileViewModel: UProfile_ViewModel by viewModels()
+            val uProfileDTO = UProfileDTO(name, address, phone)
 
-            uProfileViewModel.profile.observe(this) { uProfileEntity ->
-                if (uProfileEntity != null) {
-                    // Load main app
-                    Toast.makeText(this@UProfileActivity, uProfileEntity.name, Toast.LENGTH_SHORT).show()
-                    val openPinActivity = Intent(this@UProfileActivity, PinActivity::class.java)
-                    startActivity(openPinActivity)
-                }
-            }
-
-            uProfileViewModel.createProfile(name, address, phone)
+            val openPinActivity = Intent(this@UProfileActivity, PinActivity::class.java)
+            openPinActivity
+                .putExtra("userDTO", intent.getSerializableExtra("userDTO", UserDTO::class.java))
+                .putExtra("uProfileDTO", uProfileDTO)
+            startActivity(openPinActivity)
+            finish()
         }
     }
 

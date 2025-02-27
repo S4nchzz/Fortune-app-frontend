@@ -4,8 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.fortune.app.BuildConfig
 import com.fortune.app.data.db.AppDatabase
+import com.fortune.app.data.repositories.db.bank_data.AccountDBRepository
+import com.fortune.app.data.repositories.db.bank_data.CardDBRepository
 import com.fortune.app.data.repositories.db.user.UProfileDBRepository
 import com.fortune.app.data.repositories.db.user.UserDBRepository
+import com.fortune.app.data.repositories.remote.bank_data.AccountAPIRepository
+import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepository
 import com.fortune.app.data.repositories.remote.user.UProfileAPIRepository
 import com.fortune.app.data.repositories.remote.user.UserAPIRepository
 import dagger.Module
@@ -57,5 +61,29 @@ object AppModule {
     @Singleton
     fun provideUProfileDBRepository(appDatabase: AppDatabase): UProfileDBRepository {
         return UProfileDBRepository(appDatabase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCardAPIRepository(retrofit: Retrofit): CardAPIRepository {
+        return CardAPIRepository(retrofit)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCardDBRepository(appDatabase: AppDatabase): CardDBRepository {
+        return CardDBRepository(appDatabase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAccountAPIRepository(retrofit: Retrofit): AccountAPIRepository {
+        return AccountAPIRepository(retrofit)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAccountDBRepository(appDatabase: AppDatabase): AccountDBRepository {
+        return AccountDBRepository(appDatabase)
     }
 }

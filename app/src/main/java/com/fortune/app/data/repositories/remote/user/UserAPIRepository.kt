@@ -1,7 +1,7 @@
 package com.fortune.app.data.repositories.remote.user
 
-import com.fortune.app.data.db.entities.UserEntity
-import com.fortune.app.data.remote.UserAPIRest
+import com.fortune.app.data.entities.user.UserEntity
+import com.fortune.app.data.remote.user.UserAPIRest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit

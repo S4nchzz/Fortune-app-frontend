@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId = "com.fortune.app"
-        minSdk = 24
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -75,7 +75,8 @@ dependencies {
     implementation(libs.retrofit)       // Retrofit
     implementation(libs.converter.gson)  // Retrofit Gson Converter
 
-    implementation(libs.androidx.room.runtime) // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.activity) // Room
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
@@ -89,6 +90,8 @@ dependencies {
     kapt(libs.hilt.android.compiler.v2511)
 
     implementation(libs.lottie) // lottie
+
+    testImplementation(libs.junit.jupiter)
 }
 
 kapt {
