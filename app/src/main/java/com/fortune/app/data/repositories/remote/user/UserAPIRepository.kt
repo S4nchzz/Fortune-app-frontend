@@ -1,5 +1,6 @@
 package com.fortune.app.data.repositories.remote.user
 
+import android.util.Log
 import com.fortune.app.data.entities.user.UserEntity
 import com.fortune.app.data.remote.user.UserAPIRest
 import kotlinx.coroutines.Dispatchers
@@ -18,9 +19,14 @@ class UserAPIRepository @Inject constructor(
         }
     }
 
-    suspend fun login(identityDocument: String, password: String): UserEntity {
+    suspend fun login(identityDocument: String, password: String): UserEntity? {
         return withContext(Dispatchers.IO) {
-            userAPIService.login(identityDocument, password)
+            try {
+                userAPIService.login(identityDocument, password)
+            } catch (e: Exception) {
+                Log.e("LOGIN", "User credentials are incorrect", e)
+                null
+            }
         }
     }
 

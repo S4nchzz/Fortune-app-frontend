@@ -1,13 +1,11 @@
 package com.fortune.app.ui.viewmodel.user
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.entities.user.UserEntity
 import com.fortune.app.data.entities.bank_data.CardEntity
-import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.data.repositories.db.bank_data.AccountDBRepository
 import com.fortune.app.data.repositories.db.bank_data.CardDBRepository
@@ -17,6 +15,7 @@ import com.fortune.app.data.repositories.db.user.UserDBRepository
 import com.fortune.app.data.repositories.remote.bank_data.AccountAPIRepository
 import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepository
 import com.fortune.app.data.repositories.remote.user.UProfileAPIRepository
+import com.fortune.app.ui.viewmodel.uiStates.LoginResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,9 +38,7 @@ class User_ViewModel @Inject constructor(
     fun register(userDTO: UserDTO?) {
         viewModelScope.launch {
             if (userDTO != null) {
-                userDBRepository.clearLocalUsers()
-                accountDBRepository.clearLocalAccountData()
-                cardDBRepository.clearLocalCardData()
+                clearDBL()
 
                 val userEntity: UserEntity = userAPIRepository.register(userDTO.identityDocument, userDTO.email, userDTO.password)
                 userDBRepository.saveUser(userEntity)
@@ -50,16 +47,20 @@ class User_ViewModel @Inject constructor(
         }
     }
 
-    private val _login = MutableLiveData<UserEntity?>()
-    val login: LiveData<UserEntity?> = _login
+    private val _login = MutableLiveData<LoginResponseState?>()
+    val login: LiveData<LoginResponseState?> = _login
 
     fun login(identityDocument: String, password: String) {
         viewModelScope.launch {
-            userDBRepository.clearLocalUsers()
-            accountDBRepository.clearLocalAccountData()
-            cardDBRepository.clearLocalCardData()
+            clearDBL()
 
             val userEntity = userAPIRepository.login(identityDocument, password)
+
+            if (userEntity == null) {
+                _login.value = LoginResponseState.Error
+                return@launch
+            }
+
             userDBRepository.saveUser(userEntity)
 
             if (userEntity.isProfileCreated) {
@@ -75,12 +76,8 @@ class User_ViewModel @Inject constructor(
                 cardDBRepository.saveCards(userCardsEntities)
             }
 
-             _login.value = userEntity
+             _login.value = LoginResponseState.Success(userEntity)
         }
-    }
-
-    fun resetLoginLiveData() {
-        _login.value = null
     }
 
     private val _digitalSign = MutableLiveData<UserEntity>()
@@ -95,5 +92,15 @@ class User_ViewModel @Inject constructor(
 
             _digitalSign.value = userEntity
         }
+    }
+
+    fun resetLoginObserve() {
+        this._login.value = null
+    }
+
+    private suspend fun clearDBL() {
+        userDBRepository.clearLocalUsers()
+        accountDBRepository.clearLocalAccountData()
+        cardDBRepository.clearLocalCardData()
     }
 }
