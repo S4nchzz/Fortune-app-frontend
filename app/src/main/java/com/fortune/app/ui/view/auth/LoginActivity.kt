@@ -4,9 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -15,16 +12,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isEmpty
+import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.ui.dialogs.IncorrectCredentials_Dialog
 import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.ui.viewmodel.uiStates.LoginResponseState
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -35,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
         adjustScreenInsets()
+
+        dataFieldsSetListeners()
 
         loadingDialog = AlertDialog.Builder(this@LoginActivity)
             .setView(R.layout.loading_dialog)
@@ -47,9 +46,26 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun dataFieldsSetListeners() {
+        val identityDocumentLayout = findViewById<TextInputLayout>(R.id.login_data_dniNie_layout)
+        val passwordLayout = findViewById<TextInputLayout>(R.id.login_data_password_layout)
+
+        findViewById<TextInputEditText>(R.id.login_data_dniNie).addTextChangedListener {
+            identityDocumentLayout.error = null
+        }
+
+        findViewById<TextInputEditText>(R.id.login_data_password).addTextChangedListener {
+            passwordLayout.error = null
+        }
+    }
+
     private fun loginServerRequest() {
-        val identity_document: String = findViewById<EditText>(R.id.login_data_dniNie).text.toString()
+        val identityDocument: String = findViewById<EditText>(R.id.login_data_dniNie).text.toString()
         val password: String = findViewById<EditText>(R.id.login_data_password).text.toString()
+
+        if (!validateFields(identityDocument, password)) {
+            return
+        }
 
         loadingDialog.show()
 
@@ -75,7 +91,27 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        authViewModel.login(identity_document, password)
+        authViewModel.login(identityDocument, password)
+    }
+
+    private fun validateFields(identityDocument: String, password: String): Boolean {
+        val identityDocumentLayout = findViewById<TextInputLayout>(R.id.login_data_dniNie_layout)
+        val passwordLayout = findViewById<TextInputLayout>(R.id.login_data_password_layout)
+
+        var identityDocumentValidation = true
+        var passwordValidation = true
+
+        if (identityDocument.isEmpty()) {
+            identityDocumentLayout.error = "Este campo no puede estar vacio."
+            identityDocumentValidation = false
+        }
+
+        if (password.isEmpty()) {
+            passwordLayout.error = "Este campo no puede estar vacio."
+            passwordValidation = false
+        }
+
+        return identityDocumentValidation && passwordValidation
     }
 
     private fun adjustScreenInsets() {

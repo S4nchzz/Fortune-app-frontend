@@ -1,70 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/ac_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
+        android:background="@drawable/bg"
         android:orientation="vertical"
-        android:background="@drawable/bg">
+        tools:context=".MainActivity">
 
     <ImageView
-            android:layout_weight="2"
             android:layout_width="120dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
-            android:src="@drawable/login_logo"
-            android:contentDescription="Logo con slogan"/>
-
+            android:layout_weight="2"
+            android:contentDescription="Logo con slogan"
+            android:src="@drawable/login_logo" />
 
     <LinearLayout
-            android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_weight="2"
             android:orientation="vertical">
-        <EditText
-                android:id="@+id/login_data_dniNie"
-                android:layout_weight="1"
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_data_dniNie_layout"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:inputType="text"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
-                android:hint="DNI/NIE"
-                android:textColorHint="@color/disabled1"/>
-        <EditText
-                android:id="@+id/login_data_password"
-                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:hint="DNI/NIE">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_data_dniNie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_data_password_layout"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:inputType="textPassword"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
+                app:passwordToggleTint="@color/disabled1"
                 android:hint="Password"
-                android:textColorHint="@color/disabled1"/>
+
+                app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_data_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
-                android:layout_weight="2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="30dp"
+                android:layout_weight="2"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginBottom="30dp">
+                android:orientation="horizontal">
 
             <Button
                     android:id="@+id/btn_login"
                     android:layout_width="300dp"
                     android:layout_height="70dp"
+                    android:backgroundTint="@color/white"
                     android:text="Log in"
                     android:textColor="@color/black"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:backgroundTint="@color/white"/>
+                    android:textStyle="bold" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
