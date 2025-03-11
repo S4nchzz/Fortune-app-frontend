@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         adjustScreenInsets()
 
-        setFieldListeners()
+        setFieldResetErrorListeners()
 
         loadingDialog = AlertDialog.Builder(this@LoginActivity)
             .setView(R.layout.dialog_loading)
@@ -98,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
         return validate
     }
 
-    private fun setFieldListeners() {
+    private fun setFieldResetErrorListeners() {
         val identityDocumentLayout = findViewById<TextInputLayout>(R.id.login_data_dniNie_layout)
         val passwordLayout = findViewById<TextInputLayout>(R.id.login_data_password_layout)
 
