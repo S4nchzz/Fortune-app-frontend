@@ -35,7 +35,7 @@
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/login_data_dniNie"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -54,7 +54,7 @@
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/login_data_password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

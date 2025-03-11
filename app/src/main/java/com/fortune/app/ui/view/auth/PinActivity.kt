@@ -19,7 +19,6 @@ import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
-import com.fortune.app.ui.viewmodel.bank_data.Card_ViewModel
 import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +55,7 @@ class PinActivity : AppCompatActivity() {
         val uProfileDto = intent.getSerializableExtra("uProfileDTO", UProfileDTO::class.java)
 
         val alertDialog = AlertDialog.Builder(this)
-            .setView(R.layout.loading_dialog)
+            .setView(R.layout.dialog_loading)
             .create()
 
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

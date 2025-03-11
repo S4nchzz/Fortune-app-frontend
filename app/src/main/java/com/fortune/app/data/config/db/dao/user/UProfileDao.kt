@@ -11,7 +11,7 @@ abstract class UProfileDao {
     abstract fun saveUProfile(entityResponseFromAPI: UProfileEntity)
 
     @Query("SELECT * FROM fl_user_profile")
-    abstract fun findProfile(): UProfileEntity?
+    abstract fun findProfile(): UProfileEntity
 
     @Query("DELETE FROM fl_user")
     abstract fun clearLocalProfiles()

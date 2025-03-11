@@ -3,15 +3,15 @@ package com.fortune.app.di
 import android.content.Context
 import androidx.room.Room
 import com.fortune.app.BuildConfig
-import com.fortune.app.data.db.AppDatabase
-import com.fortune.app.data.repositories.db.bank_data.AccountDBRepository
-import com.fortune.app.data.repositories.db.bank_data.CardDBRepository
-import com.fortune.app.data.repositories.db.user.UProfileDBRepository
-import com.fortune.app.data.repositories.db.user.UserDBRepository
-import com.fortune.app.data.repositories.remote.bank_data.AccountAPIRepository
-import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepository
-import com.fortune.app.data.repositories.remote.user.UProfileAPIRepository
-import com.fortune.app.data.repositories.remote.user.UserAPIRepository
+import com.fortune.app.data.config.db.AppDatabase
+import com.fortune.app.data.repositories.db.bank_data.AccountDBRepositoryImpl
+import com.fortune.app.data.repositories.db.bank_data.CardDBRepositoryImpl
+import com.fortune.app.data.repositories.db.user.UProfileDBRepositoryImpl
+import com.fortune.app.data.repositories.db.user.UserDBRepositoryImpl
+import com.fortune.app.data.repositories.remote.bank_data.AccountAPIRepositoryImpl
+import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepositoryImpl
+import com.fortune.app.data.repositories.remote.user.UProfileAPIRepositoryImpl
+import com.fortune.app.data.repositories.remote.user.UserAPIRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,49 +41,49 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserAPIRepository(retrofit: Retrofit): UserAPIRepository {
-        return UserAPIRepository(retrofit)
+    fun provideUserAPIRepository(retrofit: Retrofit): UserAPIRepositoryImpl {
+        return UserAPIRepositoryImpl(retrofit)
     }
 
     @Provides
     @Singleton
-    fun provideUserDBRepository(appDatabase: AppDatabase): UserDBRepository {
-        return UserDBRepository(appDatabase)
+    fun provideUserDBRepository(appDatabase: AppDatabase): UserDBRepositoryImpl {
+        return UserDBRepositoryImpl(appDatabase)
     }
 
     @Provides
     @Singleton
-    fun provideUProfileAPI(retrofit: Retrofit): UProfileAPIRepository {
-        return UProfileAPIRepository(retrofit)
+    fun provideUProfileAPI(retrofit: Retrofit): UProfileAPIRepositoryImpl {
+        return UProfileAPIRepositoryImpl(retrofit)
     }
 
     @Provides
     @Singleton
-    fun provideUProfileDBRepository(appDatabase: AppDatabase): UProfileDBRepository {
-        return UProfileDBRepository(appDatabase)
+    fun provideUProfileDBRepository(appDatabase: AppDatabase): UProfileDBRepositoryImpl {
+        return UProfileDBRepositoryImpl(appDatabase)
     }
 
     @Provides
     @Singleton
-    fun provideCardAPIRepository(retrofit: Retrofit): CardAPIRepository {
-        return CardAPIRepository(retrofit)
+    fun provideCardAPIRepository(retrofit: Retrofit): CardAPIRepositoryImpl {
+        return CardAPIRepositoryImpl(retrofit)
     }
 
     @Provides
     @Singleton
-    fun provideCardDBRepository(appDatabase: AppDatabase): CardDBRepository {
-        return CardDBRepository(appDatabase)
+    fun provideCardDBRepository(appDatabase: AppDatabase): CardDBRepositoryImpl {
+        return CardDBRepositoryImpl(appDatabase)
     }
 
     @Provides
     @Singleton
-    fun provideAccountAPIRepository(retrofit: Retrofit): AccountAPIRepository {
-        return AccountAPIRepository(retrofit)
+    fun provideAccountAPIRepository(retrofit: Retrofit): AccountAPIRepositoryImpl {
+        return AccountAPIRepositoryImpl(retrofit)
     }
 
     @Provides
     @Singleton
-    fun provideAccountDBRepository(appDatabase: AppDatabase): AccountDBRepository {
-        return AccountDBRepository(appDatabase)
+    fun provideAccountDBRepository(appDatabase: AppDatabase): AccountDBRepositoryImpl {
+        return AccountDBRepositoryImpl(appDatabase)
     }
 }

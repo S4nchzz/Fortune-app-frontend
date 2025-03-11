@@ -5,47 +5,45 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fortune.app.data.entities.bank_data.AccountEntity
-import com.fortune.app.data.repositories.db.bank_data.AccountDBRepository
-import com.fortune.app.data.repositories.db.bank_data.CardDBRepository
-import com.fortune.app.data.repositories.db.user.UserDBRepository
-import com.fortune.app.data.repositories.remote.bank_data.AccountAPIRepository
-import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepository
+import com.fortune.app.data.repositories.db.bank_data.AccountDBRepositoryImpl
+import com.fortune.app.data.repositories.db.bank_data.CardDBRepositoryImpl
+import com.fortune.app.data.repositories.db.user.UserDBRepositoryImpl
+import com.fortune.app.data.repositories.remote.bank_data.AccountAPIRepositoryImpl
+import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepositoryImpl
+import com.fortune.app.domain.model.bank_data.AccountModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class Account_ViewModel @Inject constructor(
-    val userDBRepository: UserDBRepository,
-    val accountAPIRepository: AccountAPIRepository,
-    val accountDBRepository: AccountDBRepository,
-    val cardAPIRepository: CardAPIRepository,
-    val cardDBRepository: CardDBRepository,
+    val userDBRepositoryImpl: UserDBRepositoryImpl,
+    val accountAPIRepositoryImpl: AccountAPIRepositoryImpl,
+    val accountDBRepositoryImpl: AccountDBRepositoryImpl,
+    val cardAPIRepositoryImpl: CardAPIRepositoryImpl,
+    val cardDBRepositoryImpl: CardDBRepositoryImpl,
 ) : ViewModel() {
-    private val _account = MutableLiveData<AccountEntity>()
-    val account: LiveData<AccountEntity> = _account
+    private val _account = MutableLiveData<AccountModel>()
+    val account: LiveData<AccountModel> = _account
 
     fun createAccount() {
         viewModelScope.launch {
-            val userDBEntity = userDBRepository.findUserData()
+            val userDBEntity = userDBRepositoryImpl.findUserData()
 
-            val accountEntity = accountAPIRepository.createAccount(userDBEntity.id) // Save and get from API
-            accountDBRepository.saveAccount(accountEntity) // Save in database
+            val accountModel = accountAPIRepositoryImpl.createAccount(userDBEntity.id)
+            accountDBRepositoryImpl.saveAccount(accountModel)
 
-            val cardAPIEntity = cardAPIRepository.findMainCardByAccountID(accountEntity.account_id)
-            cardDBRepository.saveCard(cardAPIEntity)
+            val cardAPIEntity = cardAPIRepositoryImpl.findMainCardByAccountID(accountModel.accountId)
+            cardDBRepositoryImpl.saveCard(cardAPIEntity)
 
-            _account.value = accountEntity
+            _account.value = accountModel
         }
     }
 
     fun clearLocalAccountData() {
         viewModelScope.launch {
             try {
-                accountDBRepository.clearLocalAccountData()
+                accountDBRepositoryImpl.clearLocalAccountData()
             } catch (e: Exception) {
                 Log.i("Data clear DB", "No data from account to delete")
             }

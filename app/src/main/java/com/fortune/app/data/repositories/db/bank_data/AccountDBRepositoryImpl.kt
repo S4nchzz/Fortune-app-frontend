@@ -1,22 +1,25 @@
 package com.fortune.app.data.repositories.db.bank_data
 
 import android.util.Log
-import com.fortune.app.data.db.AppDatabase
+import com.fortune.app.data.config.db.AppDatabase
 import com.fortune.app.data.entities.bank_data.AccountEntity
+import com.fortune.app.data.entities.bank_data.AccountMapper
+import com.fortune.app.domain.model.bank_data.AccountModel
+import com.fortune.app.domain.repository.db.bank_Data.AccountDBRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AccountDBRepository @Inject constructor(
+class AccountDBRepositoryImpl @Inject constructor(
     val appDatabase: AppDatabase
-) {
-    suspend fun saveAccount(accountEntity: AccountEntity) {
+) : AccountDBRepository {
+    override suspend fun saveAccount(accountModel: AccountModel) {
         withContext(Dispatchers.IO) {
-            appDatabase.accountDao().saveAccount(accountEntity)
+            appDatabase.accountDao().saveAccount(AccountMapper.mapToEntity(accountModel))
         }
     }
 
-    suspend fun clearLocalAccountData() {
+    override suspend fun clearLocalAccountData() {
         withContext(Dispatchers.IO) {
             try {
                 appDatabase.accountDao().clearLocalAccounts()

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         adjustScreenInsets()
 
         findViewById<Button>(R.id.btn_login).setOnClickListener {
-            val openLogin: Intent = Intent(this, LoginActivity::class.java)
+            val openLogin = Intent(this, LoginActivity::class.java)
             startActivity(openLogin)
         }
 
