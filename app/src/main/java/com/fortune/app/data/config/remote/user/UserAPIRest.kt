@@ -16,7 +16,4 @@ interface UserAPIRest {
 
     @POST("${BuildConfig.API_URL}/user/createDigitalSign")
     suspend fun createDigitalSign(@Query("user_id") user_id: Long, @Query("digital_sign") ds: Int): UserEntity
-
-    @POST("${BuildConfig.API_URL}/user/updateProfileStatus")
-    suspend fun updateProfileStatus(@Query("user_id") id: Long, @Query("is_profile_created") profileCreated: Boolean): UserEntity
 }

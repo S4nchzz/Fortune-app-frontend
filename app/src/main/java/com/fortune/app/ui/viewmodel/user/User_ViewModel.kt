@@ -63,10 +63,8 @@ class User_ViewModel @Inject constructor(
 
             userDBRepositoryImpl.saveUser(userModel)
 
-            if (userModel.is_profile_created) {
-                val uProfileEntity = uProfileAPIRepositoryImpl.findProfileByUserId(userModel.id)
-                uProfileDBRepositoryImpl.saveUprofile(uProfileEntity)
-            }
+            val uProfileEntity = uProfileAPIRepositoryImpl.findProfileByUserId(userModel.id)
+            uProfileDBRepositoryImpl.saveUprofile(uProfileEntity)
 
             if (userModel.digitalSign != null) {
                 val accountAPIEntity = accountAPIRepositoryImpl.findAccountByUserId(userModel.id)

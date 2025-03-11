@@ -1,5 +1,6 @@
-package com.fortune.app.data.entities.user
+package com.fortune.app.data.mapper.user
 
+import com.fortune.app.data.entities.user.UProfileEntity
 import com.fortune.app.domain.model.user.UProfileModel
 
 object UProfileMapper {

@@ -31,12 +31,6 @@ class UserDBRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateProfileStatus(userModel: UserModel) {
-        withContext(Dispatchers.IO) {
-            appDatabase.userDao().updateProfileStatus(UserMapper.mapToEntity(userModel))
-        }
-    }
-
     override suspend fun clearLocalUsers() {
         withContext(Dispatchers.IO) {
             try {

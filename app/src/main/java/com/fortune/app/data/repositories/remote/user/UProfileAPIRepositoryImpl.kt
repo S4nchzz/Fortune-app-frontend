@@ -1,7 +1,6 @@
 package com.fortune.app.data.repositories.remote.user
 
-import com.fortune.app.data.entities.user.UProfileEntity
-import com.fortune.app.data.entities.user.UProfileMapper
+import com.fortune.app.data.mapper.user.UProfileMapper
 import com.fortune.app.data.config.remote.user.UProfileAPIRest
 import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.repository.remote.user.UProfileApiRepository

@@ -10,7 +10,6 @@ object UserMapper {
             identityDocument = userEntity.identity_document,
             email = userEntity.email,
             digitalSign = userEntity.digitalSign,
-            is_profile_created = userEntity.isProfileCreated
         )
     }
 
@@ -20,7 +19,6 @@ object UserMapper {
             identity_document = userModel.identityDocument,
             email = userModel.email,
             digitalSign = userModel.digitalSign,
-            isProfileCreated = userModel.is_profile_created
         )
     }
 }

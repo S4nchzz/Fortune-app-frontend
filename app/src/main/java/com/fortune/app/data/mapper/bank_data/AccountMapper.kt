@@ -1,5 +1,6 @@
-package com.fortune.app.data.entities.bank_data
+package com.fortune.app.data.mapper.bank_data
 
+import com.fortune.app.data.entities.bank_data.AccountEntity
 import com.fortune.app.domain.model.bank_data.AccountModel
 
 object AccountMapper {

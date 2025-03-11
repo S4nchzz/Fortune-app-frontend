@@ -2,11 +2,9 @@ package com.fortune.app.data.repositories.db.user
 
 
 import com.fortune.app.data.config.db.AppDatabase
-import com.fortune.app.data.entities.user.UProfileEntity
-import com.fortune.app.data.entities.user.UProfileMapper
+import com.fortune.app.data.mapper.user.UProfileMapper
 import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.repository.db.user.UProfileDBRepository
-import com.fortune.app.domain.repository.remote.user.UProfileApiRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

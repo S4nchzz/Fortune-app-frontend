@@ -2,8 +2,7 @@ package com.fortune.app.data.repositories.db.bank_data
 
 import android.util.Log
 import com.fortune.app.data.config.db.AppDatabase
-import com.fortune.app.data.entities.bank_data.AccountEntity
-import com.fortune.app.data.entities.bank_data.AccountMapper
+import com.fortune.app.data.mapper.bank_data.AccountMapper
 import com.fortune.app.domain.model.bank_data.AccountModel
 import com.fortune.app.domain.repository.db.bank_Data.AccountDBRepository
 import kotlinx.coroutines.Dispatchers

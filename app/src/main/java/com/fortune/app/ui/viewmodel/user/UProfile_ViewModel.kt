@@ -33,12 +33,6 @@ class UProfile_ViewModel @Inject constructor(
                 val modelResponseFromAPI = uProfileAPIRepositoryImpl.createProfile(user.id, uProfileDTO.name, uProfileDTO.address, uProfileDTO.phone, false)
                 uProfileDBRepositoryImpl.saveUprofile(modelResponseFromAPI)
 
-                user.is_profile_created = true
-
-                val userModelUpdate: UserModel =
-                    userAPIRepositoryImpl.updateProfileCreationStatus(user)
-                userDBRepositoryImpl.updateProfileStatus(userModelUpdate)
-
                 _profile.value = modelResponseFromAPI
             }
         }

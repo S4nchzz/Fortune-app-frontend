@@ -1,7 +1,6 @@
 package com.fortune.app.data.repositories.remote.bank_data
 
-import com.fortune.app.data.entities.bank_data.CardEntity
-import com.fortune.app.data.entities.bank_data.CardMapper
+import com.fortune.app.data.mapper.bank_data.CardMapper
 import com.fortune.app.data.config.remote.bank_data.CardAPIRest
 import com.fortune.app.domain.model.bank_data.CardModel
 import kotlinx.coroutines.Dispatchers

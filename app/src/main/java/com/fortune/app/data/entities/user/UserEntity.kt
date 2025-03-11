@@ -21,7 +21,4 @@ data class UserEntity (
 
     @ColumnInfo(name = "digital_sign")
     @SerializedName("digital_sign") val digitalSign: Int?,
-
-    @ColumnInfo(name = "is_profile_created")
-    @SerializedName("is_profile_created") var isProfileCreated: Boolean,
 )

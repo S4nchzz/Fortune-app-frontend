@@ -37,12 +37,4 @@ class UserAPIRepositoryImpl @Inject constructor(
             UserMapper.mapToDomain(userAPIService.createDigitalSign(user_id, ds))
         }
     }
-
-    override suspend fun updateProfileCreationStatus(userProfileStatusUpdated: UserModel): UserModel {
-        return withContext(Dispatchers.IO) {
-            UserMapper.mapToDomain(
-                userAPIService.updateProfileStatus(userProfileStatusUpdated.id, userProfileStatusUpdated.is_profile_created)
-            )
-        }
-    }
 }
