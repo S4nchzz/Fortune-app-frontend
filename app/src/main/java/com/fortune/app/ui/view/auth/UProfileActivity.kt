@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -22,6 +23,10 @@ class UProfileActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_user_profile)
         adjustScreenInsets()
+
+        findViewById<ImageButton>(R.id.back_event_arrow).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         val name: EditText = findViewById(R.id.profile_name_data)
         val address: EditText = findViewById(R.id.profile_address_data)

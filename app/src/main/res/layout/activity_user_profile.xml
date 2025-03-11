@@ -6,75 +6,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.view.auth.UProfileActivity"
-        android:orientation="vertical"
-        android:background="@drawable/bg">
+        android:orientation="vertical">
+
+    <ImageButton
+            android:id="@+id/back_event_arrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="Go back"
+            android:src="@drawable/icon_go_back"
+            android:backgroundTint="@color/transparent" />
 
     <TextView
-            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Perfil"
-            android:textColor="@color/white"
-            android:textSize="50dp"
+            android:layout_height="wrap_content"
+            android:text="Completa tu perfil para empezar."            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
             android:textStyle="bold"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"/>
+            android:textSize="37sp" />
 
-    <ImageView
-            android:layout_weight="1"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/profile_default_profile_icon"
-            android:layout_gravity="center"/>
-
+    <ImageButton
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_edit_profile"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/transparent"/>
 
     <LinearLayout
-            android:layout_weight="5"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-        <EditText
-                android:id="@+id/profile_name_data"
-                android:layout_weight="1"
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:hint="Nombre"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:textColorHint="@color/disabled1"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Nombre">
 
-        <EditText
-                android:id="@+id/profile_address_data"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:hint="Dirección"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:textColorHint="@color/disabled1"/>
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profile_name_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/disabled1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-                android:id="@+id/profile_phone_data"
-                android:layout_weight="1"
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:hint="Telf"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:textColorHint="@color/disabled1"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Dirección">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profile_address_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/disabled1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Telf">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profile_phone_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/disabled1"
+                    android:layout_marginStart="10dp"
+                    android:inputType="phone"
+                    android:layout_marginEnd="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+                android:id="@+id/btn_confirm_profile"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="100dp"
+                android:text="Confirmar"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/white"/>
     </LinearLayout>
-
-    <Button
-            android:id="@+id/btn_confirm_profile"
-            android:layout_width="300dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="100dp"
-            android:text="Confirmar"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/white"/>
-
 </LinearLayout>
