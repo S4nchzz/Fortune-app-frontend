@@ -5,17 +5,30 @@
         android:id="@+id/ac_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg"
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-    <ImageView
-            android:layout_width="120dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:contentDescription="Logo con slogan"
-            android:src="@drawable/login_logo" />
+    <ImageButton
+            android:id="@+id/back_event_arrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="Go back"
+            android:src="@drawable/icon_go_back"
+            android:backgroundTint="@color/transparent" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¡Hola! Nos alegra verte de nuevo"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
+            android:textStyle="bold"
+            android:textSize="37sp" />
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -27,8 +40,8 @@
                 android:id="@+id/login_data_dniNie_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:hint="DNI/NIE">
 
@@ -44,8 +57,8 @@
                 android:id="@+id/login_data_password_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 app:passwordToggleTint="@color/disabled1"
                 android:hint="Password"
 
@@ -59,26 +72,38 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="30dp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="horizontal">
+        <Button
+                android:id="@+id/btn_login"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/white"
+                android:text="Log in"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+    </LinearLayout>
 
-            <Button
-                    android:id="@+id/btn_login"
-                    android:layout_width="300dp"
-                    android:layout_height="70dp"
-                    android:backgroundTint="@color/white"
-                    android:text="Log in"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-        </LinearLayout>
-
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Aún no tienes cuenta?"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        <TextView
+                android:id="@+id/span_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registrate"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:layout_marginStart="5dp"/>
     </LinearLayout>
 
 </LinearLayout>

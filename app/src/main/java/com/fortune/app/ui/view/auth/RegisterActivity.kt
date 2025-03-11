@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
 import androidx.activity.enableEdgeToEdge
@@ -34,6 +36,16 @@ class RegisterActivity : AppCompatActivity() {
         adjustScreenInsets()
 
         setFieldResetErrorListeners()
+
+        findViewById<TextView>(R.id.span_login).setOnClickListener {
+            val openLogin = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(openLogin)
+            finish()
+        }
+
+        findViewById<ImageButton>(R.id.back_event_arrow).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         findViewById<Button>(R.id.btn_register).setOnClickListener {
             registerServerRequest()

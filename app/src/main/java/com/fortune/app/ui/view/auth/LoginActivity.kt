@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -31,6 +32,12 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
         adjustScreenInsets()
+
+        findViewById<TextView>(R.id.span_register).setOnClickListener {
+            val openRegister = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(openRegister)
+            finish()
+        }
 
         setFieldResetErrorListeners()
 
