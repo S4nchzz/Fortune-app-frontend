@@ -1,13 +1,13 @@
-package com.fortune.app.data.db
+package com.fortune.app.data.config.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.fortune.app.data.db.dao.bank_data.AccountDAO
-import com.fortune.app.data.db.dao.bank_data.CardDAO
+import com.fortune.app.data.config.db.dao.bank_data.AccountDAO
+import com.fortune.app.data.config.db.dao.bank_data.CardDAO
 import com.fortune.app.data.entities.user.UProfileEntity
 import com.fortune.app.data.entities.user.UserEntity
-import com.fortune.app.data.db.dao.user.UProfileDao
-import com.fortune.app.data.db.dao.user.UserDao
+import com.fortune.app.data.config.db.dao.user.UProfileDao
+import com.fortune.app.data.config.db.dao.user.UserDao
 import com.fortune.app.data.entities.bank_data.AccountEntity
 import com.fortune.app.data.entities.bank_data.CardEntity
 

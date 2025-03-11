@@ -1,5 +1,6 @@
 package com.fortune.app.data.repositories.db.user
 
+
 import com.fortune.app.data.config.db.AppDatabase
 import com.fortune.app.data.entities.user.UProfileEntity
 import com.fortune.app.data.entities.user.UProfileMapper

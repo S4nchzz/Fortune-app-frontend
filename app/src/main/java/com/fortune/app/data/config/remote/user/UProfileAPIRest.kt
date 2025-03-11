@@ -1,4 +1,4 @@
-package com.fortune.app.data.remote.user
+package com.fortune.app.data.config.remote.user
 
 import com.fortune.app.BuildConfig
 import com.fortune.app.data.entities.user.UProfileEntity

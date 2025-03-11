@@ -1,4 +1,4 @@
-package com.fortune.app.data.db.dao.bank_data
+package com.fortune.app.data.config.db.dao.bank_data
 
 import androidx.room.Dao
 import androidx.room.Insert

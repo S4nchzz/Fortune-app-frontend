@@ -6,95 +6,70 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/bg"
         tools:context=".MainActivity">
 
-    <ImageView
-            android:layout_width="150dp"
+    <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:contentDescription="Go back"
+            android:src="@drawable/icon_go_back"
+            android:backgroundTint="@color/transparent" />
+
+    <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/register_logo"
-            android:contentDescription="Logo con slogan" />
+            android:text="¡Hola! Regístrate para comenzar"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="40dp"
+            android:textStyle="bold"
+            android:textSize="37sp" />
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp">
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/identityDocumentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="DNI/NIE"
-                    android:textColor="@color/disabled2"
-                    android:textStyle="bold"
-                    android:textSize="20sp" />
+                android:layout_marginBottom="10dp">
 
-            <TextView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textColor="@color/disabled2"
-                    android:textStyle="bold"
-                    android:textSize="20sp"/>
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:layout_weight="1"
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/register_data_identityDocument"
                     android:layout_width="match_parent"
-                    android:layout_marginEnd="10dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:hint="DNI/NIE"
+                    android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/register_data_dniNie"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="DNI/NIE"
-                        android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/register_data_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <TextView
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contraseña"
-                android:textColor="@color/disabled2"
-                android:textStyle="bold"
-                android:textSize="20sp" />
+                android:layout_marginBottom="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/register_data_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/disabled1"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/register_data_password"
@@ -114,7 +89,7 @@
                     android:id="@+id/register_data_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
+                    android:hint="Confirm password"
                     android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,7 +102,28 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:backgroundTint="@color/white"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="40dp" />
+
     </LinearLayout>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Ya tienes una cuenta?"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        <TextView
+                android:id="@+id/span_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicia sesión"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:layout_marginStart="5dp"/>
+    </LinearLayout>
 </LinearLayout>

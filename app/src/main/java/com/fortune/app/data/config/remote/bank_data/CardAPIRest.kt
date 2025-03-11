@@ -1,4 +1,4 @@
-package com.fortune.app.data.remote.bank_data
+package com.fortune.app.data.config.remote.bank_data
 
 import com.fortune.app.BuildConfig
 import com.fortune.app.data.entities.bank_data.CardEntity

@@ -14,12 +14,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.data.entities.user.UserEntity
 import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 class RegisterActivity : AppCompatActivity() {
@@ -30,13 +33,24 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         adjustScreenInsets()
 
+        setFieldResetErrorListeners()
+
         findViewById<Button>(R.id.btn_register).setOnClickListener {
             registerServerRequest()
         }
     }
 
+    private fun setFieldResetErrorListeners() {
+        val identityDocumentLayout = findViewById<TextInputLayout>(R.id.identityDocumentLayout)
+        val identityDocumentField = findViewById<TextInputEditText>(R.id.register_data_identityDocument)
+
+        identityDocumentField.addTextChangedListener {
+            identityDocumentLayout.error = null
+        }
+    }
+
     private fun registerServerRequest() {
-        val identity_document: String = findViewById<EditText>(R.id.register_data_dniNie).text.toString().trim()
+        val identity_document: String = findViewById<EditText>(R.id.register_data_identityDocument).text.toString().trim()
         val email: String = findViewById<EditText>(R.id.register_data_email).text.toString().trim()
         val password: String = findViewById<EditText>(R.id.register_data_password).text.toString().trim()
         val confirmPassword: String = findViewById<EditText>(R.id.register_data_confirm_password).text.toString().trim()
