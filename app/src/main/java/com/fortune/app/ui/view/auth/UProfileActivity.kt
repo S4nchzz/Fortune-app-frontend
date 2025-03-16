@@ -47,9 +47,10 @@ class UProfileActivity : AppCompatActivity() {
         }
     }
 
-    val authViewmodel: Auth_ViewModel by viewModels()
-    val uProfileViewModel: UProfile_ViewModel by viewModels()
     private fun handleGenerateProfile(name: String, address: String, phone: String) {
+        val authViewmodel: Auth_ViewModel by viewModels()
+        val uProfileViewModel: UProfile_ViewModel by viewModels()
+
         if (checkData(name, address, phone)) {
             val uProfileDTO = UProfileDTO(name, address, phone)
             val userDTO = intent.getSerializableExtra("userDTO", UserDTO::class.java)
