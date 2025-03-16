@@ -24,8 +24,9 @@ class IncorrectCredentials_Dialog : DialogFragment() {
 
         val alert = builder.create()
         alert.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alert.setCancelable(false)
         alert.setCanceledOnTouchOutside(false)
+
+        isCancelable = false
 
         return alert;
     }
