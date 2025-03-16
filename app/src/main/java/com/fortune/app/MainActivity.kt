@@ -4,16 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.ui.view.auth.LoginActivity
 import com.fortune.app.ui.view.auth.RegisterActivity
-import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
-import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

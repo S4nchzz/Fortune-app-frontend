@@ -19,7 +19,7 @@ import com.fortune.app.R
 import com.fortune.app.ui.dialogs.IncorrectCredentials_Dialog
 import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.domain.state.State_Login
-import com.fortune.app.ui.viewmodel.user.User_ViewModel
+import com.fortune.app.ui.viewmodel.user.Auth_ViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,22 +67,29 @@ class LoginActivity : AppCompatActivity() {
 
         loadingDialog.show()
 
-        val credentialFailDialog = IncorrectCredentials_Dialog(this)
+        val credentialFailDialog = IncorrectCredentials_Dialog()
 
-        val authViewModel: User_ViewModel by viewModels()
+        val authViewModel: Auth_ViewModel by viewModels()
         authViewModel.login.observe(this) { loginState ->
             if (loginState != null) {
-                loadingDialog.dismiss()
-
                 when (loginState) {
                     is State_Login.Error -> {
+                        loadingDialog.dismiss()
+
                         authViewModel.resetLoginObserve()
                         credentialFailDialog.show(supportFragmentManager, "Incorrect credentials")
                     }
 
                     is State_Login.Success -> {
-                        val openMainAppActivity = Intent(this@LoginActivity, MainAppActivity::class.java)
-                        startActivity(openMainAppActivity)
+                        loadingDialog.dismiss()
+                        loginState.userModel.digitalSign?.let {
+                            val openMainAppActivity = Intent(this@LoginActivity, MainAppActivity::class.java)
+                            startActivity(openMainAppActivity)
+                        } ?: run {
+                            val openPinActivity = Intent(this@LoginActivity, PinActivity::class.java)
+                            startActivity(openPinActivity)
+                        }
+
                         finish()
                     }
                 }

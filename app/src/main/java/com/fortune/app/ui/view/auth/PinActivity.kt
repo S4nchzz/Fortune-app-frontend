@@ -20,7 +20,7 @@ import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
-import com.fortune.app.ui.viewmodel.user.User_ViewModel
+import com.fortune.app.ui.viewmodel.user.Auth_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,12 +47,8 @@ class PinActivity : AppCompatActivity() {
     }
 
     private fun pinCreationServerRequest() {
-        val userViewModel: User_ViewModel by viewModels()
-        val uProfileViewModel: UProfile_ViewModel by viewModels()
+        val authViewmodel: Auth_ViewModel by viewModels()
         val accountViewModel: Account_ViewModel by viewModels()
-
-        val userDTO = intent.getSerializableExtra("userDTO", UserDTO::class.java)
-        val uProfileDto = intent.getSerializableExtra("uProfileDTO", UProfileDTO::class.java)
 
         val alertDialog = AlertDialog.Builder(this)
             .setView(R.layout.dialog_loading)
@@ -63,27 +59,19 @@ class PinActivity : AppCompatActivity() {
         alertDialog.show()
 
         if (isPinCorrect()) {
-            userViewModel.register.observe(this) {
-                uProfileViewModel.profile.observe(this) {
-                    userViewModel.digitalSign.observe(this) {
-                        accountViewModel.account.observe(this) {
-                            alertDialog.dismiss()
+            authViewmodel.digitalSign.observe(this) {
+                accountViewModel.account.observe(this) {
+                    alertDialog.dismiss()
 
-                            val openMainView = Intent(this@PinActivity, MainAppActivity::class.java)
-                            startActivity(openMainView)
-                            finish()
-                        }
-
-                        accountViewModel.createAccount()
-                    }
-
-                    userViewModel.createDigitalSign(getCompletePin())
+                    val openMainView = Intent(this@PinActivity, MainAppActivity::class.java)
+                    startActivity(openMainView)
+                    finish()
                 }
 
-                uProfileViewModel.createProfile(uProfileDto)
+                accountViewModel.createAccount()
             }
 
-            userViewModel.register(userDTO)
+            authViewmodel.createDigitalSign(getCompletePin())
         }
     }
 

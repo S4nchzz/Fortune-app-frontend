@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class User_ViewModel @Inject constructor(
+class Auth_ViewModel @Inject constructor(
     private val userAPIRepositoryImpl: UserAPIRepositoryImpl,
     private val userDBRepositoryImpl: UserDBRepositoryImpl,
     private val uProfileAPIRepositoryImpl: UProfileAPIRepositoryImpl,

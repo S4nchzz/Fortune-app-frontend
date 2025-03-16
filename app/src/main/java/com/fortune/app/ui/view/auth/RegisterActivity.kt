@@ -1,31 +1,21 @@
 package com.fortune.app.ui.view.auth
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
-import com.fortune.app.data.entities.user.UserEntity
 import com.fortune.app.data.entities.user.dto.UserDTO
-import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
-import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
-import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import dagger.hilt.android.AndroidEntryPoint
 
 class RegisterActivity : AppCompatActivity() {
 
