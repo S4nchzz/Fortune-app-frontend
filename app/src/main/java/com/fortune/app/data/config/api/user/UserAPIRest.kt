@@ -17,8 +17,8 @@ interface UserAPIRest {
     suspend fun login(@Query("identityDocument") identityDocument: String, @Query("password") password: String): Response<LoginResponse>
 
     @POST("${BuildConfig.API_URL}/user/register")
-    suspend fun register(@Query("identityDocument") identityDocument: String, @Query("email") email: String, @Query("password") password: String): UserEntity
+    suspend fun register(@Query("identityDocument") identityDocument: String, @Query("email") email: String, @Query("password") password: String, @Query("name") name: String, @Query("phone") phone: String, @Query("address") address: String): Response<Unit>
 
     @POST("${BuildConfig.API_URL}/user/createDigitalSign")  
-    suspend fun createDigitalSign(@Header("Authorization") token: String, @Query("digital_sign") ds: Int): UserEntity
+    suspend fun createDigitalSign(@Header("Authorization") token: String, @Query("digital_sign") ds: Int): Response<Unit>
 }

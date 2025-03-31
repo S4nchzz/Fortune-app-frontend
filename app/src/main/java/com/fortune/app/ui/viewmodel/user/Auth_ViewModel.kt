@@ -2,41 +2,35 @@ package com.fortune.app.ui.viewmodel.user
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
-import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
-import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
-import com.fortune.app.data.repositories.api.user.UProfileAPIRepositoryImpl
 import com.fortune.app.domain.model.user.UserModel
+import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.security.KeyStore
 import javax.inject.Inject
 
 @HiltViewModel
 class Auth_ViewModel @Inject constructor(
     private val userAPIRepositoryImpl: UserAPIRepositoryImpl,
-    private val uProfileAPIRepositoryImpl: UProfileAPIRepositoryImpl,
-    private val accountAPIRepositoryImpl: AccountAPIRepositoryImpl,
-    private val cardAPIRepositoryImpl: CardAPIRepositoryImpl,
     private val application: Application
 ) : ViewModel() {
 
-    private val _register = MutableLiveData<UserModel>()
-    val register: LiveData<UserModel> = _register
+    private val _register = MutableLiveData<DefaultState>()
+    val register: LiveData<DefaultState> = _register
 
-    fun register(userDTO: UserDTO?) {
+    fun register(userDTO: UserDTO?, uProfileDTO: UProfileDTO) {
         viewModelScope.launch {
             if (userDTO != null) {
-                val userModel: UserModel = userAPIRepositoryImpl.register(userDTO.identityDocument, userDTO.email, userDTO.password)
-                _register.value = userModel
+                val registerState = userAPIRepositoryImpl.register(userDTO, uProfileDTO)
+                _register.value = registerState
             }
         }
     }
@@ -58,17 +52,17 @@ class Auth_ViewModel @Inject constructor(
         }
     }
 
-    private val _digitalSign = MutableLiveData<UserModel>()
-    val digitalSign: LiveData<UserModel> = _digitalSign
+    private val _digitalSign = MutableLiveData<DefaultState>()
+    val digitalSign: LiveData<DefaultState> = _digitalSign
 
     fun createDigitalSign(ds: Int) {
         viewModelScope.launch {
             val sharedPreferences = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
             val token = sharedPreferences.getString("auth_token", null)
 
-            val userModel: UserModel = userAPIRepositoryImpl.createDigitalSign("Bearer ${token.toString()}", ds)
+            val pinCreationState = userAPIRepositoryImpl.createDigitalSign("Bearer ${token.toString()}", ds)
 
-            _digitalSign.value = userModel
+            _digitalSign.value = pinCreationState
         }
     }
 

@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
 import com.fortune.app.domain.model.bank_data.AccountModel
-import com.fortune.app.domain.state.AccountCreationState
+import com.fortune.app.domain.state.DefaultState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,8 +20,8 @@ class Account_ViewModel @Inject constructor(
     private val accountAPIRepositoryImpl: AccountAPIRepositoryImpl,
     private val application: Application
 ) : ViewModel() {
-    private val _account = MutableLiveData<AccountCreationState>()
-    val account: LiveData<AccountCreationState> = _account
+    private val _account = MutableLiveData<DefaultState>()
+    val account: LiveData<DefaultState> = _account
 
     fun createAccount() {
         viewModelScope.launch {

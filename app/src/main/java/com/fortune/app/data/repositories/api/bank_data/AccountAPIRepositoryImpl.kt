@@ -4,7 +4,7 @@ import com.fortune.app.data.mapper.bank_data.AccountMapper
 import com.fortune.app.data.config.api.bank_data.AccountAPIRest
 import com.fortune.app.domain.model.bank_data.AccountModel
 import com.fortune.app.domain.repository.api.bank_Data.AccountApiRepository
-import com.fortune.app.domain.state.AccountCreationState
+import com.fortune.app.domain.state.DefaultState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -15,14 +15,14 @@ class AccountAPIRepositoryImpl @Inject constructor(
 ) : AccountApiRepository {
     private val accountAPIService = retrofit.create(AccountAPIRest::class.java)
 
-    override suspend fun createAccount(token: String): AccountCreationState {
+    override suspend fun createAccount(token: String): DefaultState {
         return withContext(Dispatchers.IO) {
             val response = accountAPIService.createAccount(token)
 
             if (response.code() == 200) {
-                AccountCreationState.Success
+                DefaultState.Success
             } else {
-                AccountCreationState.Error
+                DefaultState.Error
             }
         }
     }

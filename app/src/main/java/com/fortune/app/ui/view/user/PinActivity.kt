@@ -1,4 +1,4 @@
-package com.fortune.app.ui.view.auth
+package com.fortune.app.ui.view.user
 
 import android.content.Intent
 import android.graphics.Color
@@ -15,11 +15,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
-import com.fortune.app.data.entities.user.dto.UProfileDTO
-import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
-import com.fortune.app.ui.viewmodel.user.UProfile_ViewModel
 import com.fortune.app.ui.viewmodel.user.Auth_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

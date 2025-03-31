@@ -3,9 +3,13 @@ package com.fortune.app.data.repositories.api.user
 import android.util.Log
 import com.fortune.app.data.mapper.user.UserMapper
 import com.fortune.app.data.config.api.user.UserAPIRest
+import com.fortune.app.data.entities.user.dto.UProfileDTO
+import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.domain.model.user.UserModel
 import com.fortune.app.domain.repository.api.user.UserApiRepository
 import com.fortune.app.domain.state.LoginState
+import com.fortune.app.domain.state.PinCreationState
+import com.fortune.app.domain.state.RegisterState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -16,9 +20,14 @@ class UserAPIRepositoryImpl @Inject constructor(
 ) : UserApiRepository {
     private val userAPIService = retrofit.create(UserAPIRest::class.java)
 
-    override suspend fun register(identity_document: String, email: String, password: String): UserModel {
+    override suspend fun register(userDTO: UserDTO, uProfileDTO: UProfileDTO): RegisterState {
         return withContext(Dispatchers.IO) {
-            UserMapper.mapToDomain(userAPIService.register(identity_document, email, password))
+            val response = userAPIService.register(userDTO.identityDocument, userDTO.email, userDTO.password, uProfileDTO.name, uProfileDTO.phone, uProfileDTO.address)
+            if (response.code() == 200) {
+                RegisterState.Succesful
+            } else {
+                RegisterState.Error
+            }
         }
     }
 
@@ -38,9 +47,15 @@ class UserAPIRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun createDigitalSign(token: String, ds: Int): UserModel {
+    override suspend fun createDigitalSign(token: String, ds: Int): PinCreationState {
         return withContext(Dispatchers.IO) {
-            UserMapper.mapToDomain(userAPIService.createDigitalSign(token, ds))
+            val response = userAPIService.createDigitalSign(token, ds)
+
+            if (response.code() == 200) {
+                PinCreationState.Successful
+            } else {
+                PinCreationState.Error
+            }
         }
     }
 }

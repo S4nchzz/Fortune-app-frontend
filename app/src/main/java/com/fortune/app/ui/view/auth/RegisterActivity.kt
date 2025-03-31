@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.data.entities.user.dto.UserDTO
+import com.fortune.app.ui.view.user.UProfileActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 

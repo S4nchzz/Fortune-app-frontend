@@ -2,7 +2,6 @@ package com.fortune.app.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.fortune.app.R
 import com.fortune.app.ui.view.auth.LoginActivity
 
-class AccountSuccesfullyCreated_Dialog : DialogFragment() {
+class AccountSuccessfullyCreated_Dialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
