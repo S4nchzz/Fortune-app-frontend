@@ -25,13 +25,7 @@ class MainAppActivity : AppCompatActivity() {
     }
 
     private fun loadUserViewData() {
-        val uProfileViewModel: UProfile_ViewModel by viewModels()
-        
-        uProfileViewModel.profile.observe(this) { uProfile ->
-            Toast.makeText(this@MainAppActivity, uProfile.name, Toast.LENGTH_LONG).show()
-        }
-
-        uProfileViewModel.findLocalProfileData()
+        Toast.makeText(this@MainAppActivity, "aaa", Toast.LENGTH_LONG).show()
     }
 
     private fun adjustScreenInsets() {

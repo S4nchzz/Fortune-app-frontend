@@ -50,8 +50,8 @@ class Auth_ViewModel @Inject constructor(
 
             if(loginState is LoginState.Success) {
                 val sharedPrefs = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                sharedPrefs.edit().putString("auth_token", loginState.token).apply()
-                Log.e("mitoken", loginState.token)
+                sharedPrefs.edit().putString("auth_token", loginState.responseInfo.token).apply()
+                Log.e("mitoken", loginState.responseInfo.token)
             }
 
              _login.value = loginState

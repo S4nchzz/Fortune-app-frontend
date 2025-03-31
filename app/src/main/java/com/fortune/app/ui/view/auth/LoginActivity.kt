@@ -82,10 +82,10 @@ class LoginActivity : AppCompatActivity() {
 
                     is LoginState.Success -> {
                         loadingDialog.dismiss()
-                        loginState.userModel.digitalSign?.let {
+                        if (loginState.responseInfo.hasDigitalSign) {
                             val openMainAppActivity = Intent(this@LoginActivity, MainAppActivity::class.java)
                             startActivity(openMainAppActivity)
-                        } ?: run {
+                        } else {
                             val openPinActivity = Intent(this@LoginActivity, PinActivity::class.java)
                             startActivity(openPinActivity)
                         }
