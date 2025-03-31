@@ -1,35 +1,32 @@
 package com.fortune.app.ui.viewmodel.user
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.entities.user.dto.UserDTO
-import com.fortune.app.data.repositories.db.bank_data.AccountDBRepositoryImpl
-import com.fortune.app.data.repositories.db.bank_data.CardDBRepositoryImpl
-import com.fortune.app.data.repositories.db.user.UProfileDBRepositoryImpl
-import com.fortune.app.data.repositories.remote.user.UserAPIRepositoryImpl
-import com.fortune.app.data.repositories.db.user.UserDBRepositoryImpl
-import com.fortune.app.data.repositories.remote.bank_data.AccountAPIRepositoryImpl
-import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepositoryImpl
-import com.fortune.app.data.repositories.remote.user.UProfileAPIRepositoryImpl
-import com.fortune.app.domain.model.bank_data.CardModel
+import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.user.UProfileAPIRepositoryImpl
 import com.fortune.app.domain.model.user.UserModel
-import com.fortune.app.domain.state.State_Login
+import com.fortune.app.domain.state.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.security.KeyStore
 import javax.inject.Inject
 
 @HiltViewModel
 class Auth_ViewModel @Inject constructor(
     private val userAPIRepositoryImpl: UserAPIRepositoryImpl,
-    private val userDBRepositoryImpl: UserDBRepositoryImpl,
     private val uProfileAPIRepositoryImpl: UProfileAPIRepositoryImpl,
-    private val uProfileDBRepositoryImpl: UProfileDBRepositoryImpl,
     private val accountAPIRepositoryImpl: AccountAPIRepositoryImpl,
-    private val accountDBRepositoryImpl: AccountDBRepositoryImpl,
     private val cardAPIRepositoryImpl: CardAPIRepositoryImpl,
-    private val cardDBRepositoryImpl: CardDBRepositoryImpl
+    private val application: Application
 ) : ViewModel() {
 
     private val _register = MutableLiveData<UserModel>()
@@ -38,43 +35,26 @@ class Auth_ViewModel @Inject constructor(
     fun register(userDTO: UserDTO?) {
         viewModelScope.launch {
             if (userDTO != null) {
-                clearDBL()
-
                 val userModel: UserModel = userAPIRepositoryImpl.register(userDTO.identityDocument, userDTO.email, userDTO.password)
-                userDBRepositoryImpl.saveUser(userModel)
                 _register.value = userModel
             }
         }
     }
 
-    private val _login = MutableLiveData<State_Login?>()
-    val login: LiveData<State_Login?> = _login
+    private val _login = MutableLiveData<LoginState?>()
+    val login: LiveData<LoginState?> = _login
 
     fun login(identityDocument: String, password: String) {
         viewModelScope.launch {
-            clearDBL()
+            val loginState: LoginState = userAPIRepositoryImpl.login(identityDocument, password)
 
-            val userModel = userAPIRepositoryImpl.login(identityDocument, password)
-
-            if (userModel == null) {
-                _login.value = State_Login.Error
-                return@launch
+            if(loginState is LoginState.Success) {
+                val sharedPrefs = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                sharedPrefs.edit().putString("auth_token", loginState.token).apply()
+                Log.e("mitoken", loginState.token)
             }
 
-            userDBRepositoryImpl.saveUser(userModel)
-
-            val uProfileEntity = uProfileAPIRepositoryImpl.findProfileByUserId(userModel.id)
-            uProfileDBRepositoryImpl.saveUprofile(uProfileEntity)
-
-            if (userModel.digitalSign != null) {
-                val accountAPIEntity = accountAPIRepositoryImpl.findAccountByUserId(userModel.id)
-                accountDBRepositoryImpl.saveAccount(accountAPIEntity)
-
-                val userCardsEntities: List<CardModel> = cardAPIRepositoryImpl.findAllCardsByAccId(accountAPIEntity.accountId)
-                cardDBRepositoryImpl.saveCards(userCardsEntities)
-            }
-
-             _login.value = State_Login.Success(userModel)
+             _login.value = loginState
         }
     }
 
@@ -83,10 +63,10 @@ class Auth_ViewModel @Inject constructor(
 
     fun createDigitalSign(ds: Int) {
         viewModelScope.launch {
-            val userFromDB: UserModel = userDBRepositoryImpl.findUserData()
-            val userModel: UserModel = userAPIRepositoryImpl.createDigitalSign(userFromDB.id, ds)
+            val sharedPreferences = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+            val token = sharedPreferences.getString("auth_token", null)
 
-            userDBRepositoryImpl.updateDigitalSign(userModel)
+            val userModel: UserModel = userAPIRepositoryImpl.createDigitalSign("Bearer ${token.toString()}", ds)
 
             _digitalSign.value = userModel
         }
@@ -94,11 +74,5 @@ class Auth_ViewModel @Inject constructor(
 
     fun resetLoginObserve() {
         this._login.value = null
-    }
-
-    private suspend fun clearDBL() {
-        userDBRepositoryImpl.clearLocalUsers()
-        accountDBRepositoryImpl.clearLocalAccountData()
-        cardDBRepositoryImpl.clearLocalCardData()
     }
 }

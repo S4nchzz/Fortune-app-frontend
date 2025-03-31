@@ -1,7 +1,7 @@
-package com.fortune.app.data.repositories.remote.bank_data
+package com.fortune.app.data.repositories.api.bank_data
 
 import com.fortune.app.data.mapper.bank_data.AccountMapper
-import com.fortune.app.data.config.remote.bank_data.AccountAPIRest
+import com.fortune.app.data.config.api.bank_data.AccountAPIRest
 import com.fortune.app.domain.model.bank_data.AccountModel
 import com.fortune.app.domain.repository.remote.bank_Data.AccountApiRepository
 import kotlinx.coroutines.Dispatchers

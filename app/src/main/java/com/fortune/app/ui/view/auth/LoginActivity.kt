@@ -18,7 +18,7 @@ import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.ui.dialogs.IncorrectCredentials_Dialog
 import com.fortune.app.ui.view.MainAppActivity
-import com.fortune.app.domain.state.State_Login
+import com.fortune.app.domain.state.LoginState
 import com.fortune.app.ui.viewmodel.user.Auth_ViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -73,14 +73,14 @@ class LoginActivity : AppCompatActivity() {
         authViewModel.login.observe(this) { loginState ->
             if (loginState != null) {
                 when (loginState) {
-                    is State_Login.Error -> {
+                    is LoginState.Error -> {
                         loadingDialog.dismiss()
 
                         authViewModel.resetLoginObserve()
                         credentialFailDialog.show(supportFragmentManager, "Incorrect credentials")
                     }
 
-                    is State_Login.Success -> {
+                    is LoginState.Success -> {
                         loadingDialog.dismiss()
                         loginState.userModel.digitalSign?.let {
                             val openMainAppActivity = Intent(this@LoginActivity, MainAppActivity::class.java)

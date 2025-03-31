@@ -1,9 +1,8 @@
-package com.fortune.app.data.config.remote.bank_data
+package com.fortune.app.data.config.api.bank_data
 
 import com.fortune.app.BuildConfig
 import com.fortune.app.data.entities.bank_data.CardEntity
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface CardAPIRest {

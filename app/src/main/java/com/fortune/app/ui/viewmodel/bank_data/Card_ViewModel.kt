@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fortune.app.data.repositories.db.user.UserDBRepositoryImpl
-import com.fortune.app.data.repositories.remote.bank_data.CardAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
 import com.fortune.app.domain.model.bank_data.CardModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

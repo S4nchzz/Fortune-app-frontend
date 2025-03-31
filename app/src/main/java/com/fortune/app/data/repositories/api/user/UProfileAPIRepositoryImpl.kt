@@ -1,7 +1,7 @@
-package com.fortune.app.data.repositories.remote.user
+package com.fortune.app.data.repositories.api.user
 
 import com.fortune.app.data.mapper.user.UProfileMapper
-import com.fortune.app.data.config.remote.user.UProfileAPIRest
+import com.fortune.app.data.config.api.user.UProfileAPIRest
 import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.repository.remote.user.UProfileApiRepository
 import kotlinx.coroutines.Dispatchers

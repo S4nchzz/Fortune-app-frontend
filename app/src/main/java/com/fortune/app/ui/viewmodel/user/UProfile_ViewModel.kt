@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.entities.user.dto.UProfileDTO
-import com.fortune.app.data.repositories.remote.user.UProfileAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.user.UProfileAPIRepositoryImpl
 import com.fortune.app.data.repositories.db.user.UProfileDBRepositoryImpl
 import com.fortune.app.data.repositories.db.user.UserDBRepositoryImpl
-import com.fortune.app.data.repositories.remote.user.UserAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
 import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.model.user.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel
