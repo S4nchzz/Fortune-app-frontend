@@ -27,7 +27,7 @@ class AccountAPIRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun findAccountByUserId(token: String): AccountModel {
+    override suspend fun findAccount(token: String): AccountModel {
         return withContext(Dispatchers.IO) {
             AccountMapper.mapToDomain(accountAPIService.findAccountByUserId(token))
         }

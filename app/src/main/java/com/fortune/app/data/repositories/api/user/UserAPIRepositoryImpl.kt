@@ -7,9 +7,8 @@ import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.domain.model.user.UserModel
 import com.fortune.app.domain.repository.api.user.UserApiRepository
+import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LoginState
-import com.fortune.app.domain.state.PinCreationState
-import com.fortune.app.domain.state.RegisterState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -20,13 +19,13 @@ class UserAPIRepositoryImpl @Inject constructor(
 ) : UserApiRepository {
     private val userAPIService = retrofit.create(UserAPIRest::class.java)
 
-    override suspend fun register(userDTO: UserDTO, uProfileDTO: UProfileDTO): RegisterState {
+    override suspend fun register(userDTO: UserDTO, uProfileDTO: UProfileDTO): DefaultState {
         return withContext(Dispatchers.IO) {
             val response = userAPIService.register(userDTO.identityDocument, userDTO.email, userDTO.password, uProfileDTO.name, uProfileDTO.phone, uProfileDTO.address)
             if (response.code() == 200) {
-                RegisterState.Succesful
+                DefaultState.Success
             } else {
-                RegisterState.Error
+                DefaultState.Error
             }
         }
     }
@@ -47,14 +46,14 @@ class UserAPIRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun createDigitalSign(token: String, ds: Int): PinCreationState {
+    override suspend fun createDigitalSign(token: String, ds: Int): DefaultState {
         return withContext(Dispatchers.IO) {
             val response = userAPIService.createDigitalSign(token, ds)
 
             if (response.code() == 200) {
-                PinCreationState.Successful
+                DefaultState.Success
             } else {
-                PinCreationState.Error
+                DefaultState.Error
             }
         }
     }

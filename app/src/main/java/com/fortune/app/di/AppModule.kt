@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.fortune.app.BuildConfig
 import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
-import com.fortune.app.data.repositories.api.user.UProfileAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -32,12 +31,6 @@ object AppModule {
     @Singleton
     fun provideUserAPIRepository(retrofit: Retrofit): UserAPIRepositoryImpl {
         return UserAPIRepositoryImpl(retrofit)
-    }
-
-    @Provides
-    @Singleton
-    fun provideUProfileAPI(retrofit: Retrofit): UProfileAPIRepositoryImpl {
-        return UProfileAPIRepositoryImpl(retrofit)
     }
 
     @Provides
