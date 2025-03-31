@@ -13,6 +13,7 @@ import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
 import com.fortune.app.domain.model.user.UserModel
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LoginState
+import com.fortune.app.domain.state.RegisterState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -23,8 +24,8 @@ class Auth_ViewModel @Inject constructor(
     private val application: Application
 ) : ViewModel() {
 
-    private val _register = MutableLiveData<DefaultState>()
-    val register: LiveData<DefaultState> = _register
+    private val _register = MutableLiveData<RegisterState>()
+    val register: LiveData<RegisterState> = _register
 
     fun register(userDTO: UserDTO?, uProfileDTO: UProfileDTO) {
         viewModelScope.launch {

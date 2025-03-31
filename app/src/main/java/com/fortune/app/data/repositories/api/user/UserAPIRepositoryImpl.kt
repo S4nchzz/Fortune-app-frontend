@@ -9,6 +9,7 @@ import com.fortune.app.domain.model.user.UserModel
 import com.fortune.app.domain.repository.api.user.UserApiRepository
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LoginState
+import com.fortune.app.domain.state.RegisterState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -19,13 +20,15 @@ class UserAPIRepositoryImpl @Inject constructor(
 ) : UserApiRepository {
     private val userAPIService = retrofit.create(UserAPIRest::class.java)
 
-    override suspend fun register(userDTO: UserDTO, uProfileDTO: UProfileDTO): DefaultState {
+    override suspend fun register(userDTO: UserDTO, uProfileDTO: UProfileDTO): RegisterState {
         return withContext(Dispatchers.IO) {
             val response = userAPIService.register(userDTO.identityDocument, userDTO.email, userDTO.password, uProfileDTO.name, uProfileDTO.phone, uProfileDTO.address)
-            if (response.code() == 200) {
-                DefaultState.Success
+            if (response.code() == 201) {
+                RegisterState.Success
+            } else if (response.code() == 409){
+                RegisterState.UserAlreadyExistsError
             } else {
-                DefaultState.Error
+                RegisterState.UnexpectedError
             }
         }
     }
