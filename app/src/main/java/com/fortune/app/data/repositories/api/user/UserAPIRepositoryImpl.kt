@@ -4,7 +4,7 @@ import android.util.Log
 import com.fortune.app.data.mapper.user.UserMapper
 import com.fortune.app.data.config.api.user.UserAPIRest
 import com.fortune.app.domain.model.user.UserModel
-import com.fortune.app.domain.repository.remote.user.UserApiRepository
+import com.fortune.app.domain.repository.api.user.UserApiRepository
 import com.fortune.app.domain.state.LoginState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

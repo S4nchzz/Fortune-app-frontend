@@ -3,7 +3,7 @@ package com.fortune.app.data.repositories.api.user
 import com.fortune.app.data.mapper.user.UProfileMapper
 import com.fortune.app.data.config.api.user.UProfileAPIRest
 import com.fortune.app.domain.model.user.UProfileModel
-import com.fortune.app.domain.repository.remote.user.UProfileApiRepository
+import com.fortune.app.domain.repository.api.user.UProfileApiRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit

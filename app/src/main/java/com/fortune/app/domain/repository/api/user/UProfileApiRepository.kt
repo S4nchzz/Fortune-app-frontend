@@ -1,4 +1,4 @@
-package com.fortune.app.domain.repository.remote.user
+package com.fortune.app.domain.repository.api.user
 
 import com.fortune.app.domain.model.user.UProfileModel
 
