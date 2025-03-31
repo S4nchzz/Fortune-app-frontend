@@ -14,9 +14,9 @@ class UProfileAPIRepositoryImpl @Inject constructor(
 ) : UProfileApiRepository {
     private val uProfileApiService = retrofit.create(UProfileAPIRest::class.java)
 
-    override suspend fun createProfile(userId: Long, name: String, address: String, phone: String, online: Boolean): UProfileModel {
+    override suspend fun createProfile(token: String, name: String, address: String, phone: String, online: Boolean): UProfileModel {
         return withContext(Dispatchers.IO) {
-            UProfileMapper.mapToDomain(uProfileApiService.userProfile(userId, name, address, phone,online))
+            UProfileMapper.mapToDomain(uProfileApiService.userProfile(token, name, address, phone,online))
         }
     }
 
