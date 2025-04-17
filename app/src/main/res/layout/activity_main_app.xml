@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.view.MainAppActivity">
+        tools:context=".ui.view.MainAppActivity"
+        android:background="@drawable/gradiant_background">
 
     <LinearLayout
             android:layout_weight="0.4"
@@ -16,18 +17,30 @@
             android:gravity="center_vertical">
 
         <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/icon_edit_profile"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"/>
+                android:layout_marginEnd="10dp"/>
 
         <TextView
                 android:id="@+id/client_name"
+                android:text="Iyan Sanchez da Costa"
                 android:layout_width="wrap_content"
+                android:textSize="16dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"/>
+        <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/menu_trigger_icon"/>
     </LinearLayout>
 
     <LinearLayout
@@ -36,11 +49,24 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             android:gravity="center">
-        <TextView
-                android:layout_width="wrap_content"
+        <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/disabled0"
-                android:text="Total Balance"/>
+                android:orientation="horizontal"
+                android:gravity="center">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/disabled0"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="20dp"
+                    android:text="Total Balance"/>
+
+            <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
+                    android:src="@drawable/info_account"/>
+        </LinearLayout>
         <TextView
                 android:id="@+id/account_total_balance"
                 android:layout_width="wrap_content"
@@ -48,7 +74,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:text="49.134,34 €"
-                android:textSize="30dp"/>
+                android:textSize="40dp"/>
     </LinearLayout>
 
     <LinearLayout
