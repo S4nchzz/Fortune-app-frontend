@@ -9,9 +9,9 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AccountAPIRest {
-    @POST("${BuildConfig.API_URL}/b_operations/account/createAccount")
+    @POST("/b_operations/account/createAccount")
     suspend fun createAccount(@Header("Authorization") token: String): Response<Unit>
 
-    @GET("${BuildConfig.API_URL}/b_operations/account/findAccount")
-    suspend fun findAccountByUserId(@Header("Authorization") token: String): AccountEntity
+    @GET("/b_operations/account/findAccount")
+    suspend fun findAccount(@Header("Authorization") token: String): Response<AccountEntity>
 }

@@ -25,7 +25,6 @@
         <TextView
                 android:id="@+id/client_name"
                 android:layout_width="wrap_content"
-                android:text="Iyan Sanchez"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"/>
@@ -43,6 +42,7 @@
                 android:textColor="@color/disabled0"
                 android:text="Total Balance"/>
         <TextView
+                android:id="@+id/account_total_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"

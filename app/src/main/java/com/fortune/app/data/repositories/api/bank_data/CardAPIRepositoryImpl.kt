@@ -15,13 +15,13 @@ class CardAPIRepositoryImpl @Inject constructor(
 
     suspend fun findMainCardByAccountID(accountId: String): CardModel {
         return withContext(Dispatchers.IO) {
-            CardMapper.mapToDomain(cardAPIService.findMainCardByAccountID(accountId))
+            CardMapper.mapToDomain(cardAPIService.findMainCardByAccountID(accountId).body()!!)
         }
     }
 
     suspend fun findAllCardsByAccId(accountId: String): List<CardModel> {
         return withContext(Dispatchers.IO) {
-            val cardEntities = cardAPIService.findAllCardsByAccId(accountId)
+            val cardEntities = cardAPIService.findAllCardsByAccId(accountId).body()!!
 
             val cardModelList: MutableList<CardModel> = mutableListOf()
             cardEntities.forEach { item ->

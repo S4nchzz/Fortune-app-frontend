@@ -4,6 +4,7 @@ import com.fortune.app.data.mapper.bank_data.AccountMapper
 import com.fortune.app.data.config.api.bank_data.AccountAPIRest
 import com.fortune.app.domain.model.bank_data.AccountModel
 import com.fortune.app.domain.repository.api.bank_Data.AccountApiRepository
+import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.DefaultState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -27,9 +28,15 @@ class AccountAPIRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun findAccount(token: String): AccountModel {
+    override suspend fun findAccount(token: String): AccountState {
         return withContext(Dispatchers.IO) {
-            AccountMapper.mapToDomain(accountAPIService.findAccountByUserId(token))
+            val response = accountAPIService.findAccount(token)
+
+            if (response.code() == 200 && response.body() != null) {
+                AccountState.Success(AccountMapper.mapToDomain(response.body()!!))
+            } else {
+                AccountState.Error
+            }
         }
     }
 }

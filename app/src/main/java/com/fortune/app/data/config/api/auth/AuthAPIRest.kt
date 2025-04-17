@@ -10,12 +10,12 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AuthAPIRest {
-    @GET("${BuildConfig.API_URL}/auth/login")
+    @GET("/auth/login")
     suspend fun login(@Query("identityDocument") identityDocument: String, @Query("password") password: String): Response<LoginResponse>
 
-    @POST("${BuildConfig.API_URL}/auth/register")
+    @POST("/auth/register")
     suspend fun register(@Query("identityDocument") identityDocument: String, @Query("email") email: String, @Query("password") password: String, @Query("name") name: String, @Query("phone") phone: String, @Query("address") address: String): Response<Unit>
 
-    @POST("${BuildConfig.API_URL}/user/createDigitalSign")  
+    @POST("/user/createDigitalSign")
     suspend fun createDigitalSign(@Header("Authorization") token: String, @Query("digital_sign") ds: Int): Response<Unit>
 }

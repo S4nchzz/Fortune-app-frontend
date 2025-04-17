@@ -46,7 +46,7 @@ class Auth_ViewModel @Inject constructor(
 
             if(loginState is LoginState.Success) {
                 tokenManager.saveToken(loginState.responseInfo.token)
-                Log.e("mitoken", loginState.responseInfo.token)
+                Log.e("mitoken", tokenManager.getToken()!!)
             }
 
              _login.value = loginState
@@ -58,10 +58,7 @@ class Auth_ViewModel @Inject constructor(
 
     fun createDigitalSign(ds: Int) {
         viewModelScope.launch {
-            val sharedPreferences = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-            val token = sharedPreferences.getString("auth_token", null)
-
-            val pinCreationState = authAPIRepositoryImpl.createDigitalSign("Bearer ${token.toString()}", ds)
+            val pinCreationState = authAPIRepositoryImpl.createDigitalSign("Bearer ${tokenManager.getToken()}", ds)
 
             _digitalSign.value = pinCreationState
         }
