@@ -9,6 +9,7 @@
         android:background="@drawable/rounded_shape">
 
     <ImageView
+            android:id="@+id/dialog_image_acc_creation"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/icon_checkmark_true"
@@ -21,11 +22,11 @@
             android:layout_marginBottom="20dp"/>
 
     <TextView
+            android:id="@+id/dialog_message_acc_creation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:text="Se ha creado la cuenta correctamente, por favor, inicie sesión."
             android:textColor="@color/disabled2"
             android:gravity="center"
             android:layout_marginBottom="24dp" />

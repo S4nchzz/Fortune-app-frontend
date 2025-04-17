@@ -1,15 +1,14 @@
 package com.fortune.app.di
 
-import android.content.Context
-import androidx.room.Room
+import android.app.Application
 import com.fortune.app.BuildConfig
 import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
-import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.auth.AuthAPIRepositoryImpl
+import com.fortune.app.data.secure.TokenManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,8 +28,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUserAPIRepository(retrofit: Retrofit): UserAPIRepositoryImpl {
-        return UserAPIRepositoryImpl(retrofit)
+    fun provideUserAPIRepository(retrofit: Retrofit): AuthAPIRepositoryImpl {
+        return AuthAPIRepositoryImpl(retrofit)
     }
 
     @Provides
@@ -44,5 +43,11 @@ object AppModule {
     @Singleton
     fun provideAccountAPIRepository(retrofit: Retrofit): AccountAPIRepositoryImpl {
         return AccountAPIRepositoryImpl(retrofit)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTokenMaanger(application: Application): TokenManager {
+        return TokenManager(application)
     }
 }

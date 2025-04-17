@@ -20,7 +20,7 @@ import com.fortune.app.ui.dialogs.IncorrectCredentials_Dialog
 import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.domain.state.LoginState
 import com.fortune.app.ui.view.user.PinActivity
-import com.fortune.app.ui.viewmodel.user.Auth_ViewModel
+import com.fortune.app.ui.viewmodel.auth.Auth_ViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint

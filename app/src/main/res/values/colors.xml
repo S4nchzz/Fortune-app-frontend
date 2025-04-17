@@ -6,9 +6,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     
+    <color name="disabled0">#E2E2E2</color>
     <color name="disabled1">#4F4F4F</color>
     <color name="disabled2">#7B7B7B</color>
 
     <color name="transparent">#17000000</color>
     <color name="blue">#7EAAFF</color>
+
 </resources>

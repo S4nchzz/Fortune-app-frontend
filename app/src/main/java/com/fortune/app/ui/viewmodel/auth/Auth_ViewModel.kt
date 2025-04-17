@@ -1,4 +1,4 @@
-package com.fortune.app.ui.viewmodel.user
+package com.fortune.app.ui.viewmodel.auth
 
 import android.app.Application
 import android.content.Context
@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.entities.user.dto.UserDTO
-import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
-import com.fortune.app.domain.model.user.UserModel
+import com.fortune.app.data.repositories.api.auth.AuthAPIRepositoryImpl
+import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LoginState
 import com.fortune.app.domain.state.RegisterState
@@ -20,8 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class Auth_ViewModel @Inject constructor(
-    private val userAPIRepositoryImpl: UserAPIRepositoryImpl,
-    private val application: Application
+    private val authAPIRepositoryImpl: AuthAPIRepositoryImpl,
+    private val application: Application,
+    private val tokenManager: TokenManager
 ) : ViewModel() {
 
     private val _register = MutableLiveData<RegisterState>()
@@ -30,7 +31,7 @@ class Auth_ViewModel @Inject constructor(
     fun register(userDTO: UserDTO?, uProfileDTO: UProfileDTO) {
         viewModelScope.launch {
             if (userDTO != null) {
-                val registerState = userAPIRepositoryImpl.register(userDTO, uProfileDTO)
+                val registerState = authAPIRepositoryImpl.register(userDTO, uProfileDTO)
                 _register.value = registerState
             }
         }
@@ -41,11 +42,10 @@ class Auth_ViewModel @Inject constructor(
 
     fun login(identityDocument: String, password: String) {
         viewModelScope.launch {
-            val loginState: LoginState = userAPIRepositoryImpl.login(identityDocument, password)
+            val loginState: LoginState = authAPIRepositoryImpl.login(identityDocument, password)
 
             if(loginState is LoginState.Success) {
-                val sharedPrefs = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-                sharedPrefs.edit().putString("auth_token", loginState.responseInfo.token).apply()
+                tokenManager.saveToken(loginState.responseInfo.token)
                 Log.e("mitoken", loginState.responseInfo.token)
             }
 
@@ -61,7 +61,7 @@ class Auth_ViewModel @Inject constructor(
             val sharedPreferences = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
             val token = sharedPreferences.getString("auth_token", null)
 
-            val pinCreationState = userAPIRepositoryImpl.createDigitalSign("Bearer ${token.toString()}", ds)
+            val pinCreationState = authAPIRepositoryImpl.createDigitalSign("Bearer ${token.toString()}", ds)
 
             _digitalSign.value = pinCreationState
         }

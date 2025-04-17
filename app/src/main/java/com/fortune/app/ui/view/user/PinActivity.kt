@@ -17,7 +17,7 @@ import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
-import com.fortune.app.ui.viewmodel.user.Auth_ViewModel
+import com.fortune.app.ui.viewmodel.auth.Auth_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

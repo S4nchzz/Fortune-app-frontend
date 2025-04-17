@@ -1,10 +1,7 @@
-package com.fortune.app.data.config.api.user
+package com.fortune.app.data.config.api.auth
 
 import com.fortune.app.BuildConfig
-import com.fortune.app.network.response.api.ApiResponseData
 import com.fortune.app.network.response.auth.LoginResponse
-import com.fortune.app.data.entities.user.UserEntity
-import retrofit2.Call
 import retrofit2.Response
 
 import retrofit2.http.GET
@@ -12,7 +9,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface UserAPIRest {
+interface AuthAPIRest {
     @GET("${BuildConfig.API_URL}/auth/login")
     suspend fun login(@Query("identityDocument") identityDocument: String, @Query("password") password: String): Response<LoginResponse>
 

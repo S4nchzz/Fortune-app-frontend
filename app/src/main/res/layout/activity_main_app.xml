@@ -9,15 +9,103 @@
         tools:context=".ui.view.MainAppActivity">
 
     <LinearLayout
-            android:layout_weight="1"
+            android:layout_weight="0.4"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/icon_edit_profile"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"/>
 
         <TextView
-                android:id="@+id/user_data_name"
+                android:id="@+id/client_name"
+                android:layout_width="wrap_content"
+                android:text="Iyan Sanchez"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center">
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="50sp"/>
+                android:textColor="@color/disabled0"
+                android:text="Total Balance"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="49.134,34 €"
+                android:textSize="30dp"/>
     </LinearLayout>
+
+    <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="My Cards"
+                android:textSize="22dp"/>
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+    </LinearLayout>
+    
+    <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp"
+                android:text="Recent"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/add_person_icon"
+                    android:layout_marginRight="10dp"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/add_person_icon"
+                    android:layout_marginRight="10dp"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/add_person_icon"
+                    android:layout_marginRight="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+            
 </LinearLayout>

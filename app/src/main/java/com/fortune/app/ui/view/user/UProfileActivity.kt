@@ -15,10 +15,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
 import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.entities.user.dto.UserDTO
-import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.RegisterState
 import com.fortune.app.ui.dialogs.AccountSuccessfullyCreated_Dialog
-import com.fortune.app.ui.viewmodel.user.Auth_ViewModel
+import com.fortune.app.ui.viewmodel.auth.Auth_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

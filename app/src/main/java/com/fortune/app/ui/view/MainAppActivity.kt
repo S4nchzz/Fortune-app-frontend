@@ -23,7 +23,7 @@ class MainAppActivity : AppCompatActivity() {
     }
 
     private fun loadUserViewData() {
-        Toast.makeText(this@MainAppActivity, "aaa", Toast.LENGTH_LONG).show()
+
     }
 
     private fun adjustScreenInsets() {
