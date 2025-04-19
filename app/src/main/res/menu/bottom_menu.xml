@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home1" android:title="Home" android:iconTint="@color/white" android:icon="@drawable/home_icon" android:checked="true"/>
+    <item android:id="@+id/home2" android:title="Home" android:iconTint="@color/white" android:icon="@drawable/home_icon"/>
+    <item android:id="@+id/home3" android:title="Home" android:iconTint="@color/white" android:icon="@drawable/home_icon"/>
+</menu>
