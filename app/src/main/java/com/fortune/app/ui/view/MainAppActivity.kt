@@ -3,6 +3,7 @@ package com.fortune.app.ui.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,10 +11,15 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.MainActivity
 import com.fortune.app.R
+import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.state.AccountState
+import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.UProfileState
+import com.fortune.app.ui.adapters.cards.CardAdapter
+import com.fortune.app.ui.adapters.cards.CardItem
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,6 +69,26 @@ class MainAppActivity : AppCompatActivity() {
 
         userViewModel.getAccount()
 
+        userViewModel.cards.observe(this) { cardState ->
+            when(cardState) {
+                is CardState.Success -> {
+                    val cardItems: MutableList<CardItem> = mutableListOf()
+                    cardState.cards.forEach { cardModel: CardModel ->
+                        cardItems.add(
+                            CardItem(cardModel.cardType, cardModel.cardNumber.takeLast(4).toInt(), cardModel.balance)
+                        )
+                    }
+
+                    findViewById<RecyclerView>(R.id.card_recycler_view).adapter = CardAdapter(cardItems)
+                }
+
+                is CardState.Error -> {
+
+                }
+            }
+        }
+
+        userViewModel.getCards()
     }
 
     private fun adjustScreenInsets() {

@@ -5,7 +5,10 @@
     
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    
+    <color name="lightgrey">#B9B9B9</color>
+
+    <color name="white_transparent">#2AFFFFFF</color>
+
     <color name="disabled0">#E2E2E2</color>
     <color name="disabled1">#4F4F4F</color>
     <color name="disabled2">#7B7B7B</color>

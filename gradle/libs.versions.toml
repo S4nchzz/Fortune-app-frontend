@@ -20,6 +20,7 @@ lifecycleLivedataKtx = "2.3.1"
 lifecycleViewmodelKtxVersion = "2.3.1"
 lottie = "3.4.0"
 material = "1.12.0"
+recyclerview = "1.4.0"
 roomRuntime = "2.6.1"
 activity = "1.10.0"
 
@@ -34,6 +35,7 @@ androidx-espresso-core-v330 = { module = "androidx.test.espresso:espresso-core",
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-lifecycle-livedata-ktx-v231 = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx-v231 = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtxVersion" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
