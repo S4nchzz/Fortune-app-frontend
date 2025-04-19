@@ -37,38 +37,12 @@ class MainAppActivity : AppCompatActivity() {
     private fun loadUserViewData() {
         val userViewModel: User_ViewModel by viewModels()
 
-        userViewModel.profile.observe(this) { userProfileState ->
-            when(userProfileState) {
-                is UProfileState.Success -> {
-                    findViewById<TextView>(R.id.client_name).text = userProfileState.uProfileModel.name
-                }
+        getProfile(userViewModel)
+        getAccount(userViewModel)
+        getCards(userViewModel)
+    }
 
-                is UProfileState.Error -> {
-                    val openMain = Intent(this@MainAppActivity, MainActivity::class.java)
-                    startActivity(openMain)
-                    finish()
-                }
-            }
-        }
-
-        userViewModel.getProfile()
-
-        userViewModel.account.observe(this) { accountState ->
-            when(accountState) {
-                is AccountState.Success -> {
-                    findViewById<TextView>(R.id.account_total_balance).text = "${accountState.accountModel.totalBalance} €"
-                }
-
-                is AccountState.Error -> {
-                    val openMain = Intent(this@MainAppActivity, MainActivity::class.java)
-                    startActivity(openMain)
-                    finish()
-                }
-            }
-        }
-
-        userViewModel.getAccount()
-
+    private fun getCards(userViewModel: User_ViewModel) {
         userViewModel.cards.observe(this) { cardState ->
             when(cardState) {
                 is CardState.Success -> {
@@ -89,6 +63,42 @@ class MainAppActivity : AppCompatActivity() {
         }
 
         userViewModel.getCards()
+    }
+
+    private fun getAccount(userViewModel: User_ViewModel) {
+        userViewModel.account.observe(this) { accountState ->
+            when(accountState) {
+                is AccountState.Success -> {
+                    findViewById<TextView>(R.id.account_total_balance).text = "${accountState.accountModel.totalBalance} €"
+                }
+
+                is AccountState.Error -> {
+                    val openMain = Intent(this@MainAppActivity, MainActivity::class.java)
+                    startActivity(openMain)
+                    finish()
+                }
+            }
+        }
+
+        userViewModel.getAccount()
+    }
+
+    private fun getProfile(userViewModel: User_ViewModel) {
+        userViewModel.profile.observe(this) { userProfileState ->
+            when(userProfileState) {
+                is UProfileState.Success -> {
+                    findViewById<TextView>(R.id.client_name).text = userProfileState.uProfileModel.name
+                }
+
+                is UProfileState.Error -> {
+                    val openMain = Intent(this@MainAppActivity, MainActivity::class.java)
+                    startActivity(openMain)
+                    finish()
+                }
+            }
+        }
+
+        userViewModel.getProfile()
     }
 
     private fun adjustScreenInsets() {
