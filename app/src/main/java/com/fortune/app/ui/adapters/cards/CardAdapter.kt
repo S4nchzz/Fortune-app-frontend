@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 
 class CardAdapter(private val cardItems: List<CardItem>) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
-
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardTypeTextView: TextView = itemView.findViewById(R.id.card_type)
         val cardNumberHintTextView: TextView = itemView.findViewById(R.id.card_number_hint)

@@ -16,4 +16,8 @@
     <color name="transparent">#00000000</color>
     <color name="blue">#7EAAFF</color>
 
+    <color name="nav_background">#111211</color>
+    <color name="inside_app_background">#0D0E0D</color>
+    <color name="button_black_background">#141414</color>
+    <color name="button_black_border">#222222</color>
 </resources>

@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.view.MainAppActivity"
-        android:background="@drawable/gradiant_background">
+        android:background="@color/inside_app_background">
 
     <LinearLayout
             android:layout_weight="0.4"
@@ -19,7 +19,7 @@
         <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/icon_edit_profile"
+                android:src="@drawable/profile_default_profile_icon"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="10dp"/>
 
@@ -88,16 +88,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center">
-            <FrameLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/shadow_rounded_button">
-                <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/plus_icon"
-                        android:layout_gravity="center"/>
-            </FrameLayout>
+            <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/plus_icon"
+                    android:scaleType="centerInside"
+                    android:background="@drawable/shadow_rounded_button"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,16 +107,13 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginEnd="50dp"
                 android:gravity="center">
-            <FrameLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+            <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/bizum_logo"
+                    android:scaleType="centerInside"
                     android:background="@drawable/shadow_rounded_button">
-                <ImageView
-                        android:layout_width="27dp"
-                        android:layout_height="27dp"
-                        android:src="@drawable/bizum_logo"
-                        android:layout_gravity="center"/>
-            </FrameLayout>
+            </ImageButton>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,16 +125,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center">
-            <FrameLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/shadow_rounded_button">
-            <ImageView
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
+            <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/more_icon"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
+                    android:scaleType="centerInside"
+                    android:background="@drawable/shadow_rounded_button">
+            </ImageButton>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
