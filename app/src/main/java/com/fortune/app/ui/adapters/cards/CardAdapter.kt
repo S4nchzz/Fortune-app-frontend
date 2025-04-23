@@ -1,13 +1,19 @@
 package com.fortune.app.ui.adapters.cards
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
+import com.fortune.app.ui.view.app.CardDetailActivity
 
-class CardAdapter(private val cardItems: List<CardItem>) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
+class CardAdapter(
+    private val context: Context,
+    private val cardItems: List<CardItem>
+) : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardTypeTextView: TextView = itemView.findViewById(R.id.card_type)
         val cardNumberHintTextView: TextView = itemView.findViewById(R.id.card_number_hint)
@@ -27,7 +33,9 @@ class CardAdapter(private val cardItems: List<CardItem>) : RecyclerView.Adapter<
         holder.cardBalanceTextView.text = "${currentItem.cardBalance.toString()} €"
 
         holder.itemView.setOnClickListener {
-            //Onclick listener to open card details
+            val openCardDetail = Intent(context, CardDetailActivity::class.java)
+            openCardDetail.putExtra("cardID", cardItems.get(position).cardID)
+            context.startActivity(openCardDetail)
         }
     }
 

@@ -90,11 +90,11 @@ class MainAppActivity : AppCompatActivity() {
                     val cardItems: MutableList<CardItem> = mutableListOf()
                     cardState.cards.forEach { cardModel: CardModel ->
                         cardItems.add(
-                            CardItem(cardModel.cardType, cardModel.cardNumber.takeLast(4).toInt(), cardModel.balance)
+                            CardItem(cardModel.id, cardModel.cardType, cardModel.cardNumber.takeLast(4).toInt(), cardModel.balance)
                         )
                     }
 
-                    findViewById<RecyclerView>(R.id.card_recycler_view).adapter = CardAdapter(cardItems)
+                    findViewById<RecyclerView>(R.id.card_recycler_view).adapter = CardAdapter(this, cardItems)
                 }
 
                 is CardState.Error -> {

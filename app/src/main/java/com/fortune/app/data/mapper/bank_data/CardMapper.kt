@@ -6,7 +6,7 @@ import com.fortune.app.domain.model.bank_data.CardModel
 object CardMapper {
     fun mapToDomain(cardEntity: CardEntity): CardModel {
         return CardModel(
-            id = cardEntity.id,
+            id = cardEntity.cardID,
             cardType = cardEntity.cardType,
             cardNumber = cardEntity.card_number,
             expDate = cardEntity.expDate,
@@ -17,7 +17,7 @@ object CardMapper {
 
     fun mapToEntity(cardModel: CardModel): CardEntity {
         return CardEntity(
-            id = cardModel.id,
+            cardID = cardModel.id,
             cardType = cardModel.cardType,
             card_number = cardModel.cardNumber,
             expDate = cardModel.expDate,

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "fl_card_data")
 data class CardEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @SerializedName("cardID") val cardID: Int,
 
     @ColumnInfo(name = "card_type")
     @SerializedName("card_type") val cardType: String,
