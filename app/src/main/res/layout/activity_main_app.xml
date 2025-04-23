@@ -73,7 +73,7 @@
                         android:layout_height="23dp"
                         android:tooltipText="Para cambiar el balance pulse en el boton 'Añadir €'."
                         android:contentDescription="Balance info"
-                        android:src="@drawable/info_account"/>
+                        android:src="@drawable/info"/>
             </LinearLayout>
             <TextView
                     android:id="@+id/account_total_balance"

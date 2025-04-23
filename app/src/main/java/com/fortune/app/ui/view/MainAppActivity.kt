@@ -30,6 +30,7 @@ import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.ui.adapters.cards.CardAdapter
 import com.fortune.app.ui.adapters.cards.CardItem
+import com.fortune.app.ui.view.app.ConfigActivity
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +75,8 @@ class MainAppActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.config).setOnClickListener {
-            Toast.makeText(this, "Config", Toast.LENGTH_SHORT).show()
+            val openConfig = Intent(this, ConfigActivity::class.java)
+            startActivity(openConfig)
         }
     }
 
