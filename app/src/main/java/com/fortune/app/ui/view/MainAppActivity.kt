@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.ListView
@@ -14,6 +15,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.LayoutInflaterCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.MainActivity
 import com.fortune.app.R
 import com.fortune.app.domain.model.bank_data.CardModel
+import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.UProfileState
@@ -41,18 +44,19 @@ class MainAppActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_app)
         adjustScreenInsets()
 
+        val userViewModel: User_ViewModel by viewModels()
+
         slideMenuConfiguration()
         loadUserViewData()
     }
 
     private fun loadUserViewData() {
-        val userViewModel: User_ViewModel by viewModels()
 
         generalActionListeners()
 
-        getProfile(userViewModel)
-        getAccount(userViewModel)
-        getCards(userViewModel)
+        setProfile()
+        setAccount()
+        setCards()
     }
 
     private fun generalActionListeners() {
@@ -73,7 +77,9 @@ class MainAppActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCards(userViewModel: User_ViewModel) {
+    private fun setCards() {
+        val userViewModel: User_ViewModel by viewModels()
+
         userViewModel.cards.observe(this) { cardState ->
             when(cardState) {
                 is CardState.Success -> {
@@ -96,7 +102,9 @@ class MainAppActivity : AppCompatActivity() {
         userViewModel.getCards()
     }
 
-    private fun getAccount(userViewModel: User_ViewModel) {
+    private fun setAccount() {
+        val userViewModel: User_ViewModel by viewModels()
+
         userViewModel.account.observe(this) { accountState ->
             when(accountState) {
                 is AccountState.Success -> {
@@ -114,18 +122,30 @@ class MainAppActivity : AppCompatActivity() {
         userViewModel.getAccount()
     }
 
-    private fun getProfile(userViewModel: User_ViewModel) {
+    private fun setProfile() {
+        val userViewModel: User_ViewModel by viewModels()
+
+        getProfile {
+            findViewById<TextView>(R.id.client_name).text =
+                it?.name
+        }
+        userViewModel.getProfile()
+    }
+
+    private fun getProfile(callback: (UProfileModel?) -> Unit) {
+        val userViewModel: User_ViewModel by viewModels()
+
         userViewModel.profile.observe(this) { userProfileState ->
             when (userProfileState) {
                 is UProfileState.Success -> {
-                    findViewById<TextView>(R.id.client_name).text =
-                        userProfileState.uProfileModel.name
+                    callback(userProfileState.uProfileModel)
                 }
 
                 is UProfileState.Error -> {
                     val openMain = Intent(this@MainAppActivity, MainActivity::class.java)
                     startActivity(openMain)
                     finish()
+                    callback(null)
                 }
             }
         }
@@ -136,6 +156,15 @@ class MainAppActivity : AppCompatActivity() {
     private fun slideMenuConfiguration() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.main_drawer_layout)
         val navView = findViewById<NavigationView>(R.id.nav_view)
+
+        val navHeader = LayoutInflater.from(this).inflate(R.layout.nav_header_layout, null)
+
+        getProfile { profileModel ->
+            navHeader.findViewById<TextView>(R.id.nav_view_header_uname).text = profileModel?.name
+        }
+//      navHeader.findViewById<TextView>(R.id.nav_view_header_upicture).text = getProfile().pfp <- Default picture temporally
+
+        navView.addHeaderView(navHeader)
 
         toggle = ActionBarDrawerToggle(
             this, drawerLayout,

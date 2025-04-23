@@ -4,9 +4,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:layout_marginTop="20dp">
+        android:paddingTop="20dp">
 
     <ImageView
+            android:id="@+id/nav_view_header_upicture"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
@@ -14,9 +15,9 @@
             android:contentDescription="Profile image"/>
 
     <TextView
+            android:id="@+id/nav_view_header_uname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Iyan Sanchez da Costa"
             android:layout_marginBottom="20dp"
             android:textColor="@color/white"
             android:textStyle="bold"/>

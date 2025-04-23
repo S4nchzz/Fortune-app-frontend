@@ -252,6 +252,5 @@
             app:menu="@menu/slide_menu"
             app:itemTextColor="@color/disabled0"
             app:itemIconTint="@color/white"
-            app:headerLayout="@layout/nav_header_layout"
             android:backgroundTint="@color/app"/>
 </androidx.drawerlayout.widget.DrawerLayout>
