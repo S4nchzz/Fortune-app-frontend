@@ -1,210 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ac_main_app"
+        android:id="@+id/main_drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.view.MainAppActivity"
-        android:background="@color/inside_app_background">
+        android:background="@color/app">
 
     <LinearLayout
-            android:layout_weight="0.4"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-        <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/profile_default_profile_icon"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"/>
-
-        <TextView
-                android:id="@+id/client_name"
-                android:layout_width="wrap_content"
-                android:textSize="16dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:layout_height="wrap_content"/>
-        <View
-                android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_weight="0.4"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
-
-        <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/menu_trigger_icon"/>
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_weight="0.8"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="center">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center_vertical">
+
+            <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/profile_default_profile_icon"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="10dp"/>
+
             <TextView
+                    android:id="@+id/client_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/disabled0"
-                    android:layout_marginEnd="5dp"
                     android:textSize="16dp"
-                    android:text="Total Balance"/>
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-            <ImageView
-                    android:layout_width="23dp"
-                    android:layout_height="23dp"
-                    android:src="@drawable/info_account"/>
+            <ImageButton
+                    android:backgroundTint="@color/transparent"
+                    android:id="@+id/slide_menu_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/menu_trigger_icon"/>
         </LinearLayout>
-        <TextView
-                android:id="@+id/account_total_balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="34dp"/>
-    </LinearLayout>
 
-    <LinearLayout
-            android:layout_weight="0.5"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center">
         <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:orientation="vertical"
                 android:gravity="center">
-            <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/plus_icon"
-                    android:scaleType="centerInside"
-                    android:background="@drawable/shadow_rounded_button"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/disabled0"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="16dp"
+                        android:text="Total Balance"/>
+
+                <ImageView
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:src="@drawable/info_account"/>
+            </LinearLayout>
             <TextView
+                    android:id="@+id/account_total_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Añadir €"/>
+                    android:textStyle="bold"
+                    android:textSize="34dp"/>
         </LinearLayout>
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:gravity="center">
-            <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/bizum_logo"
-                    android:scaleType="centerInside"
-                    android:background="@drawable/shadow_rounded_button">
-            </ImageButton>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Bizum"/>
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-            <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/more_icon"
-                    android:scaleType="centerInside"
-                    android:background="@drawable/shadow_rounded_button">
-            </ImageButton>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="Más"/>
-        </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp">
-        <TextView
+        <LinearLayout
+                android:layout_weight="0.5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:text="My Cards"
-                android:textSize="22dp"/>
-        
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/card_recycler_view"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <LinearLayout
-            android:layout_weight="0.7"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="22dp"
-                android:text="Recent"/>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
-            <ImageView
+                android:gravity="center">
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/add_person_icon"
-                    android:layout_marginRight="10dp"/>
-            <ImageView
+                    android:orientation="vertical"
+                    android:gravity="center">
+                <ImageButton
+                        android:id="@+id/add_money"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/plus_icon"
+                        android:contentDescription="Añadir dinero"
+                        android:scaleType="centerInside"
+                        android:background="@drawable/shadow_rounded_button"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Añadir €"/>
+            </LinearLayout>
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/add_person_icon"
-                    android:layout_marginRight="10dp"/>
-            <ImageView
+                    android:orientation="vertical"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center">
+                <ImageButton
+                        android:id="@+id/make_bizum"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/bizum_logo"
+                        android:contentDescription="Hacer bizum"
+                        android:scaleType="centerInside"
+                        android:background="@drawable/shadow_rounded_button">
+                </ImageButton>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Bizum"/>
+            </LinearLayout>
+
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/add_person_icon"
-                    android:layout_marginRight="10dp"/>
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="30dp">
+                <ImageButton
+                        android:id="@+id/config"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/config_icon"
+                        android:contentDescription="Config"
+                        android:scaleType="centerInside"
+                        android:background="@drawable/shadow_rounded_button"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Config"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                <ImageButton
+                        android:id="@+id/more"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/more_icon"
+                        android:contentDescription="More"
+                        android:scaleType="centerInside"
+                        android:background="@drawable/shadow_rounded_button">
+                </ImageButton>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Más"/>
+            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp">
+            <TextView
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="My Cards"
+                    android:textSize="22dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/card_recycler_view"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_weight="0.7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22dp"
+                    android:text="Recent"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/add_person_icon"
+                        android:layout_marginRight="10dp"/>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/add_person_icon"
+                        android:layout_marginRight="10dp"/>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/add_person_icon"
+                        android:layout_marginRight="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.App.BottomNavigationView"
+                app:menu="@menu/bottom_menu"/>
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.App.BottomNavigationView"
-            app:menu="@menu/bottom_menu"/>
-</LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_gravity="end"
+            android:layout_width="270dp"
+            android:layout_height="match_parent"
+            app:menu="@menu/slide_menu"
+            app:itemTextColor="@color/disabled0"
+            app:itemIconTint="@color/white"
+            app:headerLayout="@layout/nav_header_layout"
+            android:backgroundTint="@color/app"/>
+</androidx.drawerlayout.widget.DrawerLayout>

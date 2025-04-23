@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app">#141212</color>
+    <color name="app">#0D0E0D</color>
+    <color name="app_light">#171515</color>
     <color name="dialog">#1D1A1A</color>
-    
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lightgrey">#B9B9B9</color>
@@ -17,7 +18,6 @@
     <color name="blue">#7EAAFF</color>
 
     <color name="nav_background">#111211</color>
-    <color name="inside_app_background">#0D0E0D</color>
     <color name="button_black_background">#141414</color>
     <color name="button_black_border">#222222</color>
 </resources>

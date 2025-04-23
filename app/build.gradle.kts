@@ -93,6 +93,8 @@ dependencies {
     implementation(libs.lottie) // lottie
 
     testImplementation(libs.junit.jupiter)
+
+    implementation(libs.mpandroidchart)
 }
 
 kapt {

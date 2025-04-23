@@ -20,9 +20,12 @@ lifecycleLivedataKtx = "2.3.1"
 lifecycleViewmodelKtxVersion = "2.3.1"
 lottie = "3.4.0"
 material = "1.12.0"
+mpandroidchart = "v3.1.0"
 recyclerview = "1.4.0"
 roomRuntime = "2.6.1"
 activity = "1.10.0"
+vico = "v1.0.0"
+williamchart = "3.10.1"
 
 [libraries]
 androidx-appcompat-v120 = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
@@ -48,8 +51,10 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 kotlinx-coroutines-android-v136 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroidVersion" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterScalars" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+vico = { module = "com.github.Phillip-C:Vico", version.ref = "vico" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

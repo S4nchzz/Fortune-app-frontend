@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/personal_data" android:title="Perfil" android:icon="@drawable/profile_icon"/>
+    <item android:id="@+id/app_config" android:title="App Config" android:icon="@drawable/app_config_icon"/>
+    <item android:id="@+id/security" android:title="Seguridad" android:icon="@drawable/security_options_icon"/>
+</menu>
