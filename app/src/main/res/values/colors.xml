@@ -18,6 +18,7 @@
     <color name="blue">#7EAAFF</color>
 
     <color name="nav_background">#111211</color>
-    <color name="button_black_background">#141414</color>
+    <color name="button_black_background_false">#141414</color>
+    <color name="button_black_background_true">#201D1D</color>
     <color name="button_black_border">#222222</color>
 </resources>

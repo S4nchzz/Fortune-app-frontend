@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -35,7 +36,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainAppActivity : AppCompatActivity() {
-    private lateinit var drawerLayout: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,14 +44,15 @@ class MainAppActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_app)
         adjustScreenInsets()
 
-        val userViewModel: User_ViewModel by viewModels()
+        findViewById<ImageView>(R.id.balance_info).setOnClickListener {
+            it.performLongClick() // Simulate long click
+        }
 
         slideMenuConfiguration()
         loadUserViewData()
     }
 
     private fun loadUserViewData() {
-
         generalActionListeners()
 
         setProfile()

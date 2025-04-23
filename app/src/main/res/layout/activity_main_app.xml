@@ -14,8 +14,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
         <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
@@ -69,8 +68,11 @@
                         android:text="Total Balance"/>
 
                 <ImageView
+                        android:id="@+id/balance_info"
                         android:layout_width="23dp"
                         android:layout_height="23dp"
+                        android:tooltipText="Para cambiar el balance pulse en el boton 'Añadir €'."
+                        android:contentDescription="Balance info"
                         android:src="@drawable/info_account"/>
             </LinearLayout>
             <TextView
@@ -102,7 +104,7 @@
                         android:src="@drawable/plus_icon"
                         android:contentDescription="Añadir dinero"
                         android:scaleType="centerInside"
-                        android:background="@drawable/shadow_rounded_button"/>
+                        android:background="@drawable/button_hover_animation"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -123,7 +125,7 @@
                         android:src="@drawable/bizum_logo"
                         android:contentDescription="Hacer bizum"
                         android:scaleType="centerInside"
-                        android:background="@drawable/shadow_rounded_button">
+                        android:background="@drawable/button_hover_animation">
                 </ImageButton>
                 <TextView
                         android:layout_width="wrap_content"
@@ -145,7 +147,7 @@
                         android:src="@drawable/config_icon"
                         android:contentDescription="Config"
                         android:scaleType="centerInside"
-                        android:background="@drawable/shadow_rounded_button"/>
+                        android:background="@drawable/button_hover_animation"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -165,7 +167,7 @@
                         android:src="@drawable/more_icon"
                         android:contentDescription="More"
                         android:scaleType="centerInside"
-                        android:background="@drawable/shadow_rounded_button">
+                        android:background="@drawable/button_hover_animation">
                 </ImageButton>
                 <TextView
                         android:layout_width="wrap_content"
