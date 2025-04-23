@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app">#0D0E0D</color>
-    <color name="app_light">#171515</color>
+    <color name="app_light">#151715</color>
     <color name="dialog">#1D1A1A</color>
 
     <color name="black">#FF000000</color>
@@ -11,8 +11,9 @@
     <color name="white_transparent">#2AFFFFFF</color>
 
     <color name="disabled0">#AFAFAF</color>
-    <color name="disabled1">#4F4F4F</color>
-    <color name="disabled2">#7B7B7B</color>
+    <color name="disabled1">#7B7B7B</color>
+    <color name="disabled2">#4F4F4F</color>
+    <color name="disabled3">#303030</color>
 
     <color name="transparent">#00000000</color>
     <color name="blue">#7EAAFF</color>

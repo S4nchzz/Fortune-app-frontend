@@ -4,5 +4,5 @@
     <item android:color="@android:color/white" android:state_checked="true"/>
 
     <!-- Ítem no seleccionado -->
-    <item android:color="@color/disabled1" android:state_checked="false"/>
+    <item android:color="@color/disabled2" android:state_checked="false"/>
 </selector>

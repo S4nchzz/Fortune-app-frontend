@@ -252,7 +252,7 @@
             android:layout_width="270dp"
             android:layout_height="match_parent"
             app:menu="@menu/slide_menu"
+            android:background="@color/app"
             app:itemTextColor="@color/disabled0"
-            app:itemIconTint="@color/white"
-            android:backgroundTint="@color/app"/>
+            app:itemIconTint="@color/white"/>
 </androidx.drawerlayout.widget.DrawerLayout>

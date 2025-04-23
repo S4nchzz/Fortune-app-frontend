@@ -107,7 +107,7 @@ class PinActivity : AppCompatActivity() {
             if (confirmButton.isEnabled) {
                 confirmButton.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
             } else {
-                confirmButton.setBackgroundColor(ContextCompat.getColor(this, R.color.disabled2))
+                confirmButton.setBackgroundColor(ContextCompat.getColor(this, R.color.disabled1))
                 confirmButton.setTextColor(ContextCompat.getColor(this, R.color.black))
             }
         }

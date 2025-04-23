@@ -54,7 +54,7 @@
                     android:id="@+id/profile_name_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/disabled1"
+                    android:textColorHint="@color/disabled2"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:inputType="text"/>
@@ -72,7 +72,7 @@
                     android:id="@+id/profile_address_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/disabled1"
+                    android:textColorHint="@color/disabled2"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:inputType="text"/>
@@ -90,7 +90,7 @@
                     android:id="@+id/profile_phone_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/disabled1"
+                    android:textColorHint="@color/disabled2"
                     android:layout_marginStart="10dp"
                     android:inputType="phone"
                     android:layout_marginEnd="10dp"/>

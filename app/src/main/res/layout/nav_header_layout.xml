@@ -4,7 +4,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:paddingTop="20dp">
+        android:paddingTop="50dp"
+        android:paddingBottom="50dp"
+        android:background="@color/app_light">
 
     <ImageView
             android:id="@+id/nav_view_header_upicture"
@@ -21,4 +23,9 @@
             android:layout_marginBottom="20dp"
             android:textColor="@color/white"
             android:textStyle="bold"/>
+
+    <View
+            android:layout_width="100dp"
+            android:layout_height="2dp"
+            android:background="@color/disabled3"/>
 </LinearLayout>

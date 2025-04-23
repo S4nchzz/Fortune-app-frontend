@@ -32,7 +32,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Crea tu primera firma"
-                android:textColor="@color/disabled1"
+                android:textColor="@color/disabled2"
                 android:textSize="20dp"
                 android:textStyle="italic"/>
     </LinearLayout>
@@ -50,7 +50,7 @@
                 android:focusableInTouchMode="true"
                 android:inputType="number"
                 android:hint="-"
-                android:textColorHint="@color/disabled1"
+                android:textColorHint="@color/disabled2"
                 android:textSize="50dp"
                 android:maxLength="1"
                 android:textAlignment="center"/>
@@ -62,7 +62,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="-"
-                android:textColorHint="@color/disabled1"
+                android:textColorHint="@color/disabled2"
                 android:textSize="50dp"
                 android:maxLength="1"
                 android:textAlignment="center"/>
@@ -74,7 +74,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="-"
-                android:textColorHint="@color/disabled1"
+                android:textColorHint="@color/disabled2"
                 android:textSize="50dp"
                 android:maxLength="1"
                 android:textAlignment="center"/>
@@ -86,7 +86,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="-"
-                android:textColorHint="@color/disabled1"
+                android:textColorHint="@color/disabled2"
                 android:textSize="50dp"
                 android:maxLength="1"
                 android:textAlignment="center"/>
@@ -98,7 +98,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:hint="-"
-                android:textColorHint="@color/disabled1"
+                android:textColorHint="@color/disabled2"
                 android:textSize="50dp"
                 android:maxLength="1"
                 android:textAlignment="center"/>
@@ -116,6 +116,6 @@
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:backgroundTint="@color/disabled2"/>
+            android:backgroundTint="@color/disabled1"/>
 
 </LinearLayout>
