@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/reset_password" android:title="Resetear contraseña"/>
+    <item android:id="@+id/change_digital_sign" android:title="Cambiar firma digital"/>
+    <item android:id="@+id/close_all_jwt_sessions" android:title="Cerrar todas las sesiones"/>
+</menu>

@@ -8,11 +8,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
 
-class ConfigActivity : AppCompatActivity() {
+class SecurityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_config)
+        setContentView(R.layout.activity_security)
         adjustScreenInsets()
 
         findViewById<ImageView>(R.id.go_back).setOnClickListener {
