@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 data class CardMovementEntity (
-    @SerializedName("amount") val amount: Double,
+    @SerializedName("amount") val amount: String,
 
     @SerializedName("date") val date: Date,
 

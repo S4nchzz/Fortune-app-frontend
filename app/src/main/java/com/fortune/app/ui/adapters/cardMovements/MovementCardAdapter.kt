@@ -39,7 +39,7 @@ class MovementCardAdapter(context: Context, val movementItems: List<MovementCard
         holder.mDate.text = dateStrStructure
 
         holder.mReceiver.text = currentItem.mReceiver
-        holder.mAmount.text = currentItem.mAmount.toString() // Add logic to make backround green if amount was +
+        holder.mAmount.text = currentItem.mAmount
     }
 
     fun formatDateStructure(date: Date): String {

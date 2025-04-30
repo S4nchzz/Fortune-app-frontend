@@ -22,4 +22,6 @@
     <color name="button_black_background_false">#141414</color>
     <color name="button_black_background_true">#201D1D</color>
     <color name="button_black_border">#222222</color>
+
+    <color name="in_money">#E4F5E5</color>
 </resources>
