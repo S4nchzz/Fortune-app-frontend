@@ -22,5 +22,9 @@ data class CardEntity(
     @SerializedName("balance") val balance: Double,
 
     @ColumnInfo(name = "blocked")
-    @SerializedName("blocked") val blocked: Boolean
+    @SerializedName("blocked") val blocked: Boolean,
+
+    @SerializedName("cvv") val cvv: Int,
+
+    @SerializedName("pin") val pin: Int
 )

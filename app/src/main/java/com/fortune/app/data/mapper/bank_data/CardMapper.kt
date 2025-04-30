@@ -11,7 +11,9 @@ object CardMapper {
             cardNumber = cardEntity.card_number,
             expDate = cardEntity.expDate,
             balance = cardEntity.balance,
-            blocked = cardEntity.blocked
+            blocked = cardEntity.blocked,
+            cvv = cardEntity.cvv,
+            pin = cardEntity.pin
         )
     }
 
@@ -22,7 +24,9 @@ object CardMapper {
             card_number = cardModel.cardNumber,
             expDate = cardModel.expDate,
             balance = cardModel.balance,
-            blocked = cardModel.blocked
+            blocked = cardModel.blocked,
+            cvv = cardModel.cvv,
+            pin = cardModel.pin
         )
     }
 }

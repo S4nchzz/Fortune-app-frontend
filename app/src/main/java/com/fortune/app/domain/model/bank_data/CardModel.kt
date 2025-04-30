@@ -6,5 +6,7 @@ data class CardModel(
     val cardNumber: String,
     val expDate: String,
     val balance: Double,
-    val blocked: Boolean
+    val blocked: Boolean,
+    val cvv: Int,
+    val pin: Int
 )
