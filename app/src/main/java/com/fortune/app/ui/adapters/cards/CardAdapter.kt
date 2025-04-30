@@ -34,7 +34,7 @@ class CardAdapter(
 
         holder.itemView.setOnClickListener {
             val openCardDetail = Intent(context, CardDetailActivity::class.java)
-            openCardDetail.putExtra("cardID", cardItems.get(position).cardID)
+            openCardDetail.putExtra("card_uuid", cardItems.get(position).cardUUID)
             context.startActivity(openCardDetail)
         }
     }

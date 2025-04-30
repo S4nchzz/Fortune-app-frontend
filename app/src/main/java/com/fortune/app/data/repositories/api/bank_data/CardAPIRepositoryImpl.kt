@@ -3,9 +3,14 @@ package com.fortune.app.data.repositories.api.bank_data
 import com.fortune.app.data.mapper.bank_data.CardMapper
 import com.fortune.app.data.config.api.bank_data.CardAPIRest
 import com.fortune.app.data.entities.bank_data.CardEntity
+import com.fortune.app.data.entities.bank_data.CardMovementEntity
+import com.fortune.app.data.mapper.bank_data.CardMovementMapper
 import com.fortune.app.domain.model.bank_data.CardModel
+import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.repository.api.bank_Data.CardRepository
+import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardState
+import com.fortune.app.network.request.CardMovementRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -16,7 +21,7 @@ class CardAPIRepositoryImpl @Inject constructor(
 ): CardRepository {
     private val cardAPIService = retrofit.create(CardAPIRest::class.java)
 
-    suspend fun findCards(token: String): CardState {
+    override suspend fun findCards(token: String): CardState {
         return withContext(Dispatchers.IO) {
             val response = cardAPIService.findCards(token)
 
@@ -29,6 +34,23 @@ class CardAPIRepositoryImpl @Inject constructor(
                 CardState.Success(domainCards)
             } else {
                 CardState.Error
+            }
+        }
+    }
+
+    override suspend fun findMovements(token: String, card_uuid: String): CardMovementState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.findMovements(token, CardMovementRequest(card_uuid))
+
+            if (response.code() == 200 && response.body() != null) {
+                val domainMovement: MutableList<CardMovementModel> = mutableListOf()
+                response.body()!!.forEach { movementEntity : CardMovementEntity ->
+                    domainMovement.add(CardMovementMapper.mapToDomain(movementEntity))
+                }
+
+                CardMovementState.Success(domainMovement)
+            } else {
+                CardMovementState.Error
             }
         }
     }

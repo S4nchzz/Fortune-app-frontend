@@ -90,7 +90,7 @@ class MainAppActivity : AppCompatActivity() {
                     val cardItems: MutableList<CardItem> = mutableListOf()
                     cardState.cards.forEach { cardModel: CardModel ->
                         cardItems.add(
-                            CardItem(cardModel.id, cardModel.cardType, cardModel.cardNumber.takeLast(4).toInt(), cardModel.balance)
+                            CardItem(cardModel.uuid, cardModel.cardType, cardModel.cardNumber.takeLast(4).toInt(), cardModel.balance)
                         )
                     }
 

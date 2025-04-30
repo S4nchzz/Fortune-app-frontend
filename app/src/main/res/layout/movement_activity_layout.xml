@@ -57,4 +57,11 @@
         </LinearLayout>
     </LinearLayout>
 
+    <View
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="3px"
+            android:background="@color/disabled3"/>
+
 </LinearLayout>
