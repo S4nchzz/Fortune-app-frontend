@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/item_movement_container"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="vertical"
-        android:background="@color/transparent">
+        android:background="@drawable/movement_hover_animation"
+        android:clickable="true"
+        android:focusable="true">
 
     <LinearLayout
             android:layout_width="match_parent"

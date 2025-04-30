@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
@@ -18,6 +19,8 @@ class MovementCardAdapter(context: Context, val movementItems: List<MovementCard
         val mYear = itemView.findViewById<TextView>(R.id.movement_year)
         val mReceiver = itemView.findViewById<TextView>(R.id.movement_title)
         val mAmount = itemView.findViewById<TextView>(R.id.movement_amount)
+
+        val container = itemView.findViewById<LinearLayout>(R.id.item_movement_container)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentActivityHolder {
@@ -30,6 +33,7 @@ class MovementCardAdapter(context: Context, val movementItems: List<MovementCard
     override fun onBindViewHolder(holder: PaymentActivityHolder, position: Int) {
         val currentItem = movementItems[position]
 
+        holder.container.tooltipText = "${currentItem.mReceiver} | ${currentItem.mAmount}"
         holder.mReceiver.text = currentItem.mReceiver
 
         val mDate = currentItem.mDate

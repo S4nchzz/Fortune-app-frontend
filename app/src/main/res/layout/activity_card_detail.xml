@@ -99,9 +99,10 @@
                             android:id="@+id/view_pin"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/plus_icon"
+                            android:src="@drawable/closed_eye"
                             android:contentDescription="Consultar PIN"
                             android:scaleType="centerInside"
+                            android:padding="15dp"
                             android:background="@drawable/button_hover_animation"/>
 
                     <ImageButton
@@ -109,27 +110,30 @@
                             android:id="@+id/charge_card"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/plus_icon"
+                            android:src="@drawable/lock"
                             android:contentDescription="Cargar tarjeta"
                             android:scaleType="centerInside"
+                            android:padding="16dp"
                             android:background="@drawable/button_hover_animation"/>
                     <ImageButton
                             android:layout_marginEnd="20dp"
                             android:id="@+id/block_card"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/plus_icon"
+                            android:src="@drawable/pin_hand"
                             android:contentDescription="Bloquear tarjeta"
                             android:scaleType="centerInside"
+                            android:padding="15dp"
                             android:background="@drawable/button_hover_animation"/>
 
                     <ImageButton
                             android:id="@+id/view_cvv"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/plus_icon"
+                            android:src="@drawable/cvv_icon"
                             android:contentDescription="Ver cvv"
                             android:scaleType="centerInside"
+                            android:padding="15dp"
                             android:background="@drawable/button_hover_animation"/>
                 </LinearLayout>
 

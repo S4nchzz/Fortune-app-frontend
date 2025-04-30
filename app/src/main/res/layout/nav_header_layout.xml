@@ -6,7 +6,7 @@
         android:gravity="center_horizontal"
         android:paddingTop="50dp"
         android:paddingBottom="50dp"
-        android:background="@color/app_light">
+        android:background="@color/app_lighter">
 
     <ImageView
             android:id="@+id/nav_view_header_upicture"

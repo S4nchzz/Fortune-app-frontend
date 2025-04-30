@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true" android:drawable="@drawable/shadow_rounded_button_true">
-        <color android:color="@color/app_light" />
+        <color android:color="@color/app_lighter" />
     </item>
 
     <item android:state_focused="true" android:drawable="@drawable/shadow_rounded_button_true"/>
