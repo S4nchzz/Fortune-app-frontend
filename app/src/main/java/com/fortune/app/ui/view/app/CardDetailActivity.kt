@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 
 class CardDetailActivity : AppCompatActivity() {
@@ -16,6 +17,16 @@ class CardDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_card_detail)
         adjustScreenInsets()
 
+        loadCardData()
+        rViewAdapterConfig()
+    }
+
+    private fun loadCardData() {
+
+    }
+
+    private fun rViewAdapterConfig() {
+        val rView = findViewById<RecyclerView>(R.id.card_activity_rview)
     }
 
     private fun adjustScreenInsets() {

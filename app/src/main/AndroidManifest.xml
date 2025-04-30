@@ -26,9 +26,6 @@
                 android:name=".ui.view.app.ConfigActivity"
                 android:exported="false" />
         <activity
-                android:name=".ui.view.app.AccountStatsActivity"
-                android:exported="false" />
-        <activity
                 android:name=".ui.view.MainAppActivity"
                 android:exported="false" />
         <activity
