@@ -8,6 +8,7 @@ import com.fortune.app.data.mapper.bank_data.CardMovementMapper
 import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.repository.api.bank_Data.CardRepository
+import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
@@ -89,6 +90,18 @@ class CardAPIRepositoryImpl @Inject constructor(
                 CardNumberState.Success(response.body()!!.cardNumber)
             } else {
                 CardNumberState.Error
+            }
+        }
+    }
+
+    override suspend fun getExpDate(token: String, card_uuid: String): CardExpDateState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.getExpDate(token, CardUUIDApiRequest(card_uuid))
+
+            if (response.code() == 200 && response.body() != null) {
+                CardExpDateState.Success(response.body()!!.cardExpDate)
+            } else {
+                CardExpDateState.Error
             }
         }
     }

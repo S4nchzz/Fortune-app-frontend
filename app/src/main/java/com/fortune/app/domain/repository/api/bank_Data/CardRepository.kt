@@ -1,5 +1,6 @@
 package com.fortune.app.domain.repository.api.bank_Data
 
+import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
@@ -12,4 +13,5 @@ interface CardRepository {
     suspend fun lockCard(token: String, cardUuid: String): LockCardState
     suspend fun isCardLocked(token: String, cardUuid: String): LockCardState
     suspend fun getCardNumber(token: String, card_uuid: String): CardNumberState
+    suspend fun getExpDate(token: String, card_uuid: String): CardExpDateState
 }

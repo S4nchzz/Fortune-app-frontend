@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
+import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.LockCardState
@@ -43,6 +44,7 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun loadCardData() {
         isCardBlocked()
+        getExpDate()
         getCardNumber { number ->
             findViewById<TextView>(R.id.card_number).text = getHintCard(number)
             cardNumberHinted = true
@@ -138,6 +140,30 @@ class CardDetailActivity : AppCompatActivity() {
 
             cardViewModel.lockCard(intent.getStringExtra("card_uuid").toString())
         }
+    }
+
+    private fun getExpDate() {
+        val cardViewModel: Card_ViewModel by viewModels()
+
+        cardViewModel.cardExpDate.observe(this) { cardExpDateState ->
+            when(cardExpDateState) {
+                is CardExpDateState.Success -> {
+                    val formattedDate = cardExpDateState.cardExpDate.split("/").let {
+                        val month = it[0].padStart(2, '0')
+                        val year = it[1].takeLast(2)
+                        "$month/$year"
+                    }
+
+                    findViewById<TextView>(R.id.exp_date).text = formattedDate
+                }
+
+                is CardExpDateState.Error -> {
+                    // Show dialog with error
+                }
+            }
+        }
+
+        cardViewModel.getExpDate(intent.getStringExtra("card_uuid").toString())
     }
 
     private fun isCardBlocked() {

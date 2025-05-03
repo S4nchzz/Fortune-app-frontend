@@ -1,3 +1,3 @@
-package com.fortune.app.network.response
+package com.fortune.app.network.response.card
 
 data class CardNumberResponse(val cardNumber: String)

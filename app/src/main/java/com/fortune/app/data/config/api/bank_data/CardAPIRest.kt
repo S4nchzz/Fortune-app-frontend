@@ -2,15 +2,16 @@ package com.fortune.app.data.config.api.bank_data
 
 import com.fortune.app.data.entities.bank_data.CardEntity
 import com.fortune.app.data.entities.bank_data.CardMovementEntity
+import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.network.request.CardUUIDApiRequest
-import com.fortune.app.network.response.CardNumberResponse
+import com.fortune.app.network.response.card.CardExpDateResponse
+import com.fortune.app.network.response.card.CardNumberResponse
 import com.fortune.app.network.response.card.LockCardResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface CardAPIRest {
     @GET("/b_operations/card/findCards")
@@ -27,4 +28,7 @@ interface CardAPIRest {
 
     @POST("/b_operations/card/getCardNumber")
     suspend fun getCardNumber(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<CardNumberResponse>
+
+    @POST("/b_operations/card/getExpDate")
+    suspend fun getExpDate(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<CardExpDateResponse>
 }
