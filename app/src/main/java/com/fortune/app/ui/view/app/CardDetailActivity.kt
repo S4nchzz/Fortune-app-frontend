@@ -2,6 +2,7 @@ package com.fortune.app.ui.view.app
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -71,6 +72,7 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun lockButton() {
+        // Show dialog or something to use the digital sign
         val cardViewModel: Card_ViewModel by viewModels()
 
         cardViewModel.lockCardState.observe(this) { lockCardState ->
@@ -82,14 +84,18 @@ class CardDetailActivity : AppCompatActivity() {
 
                     val lockImage = findViewById<ImageView>(R.id.lock_status)
                     val simulatePayment = findViewById<Button>(R.id.simulate_payment)
+                    val lockButton = findViewById<ImageButton>(R.id.lock_card)
+
                     if (lockCardState.locked) {
                         lockImage.isVisible = true
                         simulatePayment.isEnabled = false
                         simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.white))
+                        lockButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.lock_unlocked))
                     } else {
                         lockImage.isVisible = false
                         simulatePayment.isEnabled = true
                         simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.disabled1))
+                        lockButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.lock))
                     }
                 }
 
