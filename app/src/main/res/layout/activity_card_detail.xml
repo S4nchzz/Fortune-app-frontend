@@ -85,7 +85,7 @@
                             android:text="Simular pago"
                             android:backgroundTint="@color/button_black_background_true"
                             android:textColor="@color/white"
-                            app:cornerRadius="10dp" />
+                            app:cornerRadius="10dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,9 +94,10 @@
                         android:orientation="horizontal"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
+                        android:showDividers="middle"
+                        android:divider="@drawable/empty_h_divider"
                         android:gravity="center">
                     <ImageButton
-                            android:layout_marginEnd="20dp"
                             android:id="@+id/view_card"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
@@ -107,7 +108,6 @@
                             android:background="@drawable/button_hover_animation"/>
 
                     <ImageButton
-                            android:layout_marginEnd="20dp"
                             android:id="@+id/lock_card"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
@@ -117,7 +117,6 @@
                             android:padding="16dp"
                             android:background="@drawable/button_hover_animation"/>
                     <ImageButton
-                            android:layout_marginEnd="20dp"
                             android:id="@+id/transfer_money"
                             android:layout_width="60dp"
                             android:layout_height="60dp"

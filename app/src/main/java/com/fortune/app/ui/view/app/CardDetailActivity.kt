@@ -176,7 +176,9 @@ class CardDetailActivity : AppCompatActivity() {
         cardViewModel.cardBalanceState.observe(this) { cardBalanceState ->
             when(cardBalanceState) {
                 is CardBalanceState.Success -> {
-                    findViewById<TextView>(R.id.card_balance).text = "${cardBalanceState.card_balance} €"
+                    var formattedBalance = "%,.2f".format(cardBalanceState.card_balance)
+
+                    findViewById<TextView>(R.id.card_balance).text = "${formattedBalance} €"
                 }
 
                 is CardBalanceState.Error -> {
