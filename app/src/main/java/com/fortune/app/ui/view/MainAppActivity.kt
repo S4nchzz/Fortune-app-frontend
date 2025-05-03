@@ -98,7 +98,7 @@ class MainAppActivity : AppCompatActivity() {
                 }
 
                 is CardState.Error -> {
-
+                    // Show error dialog
                 }
             }
         }

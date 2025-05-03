@@ -16,7 +16,7 @@ import com.fortune.app.R
 import com.fortune.app.data.entities.user.dto.UProfileDTO
 import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.domain.state.RegisterState
-import com.fortune.app.ui.dialogs.AccountSuccessfullyCreated_Dialog
+import com.fortune.app.ui.dialogs.AccountCreation_Dialog
 import com.fortune.app.ui.viewmodel.auth.Auth_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -62,15 +62,15 @@ class UProfileActivity : AppCompatActivity() {
 
                 when(registerState) {
                     is RegisterState.Success -> {
-                        AccountSuccessfullyCreated_Dialog(false, "Se ha creado la cuenta correctamente. por favor, inicie sesion para finalizar la configuracion de la cuenta").show(supportFragmentManager, "Account successfully created")
+                        AccountCreation_Dialog(false, "Se ha creado la cuenta correctamente. por favor, inicie sesion para finalizar la configuracion de la cuenta").show(supportFragmentManager, "Account successfully created")
                     }
 
                     is RegisterState.UserAlreadyExistsError -> {
-                        AccountSuccessfullyCreated_Dialog(true, "El usuario ya existe, por favor, intentelo de nuevo.").show(supportFragmentManager, "Account already exists")
+                        AccountCreation_Dialog(true, "El usuario ya existe, por favor, intentelo de nuevo.").show(supportFragmentManager, "Account already exists")
                     }
 
                     is RegisterState.UnexpectedError -> {
-                        AccountSuccessfullyCreated_Dialog(true, "Ha ocurrido un error inesperado").show(supportFragmentManager, "Unexpected error")
+                        AccountCreation_Dialog(true, "Ha ocurrido un error inesperado").show(supportFragmentManager, "Unexpected error")
                     }
                 }
             }

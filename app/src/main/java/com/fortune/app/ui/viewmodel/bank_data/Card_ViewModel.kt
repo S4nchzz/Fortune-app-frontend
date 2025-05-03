@@ -9,6 +9,8 @@ import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.state.CardMovementState
+import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.LockCardState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,6 +28,16 @@ class Card_ViewModel @Inject constructor(
         viewModelScope.launch {
             val cardMovementState = cardAPIRepositoryImpl.findMovements("Bearer ${tokenManager.getToken()}", card_uuid)
             _movementState.value = cardMovementState
+        }
+    }
+
+    private val _lockCardState = MutableLiveData<LockCardState>()
+    val lockCardState: LiveData<LockCardState> = _lockCardState
+
+    fun lockCard(card_uuid: String) {
+        viewModelScope.launch {
+            val cardLockState = cardAPIRepositoryImpl.lockCard("Bearer ${tokenManager.getToken()}", card_uuid)
+            _lockCardState.value = cardLockState
         }
     }
 }

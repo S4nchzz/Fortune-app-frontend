@@ -96,7 +96,7 @@
                         android:gravity="center">
                     <ImageButton
                             android:layout_marginEnd="20dp"
-                            android:id="@+id/view_pin"
+                            android:id="@+id/view_card"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/closed_eye"
@@ -107,7 +107,7 @@
 
                     <ImageButton
                             android:layout_marginEnd="20dp"
-                            android:id="@+id/charge_card"
+                            android:id="@+id/lock_card"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/lock"
@@ -117,7 +117,7 @@
                             android:background="@drawable/button_hover_animation"/>
                     <ImageButton
                             android:layout_marginEnd="20dp"
-                            android:id="@+id/block_card"
+                            android:id="@+id/view_pin"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/pin_hand"

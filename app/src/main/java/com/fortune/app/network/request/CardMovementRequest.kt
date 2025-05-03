@@ -1,5 +1,5 @@
 package com.fortune.app.network.request
 
-data class CardMovementRequest(
+data class CardUUIDApiRequest (
     val card_uuid: String
 )

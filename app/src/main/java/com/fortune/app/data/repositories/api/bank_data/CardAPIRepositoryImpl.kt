@@ -10,7 +10,9 @@ import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.repository.api.bank_Data.CardRepository
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardState
-import com.fortune.app.network.request.CardMovementRequest
+import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.LockCardState
+import com.fortune.app.network.request.CardUUIDApiRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -40,7 +42,7 @@ class CardAPIRepositoryImpl @Inject constructor(
 
     override suspend fun findMovements(token: String, card_uuid: String): CardMovementState {
         return withContext(Dispatchers.IO) {
-            val response = cardAPIService.findMovements(token, CardMovementRequest(card_uuid))
+            val response = cardAPIService.findMovements(token, CardUUIDApiRequest(card_uuid))
 
             if (response.code() == 200 && response.body() != null) {
                 val domainMovement: MutableList<CardMovementModel> = mutableListOf()
@@ -51,6 +53,18 @@ class CardAPIRepositoryImpl @Inject constructor(
                 CardMovementState.Success(domainMovement)
             } else {
                 CardMovementState.Error
+            }
+        }
+    }
+
+    override suspend fun lockCard(token: String, cardUuid: String): LockCardState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.lockCard(token, CardUUIDApiRequest(cardUuid))
+
+            if (response.code() == 200 && response.body() != null) {
+                LockCardState.Success(response.body()!!.locked)
+            } else {
+                LockCardState.Error
             }
         }
     }

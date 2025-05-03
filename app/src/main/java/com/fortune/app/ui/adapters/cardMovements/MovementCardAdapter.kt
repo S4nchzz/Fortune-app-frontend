@@ -13,7 +13,7 @@ import java.time.format.TextStyle
 import java.util.Date
 import java.util.Locale
 
-class MovementCardAdapter(context: Context, val movementItems: List<MovementCardItem>) : RecyclerView.Adapter<MovementCardAdapter.PaymentActivityHolder>(){
+class MovementCardAdapter(val movementItems: List<MovementCardItem>) : RecyclerView.Adapter<MovementCardAdapter.PaymentActivityHolder>(){
     inner class PaymentActivityHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val mDate = itemView.findViewById<TextView>(R.id.movement_date)
         val mYear = itemView.findViewById<TextView>(R.id.movement_year)

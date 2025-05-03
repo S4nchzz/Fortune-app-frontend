@@ -2,7 +2,8 @@ package com.fortune.app.data.config.api.bank_data
 
 import com.fortune.app.data.entities.bank_data.CardEntity
 import com.fortune.app.data.entities.bank_data.CardMovementEntity
-import com.fortune.app.network.request.CardMovementRequest
+import com.fortune.app.network.request.CardUUIDApiRequest
+import com.fortune.app.network.response.card.LockCardResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -15,5 +16,8 @@ interface CardAPIRest {
     suspend fun findCards(@Header("Authorization") token: String): Response<List<CardEntity>>
 
     @POST("/b_operations/movement/findMovements")
-    suspend fun findMovements(@Header("Authorization") token: String, @Body card_uuid: CardMovementRequest): Response<List<CardMovementEntity>>
+    suspend fun findMovements(@Header("Authorization") token: String, @Body card_uuid: CardUUIDApiRequest): Response<List<CardMovementEntity>>
+
+    @POST("/b_operations/card/manageCardLock")
+    suspend fun lockCard(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<LockCardResponse>
 }
