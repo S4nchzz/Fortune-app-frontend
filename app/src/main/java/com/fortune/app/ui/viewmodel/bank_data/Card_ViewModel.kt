@@ -40,4 +40,14 @@ class Card_ViewModel @Inject constructor(
             _lockCardState.value = cardLockState
         }
     }
+
+    private val _isCardLockedState = MutableLiveData<LockCardState>()
+    val isCardLockedState: LiveData<LockCardState> = _isCardLockedState
+
+    fun isCardLocked(card_uuid: String) {
+        viewModelScope.launch {
+            val cardLockState = cardAPIRepositoryImpl.isCardLocked("Bearer ${tokenManager.getToken()}", card_uuid)
+            _isCardLockedState.value = cardLockState
+        }
+    }
 }

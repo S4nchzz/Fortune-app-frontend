@@ -77,13 +77,14 @@
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
+                            android:tooltipText="Pago simulado para pruebas del proyecto"
                             android:id="@+id/simulate_payment"
                             android:layout_width="140dp"
                             android:layout_height="45dp"
                             android:layout_marginEnd="45dp"
-                            android:backgroundTint="@color/button_black_background_true"
                             android:text="Simular pago"
-                            android:textColor="@color/disabled1"
+                            android:backgroundTint="@color/button_black_background_true"
+                            android:textColor="@color/white"
                             app:cornerRadius="10dp" />
                 </LinearLayout>
 

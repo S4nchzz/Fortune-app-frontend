@@ -8,5 +8,6 @@ import com.fortune.app.domain.state.LockCardState
 interface CardRepository {
     suspend fun findCards(token: String): CardState
     suspend fun findMovements(token: String, card_uuid: String): CardMovementState
-    abstract suspend fun lockCard(s: String, cardUuid: String): LockCardState
+    suspend fun lockCard(token: String, cardUuid: String): LockCardState
+    suspend fun isCardLocked(token: String, cardUuid: String): LockCardState
 }

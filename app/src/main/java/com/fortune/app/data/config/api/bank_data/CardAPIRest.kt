@@ -20,4 +20,7 @@ interface CardAPIRest {
 
     @POST("/b_operations/card/manageCardLock")
     suspend fun lockCard(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<LockCardResponse>
+
+    @POST("/b_operations/card/isCardLocked")
+    suspend fun isCardLocked(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<LockCardResponse>
 }

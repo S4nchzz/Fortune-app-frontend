@@ -68,4 +68,16 @@ class CardAPIRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun isCardLocked(token: String, cardUuid: String): LockCardState {
+        val response = cardAPIService.isCardLocked(token, CardUUIDApiRequest(cardUuid))
+
+        return withContext(Dispatchers.IO) {
+            if (response.code() == 200 && response.body() != null) {
+                LockCardState.Success(response.body()!!.locked)
+            } else {
+                LockCardState.Error
+            }
+        }
+    }
 }

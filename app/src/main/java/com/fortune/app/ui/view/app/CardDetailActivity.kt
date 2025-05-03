@@ -3,13 +3,17 @@ package com.fortune.app.ui.view.app
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.domain.state.CardMovementState
@@ -38,9 +42,28 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun loadCardData() {
-//        isCardBlocked()
+        isCardBlocked()
         configEventButtons()
+    }
 
+    private fun isCardBlocked() {
+        val cardViewModel: Card_ViewModel by viewModels()
+        cardViewModel.isCardLockedState.observe(this) { cardLockedState ->
+            when(cardLockedState) {
+                is LockCardState.Success -> {
+                    if (cardLockedState.locked) {
+                        findViewById<Button>(R.id.simulate_payment).isEnabled = false
+                        val lockImage = findViewById<ImageView>(R.id.lock_status)
+                        lockImage.isVisible = true
+                    }
+                }
+
+                else -> {}
+            }
+        }
+
+
+        cardViewModel.isCardLocked(intent.getStringExtra("card_uuid").toString())
     }
 
     private fun configEventButtons() {
@@ -54,7 +77,20 @@ class CardDetailActivity : AppCompatActivity() {
             loadingDialog.dismiss()
             when(lockCardState) {
                 is LockCardState.Success -> {
-                    SuccessOrFail_Dialog(false, "Se ha ${if (lockCardState.locked) "bloqueado" else "desbloqueado"} la tarjeta").show(supportFragmentManager, "Card locked or unlocked")
+                    val appendLockedOrUnlockedMessage: String = if (lockCardState.locked) "bloqueado" else "desbloqueado"
+                    SuccessOrFail_Dialog(false, "Se ha ${appendLockedOrUnlockedMessage} la tarjeta").show(supportFragmentManager, "Card locked or unlocked")
+
+                    val lockImage = findViewById<ImageView>(R.id.lock_status)
+                    val simulatePayment = findViewById<Button>(R.id.simulate_payment)
+                    if (lockCardState.locked) {
+                        lockImage.isVisible = true
+                        simulatePayment.isEnabled = false
+                        simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.white))
+                    } else {
+                        lockImage.isVisible = false
+                        simulatePayment.isEnabled = true
+                        simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.disabled1))
+                    }
                 }
 
                 is LockCardState.Error -> {
