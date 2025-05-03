@@ -42,7 +42,6 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:text="**** **** **** 8702"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="19dp"

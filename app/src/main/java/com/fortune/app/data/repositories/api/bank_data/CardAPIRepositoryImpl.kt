@@ -9,6 +9,7 @@ import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.repository.api.bank_Data.CardRepository
 import com.fortune.app.domain.state.CardMovementState
+import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
@@ -70,13 +71,24 @@ class CardAPIRepositoryImpl @Inject constructor(
     }
 
     override suspend fun isCardLocked(token: String, cardUuid: String): LockCardState {
-        val response = cardAPIService.isCardLocked(token, CardUUIDApiRequest(cardUuid))
-
         return withContext(Dispatchers.IO) {
+            val response = cardAPIService.isCardLocked(token, CardUUIDApiRequest(cardUuid))
             if (response.code() == 200 && response.body() != null) {
                 LockCardState.Success(response.body()!!.locked)
             } else {
                 LockCardState.Error
+            }
+        }
+    }
+
+    override suspend fun getCardNumber(token: String, card_uuid: String): CardNumberState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.getCardNumber(token, CardUUIDApiRequest(card_uuid))
+
+            if (response.code() == 200 && response.body() != null) {
+                CardNumberState.Success(response.body()!!.cardNumber)
+            } else {
+                CardNumberState.Error
             }
         }
     }

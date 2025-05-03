@@ -3,6 +3,7 @@ package com.fortune.app.data.config.api.bank_data
 import com.fortune.app.data.entities.bank_data.CardEntity
 import com.fortune.app.data.entities.bank_data.CardMovementEntity
 import com.fortune.app.network.request.CardUUIDApiRequest
+import com.fortune.app.network.response.CardNumberResponse
 import com.fortune.app.network.response.card.LockCardResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -23,4 +24,7 @@ interface CardAPIRest {
 
     @POST("/b_operations/card/isCardLocked")
     suspend fun isCardLocked(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<LockCardResponse>
+
+    @POST("/b_operations/card/getCardNumber")
+    suspend fun getCardNumber(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<CardNumberResponse>
 }

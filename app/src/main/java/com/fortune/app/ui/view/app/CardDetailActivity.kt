@@ -2,11 +2,11 @@ package com.fortune.app.ui.view.app
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -18,18 +18,17 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.domain.state.CardMovementState
-import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.LockCardState
-import com.fortune.app.network.response.card.LockCardResponse
 import com.fortune.app.ui.adapters.cardMovements.MovementCardAdapter
 import com.fortune.app.ui.adapters.cardMovements.MovementCardItem
-import com.fortune.app.ui.dialogs.AccountCreation_Dialog
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Card_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CardDetailActivity : AppCompatActivity() {
+    private var cardNumberHinted: Boolean = true
     private lateinit var loadingDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,31 +43,54 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun loadCardData() {
         isCardBlocked()
+        getCardNumber { number ->
+            findViewById<TextView>(R.id.card_number).text = getHintCard(number)
+            cardNumberHinted = true
+        }
         configEventButtons()
     }
 
-    private fun isCardBlocked() {
+    private fun configEventButtons() {
+        viewCardNumber()
+        lockButton()
+    }
+
+    private fun viewCardNumber() {
+        // Request Digital sign auth
+        findViewById<ImageButton>(R.id.view_card).setOnClickListener {
+            getCardNumber { number ->
+                if (cardNumberHinted) {
+                    findViewById<TextView>(R.id.card_number).text = number.chunked(4).joinToString(" ")
+                    (it as ImageView).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.eye_opened))
+                } else {
+                    findViewById<TextView>(R.id.card_number).text = getHintCard(number)
+                    (it as ImageView).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.closed_eye))
+                }
+                cardNumberHinted = !cardNumberHinted
+            }
+        }
+    }
+
+    private fun getHintCard(number: String): String {
+        return number.dropLast(4).chunked(4).joinToString(" ") { "****" } +
+                " " + number.takeLast(4)
+    }
+
+    private fun getCardNumber(number: (String) -> Unit) {
         val cardViewModel: Card_ViewModel by viewModels()
-        cardViewModel.isCardLockedState.observe(this) { cardLockedState ->
-            when(cardLockedState) {
-                is LockCardState.Success -> {
-                    if (cardLockedState.locked) {
-                        findViewById<Button>(R.id.simulate_payment).isEnabled = false
-                        val lockImage = findViewById<ImageView>(R.id.lock_status)
-                        lockImage.isVisible = true
-                    }
+        cardViewModel.cardNumber.observe(this) { cardNumberState ->
+            when(cardNumberState) {
+                is CardNumberState.Success -> {
+                    number(cardNumberState.number)
                 }
 
-                else -> {}
+                is CardNumberState.Error -> {
+                    // Show dialog info with error
+                }
             }
         }
 
-
-        cardViewModel.isCardLocked(intent.getStringExtra("card_uuid").toString())
-    }
-
-    private fun configEventButtons() {
-        lockButton()
+        cardViewModel.getCardNumber(intent.getStringExtra("card_uuid").toString())
     }
 
     private fun lockButton() {
@@ -89,12 +111,12 @@ class CardDetailActivity : AppCompatActivity() {
                     if (lockCardState.locked) {
                         lockImage.isVisible = true
                         simulatePayment.isEnabled = false
-                        simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.white))
+                        simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.disabled1))
                         lockButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.lock_unlocked))
                     } else {
                         lockImage.isVisible = false
                         simulatePayment.isEnabled = true
-                        simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.disabled1))
+                        simulatePayment.setTextColor(ContextCompat.getColor(this, R.color.white))
                         lockButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.lock))
                     }
                 }
@@ -116,6 +138,26 @@ class CardDetailActivity : AppCompatActivity() {
 
             cardViewModel.lockCard(intent.getStringExtra("card_uuid").toString())
         }
+    }
+
+    private fun isCardBlocked() {
+        val cardViewModel: Card_ViewModel by viewModels()
+        cardViewModel.isCardLockedState.observe(this) { cardLockedState ->
+            when(cardLockedState) {
+                is LockCardState.Success -> {
+                    if (cardLockedState.locked) {
+                        findViewById<Button>(R.id.simulate_payment).isEnabled = false
+                        val lockImage = findViewById<ImageView>(R.id.lock_status)
+                        lockImage.isVisible = true
+                    }
+                }
+
+                else -> {}
+            }
+        }
+
+
+        cardViewModel.isCardLocked(intent.getStringExtra("card_uuid").toString())
     }
 
     private fun rViewAdapterConfig() {
