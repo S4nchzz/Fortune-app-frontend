@@ -8,6 +8,7 @@ import com.fortune.app.data.mapper.bank_data.CardMovementMapper
 import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.repository.api.bank_Data.CardRepository
+import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
@@ -102,6 +103,18 @@ class CardAPIRepositoryImpl @Inject constructor(
                 CardExpDateState.Success(response.body()!!.cardExpDate)
             } else {
                 CardExpDateState.Error
+            }
+        }
+    }
+
+    override suspend fun getCvv(token: String, card_uuid: String): CardCvvState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.getCvv(token, CardUUIDApiRequest(card_uuid))
+
+            if (response.code() == 200 && response.body() != null) {
+                CardCvvState.Success(response.body()!!.card_cvv)
+            } else {
+                CardCvvState.Error
             }
         }
     }

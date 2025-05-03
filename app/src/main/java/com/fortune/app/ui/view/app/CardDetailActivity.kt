@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
+import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
@@ -29,7 +30,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CardDetailActivity : AppCompatActivity() {
-    private var cardNumberHinted: Boolean = true
+    private var cardNumberHided: Boolean = true
+    private var cvvHided: Boolean = true
     private lateinit var loadingDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +47,10 @@ class CardDetailActivity : AppCompatActivity() {
     private fun loadCardData() {
         isCardBlocked()
         getExpDate()
+        getBalance()
         getCardNumber { number ->
             findViewById<TextView>(R.id.card_number).text = getHintCard(number)
-            cardNumberHinted = true
+            cardNumberHided = true
         }
         configEventButtons()
     }
@@ -55,20 +58,21 @@ class CardDetailActivity : AppCompatActivity() {
     private fun configEventButtons() {
         viewCardNumber()
         lockButton()
+        getCvvButton()
     }
 
     private fun viewCardNumber() {
         // Request Digital sign auth
         findViewById<ImageButton>(R.id.view_card).setOnClickListener {
             getCardNumber { number ->
-                if (cardNumberHinted) {
+                if (cardNumberHided) {
                     findViewById<TextView>(R.id.card_number).text = number.chunked(4).joinToString(" ")
                     (it as ImageView).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.eye_opened))
                 } else {
                     findViewById<TextView>(R.id.card_number).text = getHintCard(number)
                     (it as ImageView).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.closed_eye))
                 }
-                cardNumberHinted = !cardNumberHinted
+                cardNumberHided = !cardNumberHided
             }
         }
     }
@@ -164,6 +168,38 @@ class CardDetailActivity : AppCompatActivity() {
         }
 
         cardViewModel.getExpDate(intent.getStringExtra("card_uuid").toString())
+    }
+
+    private fun getBalance() {
+        val cardViewModel: Card_ViewModel by viewModels()
+        // El balance de la tarjeta cambia dependiendo si es main o normal
+    }
+
+    private fun getCvvButton() {
+        val cardViewModel: Card_ViewModel by viewModels()
+
+        cardViewModel.cardCvvState.observe(this) { cardCvvState ->
+            when(cardCvvState) {
+                is CardCvvState.Success -> {
+                    val cvvField = findViewById<TextView>(R.id.card_cvv)
+                    cvvField.isVisible = true
+                    cvvField.text = "CVV: ${cardCvvState.cardCvv}"
+                }
+
+                is CardCvvState.Error -> {
+
+                }
+            }
+        }
+
+        findViewById<ImageButton>(R.id.view_cvv).setOnClickListener {
+            if (cvvHided) {
+                cardViewModel.getCvv(intent.getStringExtra("card_uuid").toString())
+            } else {
+                findViewById<TextView>(R.id.card_cvv).isVisible = false
+            }
+            cvvHided = !cvvHided
+        }
     }
 
     private fun isCardBlocked() {
