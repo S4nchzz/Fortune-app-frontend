@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
+import com.fortune.app.domain.state.CardBalanceState
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
@@ -172,7 +173,19 @@ class CardDetailActivity : AppCompatActivity() {
 
     private fun getBalance() {
         val cardViewModel: Card_ViewModel by viewModels()
-        // El balance de la tarjeta cambia dependiendo si es main o normal
+        cardViewModel.cardBalanceState.observe(this) { cardBalanceState ->
+            when(cardBalanceState) {
+                is CardBalanceState.Success -> {
+                    findViewById<TextView>(R.id.card_balance).text = "${cardBalanceState.card_balance} €"
+                }
+
+                is CardBalanceState.Error -> {
+
+                }
+            }
+        }
+
+        cardViewModel.getBalance(intent.getStringExtra("card_uuid").toString())
     }
 
     private fun getCvvButton() {

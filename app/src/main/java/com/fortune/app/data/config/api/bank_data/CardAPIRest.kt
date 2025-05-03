@@ -5,6 +5,7 @@ import com.fortune.app.data.entities.bank_data.CardMovementEntity
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.network.request.CardUUIDApiRequest
+import com.fortune.app.network.response.card.CardBalanceResponse
 import com.fortune.app.network.response.card.CardCvvResponse
 import com.fortune.app.network.response.card.CardExpDateResponse
 import com.fortune.app.network.response.card.CardNumberResponse
@@ -36,4 +37,7 @@ interface CardAPIRest {
 
     @POST("/b_operations/card/getCvv")
     suspend fun getCvv(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<CardCvvResponse>
+
+    @POST("/b_operations/card/getBalance")
+    suspend fun getBalance(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<CardBalanceResponse>
 }

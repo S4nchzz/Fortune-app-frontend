@@ -8,6 +8,7 @@ import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
 import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.bank_data.CardMovementModel
+import com.fortune.app.domain.state.CardBalanceState
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
@@ -81,6 +82,16 @@ class Card_ViewModel @Inject constructor(
         viewModelScope.launch {
             val cardCvvState = cardAPIRepositoryImpl.getCvv("Bearer ${tokenManager.getToken()}", card_uuid)
             _cardCvvState.value = cardCvvState
+        }
+    }
+
+    private val _cardBalanceState = MutableLiveData<CardBalanceState>()
+    val cardBalanceState: LiveData<CardBalanceState> = _cardBalanceState
+
+    fun getBalance(card_uuid: String) {
+        viewModelScope.launch {
+            val responseState = cardAPIRepositoryImpl.getCardBalance("Bearer ${tokenManager.getToken()}", card_uuid)
+            _cardBalanceState.value = responseState
         }
     }
 }

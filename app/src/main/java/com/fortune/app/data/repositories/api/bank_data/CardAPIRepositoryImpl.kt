@@ -8,6 +8,7 @@ import com.fortune.app.data.mapper.bank_data.CardMovementMapper
 import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.repository.api.bank_Data.CardRepository
+import com.fortune.app.domain.state.CardBalanceState
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
@@ -115,6 +116,18 @@ class CardAPIRepositoryImpl @Inject constructor(
                 CardCvvState.Success(response.body()!!.card_cvv)
             } else {
                 CardCvvState.Error
+            }
+        }
+    }
+
+    override suspend fun getCardBalance(token: String, card_uuid: String): CardBalanceState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.getBalance(token, CardUUIDApiRequest(card_uuid))
+
+            if (response.code() == 200 && response.body() != null) {
+                CardBalanceState.Success(response.body()!!.card_balance)
+            } else {
+                CardBalanceState.Error
             }
         }
     }

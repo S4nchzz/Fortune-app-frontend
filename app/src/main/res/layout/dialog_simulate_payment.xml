@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_shape">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:text="Simular pago"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/disabled2"
+            android:layout_marginBottom="20dp"/>
+
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="Entidad receptora"
+            android:textColorHint="@color/disabled1"
+            android:inputType="text"/>
+
+    <EditText
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="0,00 €"
+            android:textColorHint="@color/disabled1"
+            android:inputType="numberDecimal"/>
+
+    <Button
+            android:id="@+id/btn_credential_close_dialog"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:textStyle="bold"
+            android:text="Pagar"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+</LinearLayout>
