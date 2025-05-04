@@ -64,6 +64,16 @@ class Auth_ViewModel @Inject constructor(
         }
     }
 
+    private val _signOperation = MutableLiveData<DefaultState>()
+    val signOperation: LiveData<DefaultState> = _signOperation
+
+    fun signOperation(ds: Int) {
+        viewModelScope.launch {
+            val signOperationState = authAPIRepositoryImpl.signOperation("Bearer ${tokenManager.getToken()}", ds)
+            _signOperation.value = signOperationState
+        }
+    }
+
     fun resetLoginObserve() {
         this._login.value = null
     }

@@ -10,4 +10,5 @@ interface AuthApiRepository {
     suspend fun register(userDTO: UserDTO, uProfileDTO: UProfileDTO): RegisterState
     suspend fun login(identityDocument: String, password: String): LoginState?
     suspend fun createDigitalSign(token: String, ds: Int): DefaultState
+    suspend fun signOperation(token: String, ds: Int): DefaultState
 }

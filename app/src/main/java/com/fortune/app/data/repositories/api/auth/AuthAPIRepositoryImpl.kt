@@ -58,4 +58,20 @@ class AuthAPIRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun signOperation(token: String, ds: Int): DefaultState {
+        return withContext(Dispatchers.IO) {
+            val response = authApiService.signOperation(token, ds)
+
+            if (response.code() == 200 && response.body() != null) {
+                if (response.body()!!.operationAccepted) {
+                    DefaultState.Success
+                } else {
+                    DefaultState.Error
+                }
+            } else {
+                DefaultState.Error
+            }
+        }
+    }
 }

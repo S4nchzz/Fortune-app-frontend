@@ -25,8 +25,10 @@ import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.LockCardState
 import com.fortune.app.ui.adapters.cardMovements.MovementCardAdapter
 import com.fortune.app.ui.adapters.cardMovements.MovementCardItem
+import com.fortune.app.ui.dialogs.SignOperation_Dialog
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Card_ViewModel
+import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,7 +65,6 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun viewCardNumber() {
-        // Request Digital sign auth
         findViewById<ImageButton>(R.id.view_card).setOnClickListener {
             getCardNumber { number ->
                 if (cardNumberHided) {
@@ -101,7 +102,6 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun lockButton() {
-        // Show dialog or something to use the digital sign
         val cardViewModel: Card_ViewModel by viewModels()
 
         cardViewModel.lockCardState.observe(this) { lockCardState ->
@@ -134,16 +134,20 @@ class CardDetailActivity : AppCompatActivity() {
             }
         }
 
-        loadingDialog = AlertDialog.Builder(this@CardDetailActivity)
-            .setView(R.layout.dialog_loading)
-            .create()
-        loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        loadingDialog.setCancelable(false)
-
         findViewById<ImageButton>(R.id.lock_card).setOnClickListener {
-            loadingDialog.show()
-
-            cardViewModel.lockCard(intent.getStringExtra("card_uuid").toString())
+            SignOperation_Dialog { isPinCorrect ->
+                if (isPinCorrect) {
+                    loadingDialog = AlertDialog.Builder(this@CardDetailActivity)
+                        .setView(R.layout.dialog_loading)
+                        .create()
+                    loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    loadingDialog.setCancelable(false)
+                    loadingDialog.show()
+                    cardViewModel.lockCard(intent.getStringExtra("card_uuid").toString())
+                } else {
+                    SuccessOrFail_Dialog(true, "La firma digital es incorrecta").show(supportFragmentManager, "Sign operation status")
+                }
+            }.show(supportFragmentManager, "Manage Digital sign auth")
         }
     }
 
@@ -223,7 +227,7 @@ class CardDetailActivity : AppCompatActivity() {
             when(cardLockedState) {
                 is LockCardState.Success -> {
                     if (cardLockedState.locked) {
-                        findViewById<Button>(R.id.simulate_payment).isEnabled = false
+                        findViewById<MaterialButton>(R.id.simulate_payment).isEnabled = false
                         val lockImage = findViewById<ImageView>(R.id.lock_status)
                         lockImage.isVisible = true
                     }

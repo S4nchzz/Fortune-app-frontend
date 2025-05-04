@@ -1,6 +1,7 @@
 package com.fortune.app.data.config.api.auth
 
 import com.fortune.app.BuildConfig
+import com.fortune.app.network.response.auth.AuthDSOperation
 import com.fortune.app.network.response.auth.LoginResponse
 import retrofit2.Response
 
@@ -18,4 +19,7 @@ interface AuthAPIRest {
 
     @POST("/user/createDigitalSign")
     suspend fun createDigitalSign(@Header("Authorization") token: String, @Query("digital_sign") ds: Int): Response<Unit>
+
+    @POST("/auth/signOperation")
+    suspend fun signOperation(@Header("Authorization") token: String, @Query("digital_sign") ds: Int): Response<AuthDSOperation>
 }
