@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.domain.state.CardBalanceState
@@ -213,7 +214,13 @@ class CardDetailActivity : AppCompatActivity() {
 
         findViewById<ImageButton>(R.id.view_cvv).setOnClickListener {
             if (cvvHided) {
-                cardViewModel.getCvv(intent.getStringExtra("card_uuid").toString())
+                SignOperation_Dialog { isPinCorrect ->
+                    if (isPinCorrect) {
+                        cardViewModel.getCvv(intent.getStringExtra("card_uuid").toString())
+                    } else {
+                        SuccessOrFail_Dialog(true, "La firma digital es incorrecta").show(supportFragmentManager, "Sign operation status")
+                    }
+                }.show(supportFragmentManager, "Show cvv auth")
             } else {
                 findViewById<TextView>(R.id.card_cvv).isVisible = false
             }
