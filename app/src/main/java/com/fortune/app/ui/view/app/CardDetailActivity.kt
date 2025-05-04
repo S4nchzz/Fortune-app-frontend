@@ -201,6 +201,7 @@ class CardDetailActivity : AppCompatActivity() {
         cardViewModel.cardCvvState.observe(this) { cardCvvState ->
             when(cardCvvState) {
                 is CardCvvState.Success -> {
+                    SuccessOrFail_Dialog(false, "Se ha mostrado el CVV").show(supportFragmentManager, "CVV show")
                     val cvvField = findViewById<TextView>(R.id.card_cvv)
                     cvvField.isVisible = true
                     cvvField.text = "CVV: ${cardCvvState.cardCvv}"
@@ -222,6 +223,7 @@ class CardDetailActivity : AppCompatActivity() {
                     }
                 }.show(supportFragmentManager, "Show cvv auth")
             } else {
+                SuccessOrFail_Dialog(false, "Se ha ocultado el CVV").show(supportFragmentManager, "CVV show")
                 findViewById<TextView>(R.id.card_cvv).isVisible = false
             }
             cvvHided = !cvvHided

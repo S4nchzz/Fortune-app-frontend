@@ -4,7 +4,7 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:background="@color/dialog">
+        android:background="@drawable/rounded_shape">
 
     <TextView
             android:layout_width="wrap_content"
@@ -81,18 +81,18 @@
                 android:textAlignment="center"/>
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-            android:tooltipText="Firmar"
+    <Button
             android:id="@+id/sign_operation"
-            android:layout_width="250dp"
-            android:layout_height="60dp"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Firmar"
             android:layout_marginBottom="20dp"
-            android:textSize="19dp"
-            android:backgroundTint="@color/button_black_background_true"
-            android:textColor="@color/white"
-            app:cornerRadius="10dp"/>
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:enabled="false"
+            android:layout_gravity="center|top"
+            android:text="Firmar"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/disabled1"/>
 
 </LinearLayout>
