@@ -181,7 +181,7 @@ class CardDetailActivity : AppCompatActivity() {
         cardViewModel.cardBalanceState.observe(this) { cardBalanceState ->
             when(cardBalanceState) {
                 is CardBalanceState.Success -> {
-                    var formattedBalance = "%,.2f".format(cardBalanceState.card_balance)
+                    val formattedBalance = "%,.2f".format(cardBalanceState.card_balance)
 
                     findViewById<TextView>(R.id.card_balance).text = "${formattedBalance} €"
                 }
@@ -218,6 +218,7 @@ class CardDetailActivity : AppCompatActivity() {
                 SignOperation_Dialog { isPinCorrect ->
                     if (isPinCorrect) {
                         cardViewModel.getCvv(intent.getStringExtra("card_uuid").toString())
+                        cvvHided = !cvvHided
                     } else {
                         SuccessOrFail_Dialog(true, "La firma digital es incorrecta").show(supportFragmentManager, "Sign operation status")
                     }
@@ -225,8 +226,8 @@ class CardDetailActivity : AppCompatActivity() {
             } else {
                 SuccessOrFail_Dialog(false, "Se ha ocultado el CVV").show(supportFragmentManager, "CVV show")
                 findViewById<TextView>(R.id.card_cvv).isVisible = false
+                cvvHided = !cvvHided
             }
-            cvvHided = !cvvHided
         }
     }
 
