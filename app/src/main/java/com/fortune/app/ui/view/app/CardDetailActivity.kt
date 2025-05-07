@@ -31,6 +31,8 @@ import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Card_ViewModel
 import com.google.android.material.button.MaterialButton
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class CardDetailActivity : AppCompatActivity() {
@@ -181,9 +183,11 @@ class CardDetailActivity : AppCompatActivity() {
         cardViewModel.cardBalanceState.observe(this) { cardBalanceState ->
             when(cardBalanceState) {
                 is CardBalanceState.Success -> {
-                    val formattedBalance = "%,.2f".format(cardBalanceState.card_balance)
+                    val formattedBalance = NumberFormat.getCurrencyInstance(Locale("es", "ES"))
+                        .format(cardBalanceState.card_balance)
+                        .replace("€", " €")
 
-                    findViewById<TextView>(R.id.card_balance).text = "${formattedBalance} €"
+                    findViewById<TextView>(R.id.card_balance).text = "${formattedBalance}"
                 }
 
                 is CardBalanceState.Error -> {

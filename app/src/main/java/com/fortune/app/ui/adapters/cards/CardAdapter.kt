@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.ui.view.app.CardDetailActivity
+import java.text.NumberFormat
+import java.util.Locale
 
 class CardAdapter(
     private val context: Context,
@@ -29,8 +31,13 @@ class CardAdapter(
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val currentItem = cardItems[position]
         holder.cardTypeTextView.text = currentItem.cardType
-        holder.cardNumberHintTextView.text = "*${currentItem.cardNumberHint.toString()}"
-        holder.cardBalanceTextView.text = "${currentItem.cardBalance.toString()} €"
+        holder.cardNumberHintTextView.text = "*${currentItem.cardNumberHint}"
+
+        val formattedBalance = NumberFormat.getCurrencyInstance(Locale("es", "ES"))
+            .format(currentItem.cardBalance)
+            .replace("€", " €")
+
+        holder.cardBalanceTextView.text = "${formattedBalance}"
 
         holder.itemView.setOnClickListener {
             val openCardDetail = Intent(context, CardDetailActivity::class.java)
