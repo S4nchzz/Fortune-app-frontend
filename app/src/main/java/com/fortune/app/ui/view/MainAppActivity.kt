@@ -1,6 +1,8 @@
 package com.fortune.app.ui.view
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -14,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.LayoutInflaterCompat
@@ -41,9 +44,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainAppActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var loadingDialog: AlertDialog
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         loadUserViewData()
     }
 
@@ -52,6 +56,12 @@ class MainAppActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_app)
         adjustScreenInsets()
+
+        loadingDialog = AlertDialog.Builder(this@MainAppActivity)
+            .setView(R.layout.dialog_loading)
+            .create()
+        loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loadingDialog.setCancelable(false)
 
         findViewById<ImageView>(R.id.balance_info).setOnClickListener {
             it.performLongClick() // Simulate long click
@@ -62,11 +72,15 @@ class MainAppActivity : AppCompatActivity() {
     }
 
     private fun loadUserViewData() {
+        loadingDialog.show()
+
         generalActionListeners()
 
         setProfile()
         setAccount()
         setCards()
+
+        loadingDialog.dismiss()
     }
 
     private fun generalActionListeners() {

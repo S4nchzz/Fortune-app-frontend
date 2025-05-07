@@ -46,10 +46,12 @@ class AddMoney_Dialog(val callback: (balanceAdded: Boolean, newAmount: Double) -
                     when(addBalanceState) {
                         is NewBalanceState.Success -> {
                             callback(true, amountSelectedField.text.toString().toDouble())
+                            this.dismiss()
                         }
 
                         is NewBalanceState.Error -> {
                             callback(false, amountSelectedField.text.toString().toDouble())
+                            this.dismiss()
                         }
                     }
                 }
