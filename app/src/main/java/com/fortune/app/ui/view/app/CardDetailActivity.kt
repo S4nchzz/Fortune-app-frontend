@@ -75,6 +75,7 @@ class CardDetailActivity : AppCompatActivity() {
                 SimulatePayment_Dialog(cardUUID){ paymentSimulated ->
                     if (paymentSimulated) {
                         SuccessOrFail_Dialog(false, "Se ha simulado el pago correctamente").show(supportFragmentManager, "Payment simulated successfully")
+                        reloadRView()
                     } else {
                         SuccessOrFail_Dialog(true, "Hubo un problema al simular el pago").show(supportFragmentManager, "Payment simulated error")
                     }
@@ -300,10 +301,20 @@ class CardDetailActivity : AppCompatActivity() {
                 is CardMovementState.Error -> {
                     // show dialog with error finding data
                 }
+
+                else -> {}
             }
         }
 
         cardViewModel.findCardMovements(intent.getStringExtra("card_uuid").toString())
+    }
+
+    private fun reloadRView() {
+        val cardUUID: String? = intent.getStringExtra("card_uuid")
+        if (cardUUID != null) {
+            val cardViewModel: Card_ViewModel by viewModels()
+            cardViewModel.reloadRViewObserver(cardUUID)
+        }
     }
 
     private fun adjustScreenInsets() {

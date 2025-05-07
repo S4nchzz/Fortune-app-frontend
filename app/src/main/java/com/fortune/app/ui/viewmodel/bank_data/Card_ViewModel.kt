@@ -26,13 +26,19 @@ class Card_ViewModel @Inject constructor(
     val cardAPIRepositoryImpl: CardAPIRepositoryImpl,
     val tokenManager: TokenManager
 ) : ViewModel() {
-    private val _movementState = MutableLiveData<CardMovementState>()
-    val movementState: LiveData<CardMovementState> = _movementState
+    private val _movementState = MutableLiveData<CardMovementState?>()
+    val movementState: LiveData<CardMovementState?> = _movementState
 
     fun findCardMovements(card_uuid: String) {
         viewModelScope.launch {
             val cardMovementState = cardAPIRepositoryImpl.findMovements("Bearer ${tokenManager.getToken()}", card_uuid)
             _movementState.value = cardMovementState
+        }
+    }
+
+    fun reloadRViewObserver(card_uuid: String) {
+        viewModelScope.launch {
+            findCardMovements(card_uuid)
         }
     }
 

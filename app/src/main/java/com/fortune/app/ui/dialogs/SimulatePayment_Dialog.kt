@@ -55,6 +55,8 @@ class SimulatePayment_Dialog(val cardUUID: String, val callback: (paymentSimulat
                 amountLayout.error = "Este campo no puede estar vacio."
                 receptorEntityLayout.error = "Este campo no puede estar vacio."
             }
+
+            this.dismiss()
         }
 
         return alert
