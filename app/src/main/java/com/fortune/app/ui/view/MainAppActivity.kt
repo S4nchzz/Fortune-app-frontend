@@ -30,6 +30,8 @@ import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.ui.adapters.cards.CardAdapter
 import com.fortune.app.ui.adapters.cards.CardItem
+import com.fortune.app.ui.dialogs.AddMoney_Dialog
+import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.view.app.ConfigActivity
 import com.fortune.app.ui.view.app.SecurityActivity
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
@@ -64,7 +66,14 @@ class MainAppActivity : AppCompatActivity() {
 
     private fun generalActionListeners() {
         findViewById<ImageButton>(R.id.add_money).setOnClickListener {
-            Toast.makeText(this, "Add money", Toast.LENGTH_SHORT).show()
+            AddMoney_Dialog{ balanceAdded, newAmount ->
+                if (balanceAdded) {
+                    SuccessOrFail_Dialog(false, "Se han añadido ${newAmount} correctamente.").show(supportFragmentManager, "Founds added")
+                } else {
+                    SuccessOrFail_Dialog(true, "Ha ocurrido un error, el importe ${newAmount} no ha sido ingresado.").show(supportFragmentManager, "Founds added")
+                }
+
+            }.show(supportFragmentManager, "Add money dialog")
         }
 
         findViewById<ImageButton>(R.id.make_bizum).setOnClickListener {

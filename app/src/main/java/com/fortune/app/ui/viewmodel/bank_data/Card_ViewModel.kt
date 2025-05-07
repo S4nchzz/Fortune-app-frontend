@@ -15,6 +15,7 @@ import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
+import com.fortune.app.domain.state.NewBalanceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -92,6 +93,16 @@ class Card_ViewModel @Inject constructor(
         viewModelScope.launch {
             val responseState = cardAPIRepositoryImpl.getCardBalance("Bearer ${tokenManager.getToken()}", card_uuid)
             _cardBalanceState.value = responseState
+        }
+    }
+
+    private val _addBalanceState = MutableLiveData<NewBalanceState>()
+    val addBalanceState: LiveData<NewBalanceState> = _addBalanceState
+
+    fun addBalance(newBalance: Double) {
+        viewModelScope.launch {
+            val responseState = cardAPIRepositoryImpl.addNewBalance(newBalance, "Bearer ${tokenManager.getToken()}")
+            _addBalanceState.value = responseState
         }
     }
 }

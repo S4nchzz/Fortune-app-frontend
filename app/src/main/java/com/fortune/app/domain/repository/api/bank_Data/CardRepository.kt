@@ -18,4 +18,5 @@ interface CardRepository {
     suspend fun getExpDate(token: String, card_uuid: String): CardExpDateState
     suspend fun getCvv(s: String, cardUuid: String): CardCvvState
     suspend fun getCardBalance(s: String, cardUuid: String): CardBalanceState
+    suspend fun addNewBalance(newBalance: Double, s: String): Any
 }

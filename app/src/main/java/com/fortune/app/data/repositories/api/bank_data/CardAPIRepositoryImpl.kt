@@ -14,9 +14,10 @@ import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
-import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
-import com.fortune.app.network.request.CardUUIDApiRequest
+import com.fortune.app.domain.state.NewBalanceState
+import com.fortune.app.network.request.account.CardUpdateAccBalanceRequest
+import com.fortune.app.network.request.card.CardUUIDApiRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -128,6 +129,18 @@ class CardAPIRepositoryImpl @Inject constructor(
                 CardBalanceState.Success(response.body()!!.card_balance)
             } else {
                 CardBalanceState.Error
+            }
+        }
+    }
+
+    override suspend fun addNewBalance(newBalance: Double, token: String): NewBalanceState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.addNewBalance(token, CardUpdateAccBalanceRequest(newBalance))
+
+            if (response.code() == 200 && response.body() != null) {
+                NewBalanceState.Success(response.body()!!.balanceUpdated)
+            } else {
+                NewBalanceState.Error
             }
         }
     }
