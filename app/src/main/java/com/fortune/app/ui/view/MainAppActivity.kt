@@ -42,6 +42,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainAppActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
 
+    override fun onStart() {
+        super.onStart()
+        loadUserViewData()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -69,6 +74,7 @@ class MainAppActivity : AppCompatActivity() {
             AddMoney_Dialog{ balanceAdded, newAmount ->
                 if (balanceAdded) {
                     SuccessOrFail_Dialog(false, "Se han añadido ${newAmount} correctamente.").show(supportFragmentManager, "Founds added")
+                    loadUserViewData()
                 } else {
                     SuccessOrFail_Dialog(true, "Ha ocurrido un error, el importe ${newAmount} no ha sido ingresado.").show(supportFragmentManager, "Founds added")
                 }
