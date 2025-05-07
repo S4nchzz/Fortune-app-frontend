@@ -62,8 +62,6 @@ class SignOperation_Dialog(private val callback: (isPinCorrect: Boolean) -> Unit
         alert.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alert.setCanceledOnTouchOutside(false)
 
-        isCancelable = false
-
         return alert;
     }
 
