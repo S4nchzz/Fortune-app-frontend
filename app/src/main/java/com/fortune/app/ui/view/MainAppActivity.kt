@@ -166,6 +166,7 @@ class MainAppActivity : AppCompatActivity() {
         getProfile { profileModel ->
             navHeader.findViewById<TextView>(R.id.nav_view_header_uname).text = profileModel?.name
         }
+
 //      navHeader.findViewById<TextView>(R.id.nav_view_header_upicture).text = getProfile().pfp <- Default picture temporally
 
         navView.addHeaderView(navHeader)

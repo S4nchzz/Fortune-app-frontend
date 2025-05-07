@@ -48,6 +48,7 @@
             android:layout_marginStart="30dp"/>
 
         <com.google.android.material.navigation.NavigationView
+                android:id="@+id/config_navigation_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:menu="@menu/config_menu"
