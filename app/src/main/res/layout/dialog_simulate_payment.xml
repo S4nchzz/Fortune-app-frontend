@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:textSize="32sp"
             android:text="Simular pago"
-            android:textColor="@color/white"
+            android:textColor="@color/disabled1"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginBottom="16dp" />
@@ -23,22 +23,47 @@
             android:background="@color/disabled2"
             android:layout_marginBottom="20dp"/>
 
-    <EditText
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:hint="Entidad receptora"
-            android:textColorHint="@color/disabled1"
-            android:inputType="text"/>
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/receptor_entity_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Entidad receptora">
 
-    <EditText
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:hint="0,00 €"
-            android:textColorHint="@color/disabled1"
-            android:inputType="numberDecimal"/>
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/receptor_entity_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/disabled2"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/amount_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:hint="0,00 €">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/disabled2"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:inputType="numberDecimal"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-            android:id="@+id/btn_credential_close_dialog"
+            android:id="@+id/btn_pay"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"

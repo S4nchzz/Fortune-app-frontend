@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.domain.state.CardBalanceState
@@ -27,6 +26,7 @@ import com.fortune.app.domain.state.LockCardState
 import com.fortune.app.ui.adapters.cardMovements.MovementCardAdapter
 import com.fortune.app.ui.adapters.cardMovements.MovementCardItem
 import com.fortune.app.ui.dialogs.SignOperation_Dialog
+import com.fortune.app.ui.dialogs.SimulatePayment_Dialog
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Card_ViewModel
 import com.google.android.material.button.MaterialButton
@@ -62,9 +62,25 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun configEventButtons() {
+        simulatePayment()
         viewCardNumber()
         lockButton()
         getCvvButton()
+    }
+
+    private fun simulatePayment() {
+        findViewById<Button>(R.id.simulate_payment).setOnClickListener {
+            val cardUUID: String? = intent.getStringExtra("card_uuid")
+            if (cardUUID != null) {
+                SimulatePayment_Dialog(cardUUID){ paymentSimulated ->
+                    if (paymentSimulated) {
+                        SuccessOrFail_Dialog(false, "Se ha simulado el pago correctamente").show(supportFragmentManager, "Payment simulated successfully")
+                    } else {
+                        SuccessOrFail_Dialog(true, "Hubo un problema al simular el pago").show(supportFragmentManager, "Payment simulated error")
+                    }
+                }.show(supportFragmentManager, "Simulate payment")
+            }
+        }
     }
 
     private fun viewCardNumber() {

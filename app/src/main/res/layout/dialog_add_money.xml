@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:textSize="32sp"
             android:text="Añadir dinero"
-            android:textColor="@color/white"
+            android:textColor="@color/disabled1"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginBottom="16dp" />
