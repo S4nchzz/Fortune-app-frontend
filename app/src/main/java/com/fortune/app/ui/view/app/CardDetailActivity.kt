@@ -68,16 +68,26 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun viewCardNumber() {
+        var cardNumber = ""
         findViewById<ImageButton>(R.id.view_card).setOnClickListener {
-            getCardNumber { number ->
+            getCardNumber { number -> cardNumber = number }
+
+            if (cardNumber.isNotEmpty()) {
                 if (cardNumberHided) {
-                    findViewById<TextView>(R.id.card_number).text = number.chunked(4).joinToString(" ")
-                    (it as ImageView).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.eye_opened))
+                    SignOperation_Dialog { isPinCorrect ->
+                        if (isPinCorrect) {
+                            findViewById<TextView>(R.id.card_number).text = cardNumber.chunked(4).joinToString(" ")
+                            (it as ImageView).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.eye_opened))
+                            cardNumberHided = !cardNumberHided
+                        } else {
+                            SuccessOrFail_Dialog(true, "La firma digital es incorrecta").show(supportFragmentManager, "Sign operation status")
+                        }
+                    }.show(supportFragmentManager, "View card number")
                 } else {
-                    findViewById<TextView>(R.id.card_number).text = getHintCard(number)
+                    findViewById<TextView>(R.id.card_number).text = getHintCard(cardNumber)
                     (it as ImageView).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.closed_eye))
+                    cardNumberHided = !cardNumberHided
                 }
-                cardNumberHided = !cardNumberHided
             }
         }
     }
