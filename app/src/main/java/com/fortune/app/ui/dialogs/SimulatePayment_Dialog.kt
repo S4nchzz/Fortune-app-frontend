@@ -16,7 +16,7 @@ import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SimulatePayment_Dialog(val cardUUID: String, val callback: (paymentSimulated: Boolean) -> Unit) : DialogFragment() {
+class SimulatePayment_Dialog(val currentCardAmount: Double, val cardUUID: String, val callback: (paymentSimulated: Boolean) -> Unit) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
@@ -37,6 +37,16 @@ class SimulatePayment_Dialog(val cardUUID: String, val callback: (paymentSimulat
         val accountViewModel: Account_ViewModel by viewModels()
 
         view.findViewById<Button>(R.id.btn_pay).setOnClickListener {
+            if (currentCardAmount <= 0.0) {
+                amountLayout.error = "Introduzca un numero valido."
+                return@setOnClickListener
+            }
+
+            if (currentCardAmount < amountField.text.toString().toDouble()) {
+                amountLayout.error = "No dispone de esta cantidad."
+                return@setOnClickListener
+            }
+
             if (amountField.text.isNotEmpty() && receptorEntityField.text.isNotEmpty()) {
                 accountViewModel.simulatePaymentState.observe(this) { simulatePaymentState ->
                     when(simulatePaymentState) {

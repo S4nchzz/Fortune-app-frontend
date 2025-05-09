@@ -39,6 +39,7 @@ class CardDetailActivity : AppCompatActivity() {
     private var cardNumberHided: Boolean = true
     private var cvvHided: Boolean = true
     private lateinit var loadingDialog: AlertDialog
+    private var currentBalance: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +72,9 @@ class CardDetailActivity : AppCompatActivity() {
     private fun simulatePayment() {
         findViewById<Button>(R.id.simulate_payment).setOnClickListener {
             val cardUUID: String? = intent.getStringExtra("card_uuid")
+
             if (cardUUID != null) {
-                SimulatePayment_Dialog(cardUUID){ paymentSimulated ->
+                SimulatePayment_Dialog(currentBalance, cardUUID){ paymentSimulated ->
                     if (paymentSimulated) {
                         SuccessOrFail_Dialog(false, "Se ha simulado el pago correctamente").show(supportFragmentManager, "Payment simulated successfully")
                         reloadRView()
@@ -210,6 +212,8 @@ class CardDetailActivity : AppCompatActivity() {
         cardViewModel.cardBalanceState.observe(this) { cardBalanceState ->
             when(cardBalanceState) {
                 is CardBalanceState.Success -> {
+                    this.currentBalance = cardBalanceState.card_balance
+
                     val formattedBalance = NumberFormat.getCurrencyInstance(Locale("es", "ES"))
                         .format(cardBalanceState.card_balance)
                         .replace("€", " €")
