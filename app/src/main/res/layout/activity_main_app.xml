@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.view.MainAppActivity"
-        android:background="@color/app">
+        android:background="@drawable/gradi_background">
 
     <LinearLayout
             android:layout_width="match_parent"
