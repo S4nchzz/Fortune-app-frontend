@@ -35,6 +35,7 @@ import com.fortune.app.ui.adapters.cards.CardAdapter
 import com.fortune.app.ui.adapters.cards.CardItem
 import com.fortune.app.ui.dialogs.AddMoney_Dialog
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
+import com.fortune.app.ui.view.app.BizumActivity
 import com.fortune.app.ui.view.app.ConfigActivity
 import com.fortune.app.ui.view.app.SecurityActivity
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
@@ -97,7 +98,8 @@ class MainAppActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.make_bizum).setOnClickListener {
-            Toast.makeText(this, "Bizum", Toast.LENGTH_SHORT).show()
+            val openBizum = Intent(this, BizumActivity::class.java)
+            startActivity(openBizum)
         }
 
         findViewById<ImageButton>(R.id.more).setOnClickListener {
