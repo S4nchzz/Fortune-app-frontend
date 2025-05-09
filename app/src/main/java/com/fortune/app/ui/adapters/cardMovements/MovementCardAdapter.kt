@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
+import java.text.NumberFormat
 import java.time.ZoneId
 import java.time.format.TextStyle
 import java.util.Date
@@ -43,7 +44,12 @@ class MovementCardAdapter(val movementItems: List<MovementCardItem>) : RecyclerV
         holder.mDate.text = dateStrStructure
 
         holder.mReceiver.text = currentItem.mReceiver
-        holder.mAmount.text = currentItem.mAmount
+
+        val formattedBalance = NumberFormat.getCurrencyInstance(Locale("es", "ES"))
+            .format(currentItem.mAmount.toDouble())
+            .replace("€", " €")
+
+        holder.mAmount.text = formattedBalance
     }
 
     fun formatDateStructure(date: Date): String {
