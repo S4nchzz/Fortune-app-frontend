@@ -42,7 +42,7 @@ class BizumActivity : AppCompatActivity() {
                     myBizumState.bizumList.forEach { item ->
                         bizumItems.add(BizumItem(
                             item.date,
-                            item.to,
+                            item.from,
                             item.amount,
                             item.description,
                             item.amountIn

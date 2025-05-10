@@ -7,8 +7,8 @@ data class MyBizumsResponse(
     @SerializedName("date")
     val date: Date,
 
-    @SerializedName("to")
-    val to: String,
+    @SerializedName("from")
+    val from: String,
 
     @SerializedName("amount")
     val amount: Double,

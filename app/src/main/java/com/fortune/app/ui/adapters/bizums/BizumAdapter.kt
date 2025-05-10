@@ -21,7 +21,7 @@ class BizumAdapter(
 ) : RecyclerView.Adapter<BizumAdapter.BizumCardHolder>() {
     inner class BizumCardHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val bizumDate = itemView.findViewById<TextView>(R.id.bizum_date)
-        val bizumTo = itemView.findViewById<TextView>(R.id.bizum_to)
+        val bizumFrom = itemView.findViewById<TextView>(R.id.bizum_from)
         val bizumDescription = itemView.findViewById<TextView>(R.id.bizum_description)
         val bizumInOutImage = itemView.findViewById<ImageView>(R.id.bizum_in_out)
         val bizumAmount = itemView.findViewById<TextView>(R.id.bizum_amount)
@@ -36,8 +36,8 @@ class BizumAdapter(
     override fun onBindViewHolder(holder: BizumCardHolder, position: Int) {
         val sdf = SimpleDateFormat("dd MMM", Locale.getDefault())
         holder.bizumDate.text = sdf.format(bizumItems.get(position).date).uppercase()
-        
-        holder.bizumTo.text = bizumItems.get(position).to
+
+        holder.bizumFrom.text = bizumItems.get(position).from
         holder.bizumDescription.text = bizumItems.get(position).description
 
         holder.bizumAmount.text = if (bizumItems[position].amountIn) {

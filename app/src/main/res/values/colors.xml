@@ -2,6 +2,7 @@
 <resources>
     <color name="app">#0D0E0D</color>
     <color name="app_lighter">#151715</color>
+    <color name="app_lighter2">#111411</color>
     <color name="dialog">#1D1A1A</color>
 
     <color name="black">#FF000000</color>
