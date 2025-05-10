@@ -5,6 +5,7 @@ import com.fortune.app.BuildConfig
 import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.auth.AuthAPIRepositoryImpl
+import com.fortune.app.data.repositories.api.bizum.BizumAPIRepositoryImpl
 import com.fortune.app.data.secure.TokenManager
 import dagger.Module
 import dagger.Provides
@@ -49,5 +50,11 @@ object AppModule {
     @Singleton
     fun provideTokenMaanger(application: Application): TokenManager {
         return TokenManager(application)
+    }
+
+    @Provides
+    @Singleton
+    fun provideBizumAPIRepository(retrofit: Retrofit): BizumAPIRepositoryImpl {
+        return BizumAPIRepositoryImpl(retrofit)
     }
 }

@@ -7,15 +7,15 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
-import com.google.android.material.button.MaterialButton
+import com.fortune.app.domain.state.MakeBizumState
+import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
 import com.google.android.material.textfield.TextInputLayout
-import java.text.NumberFormat
-import java.util.Locale
 
 class SendOrAskBizumActivity : AppCompatActivity() {
     private var isAsking: Boolean = false
@@ -103,6 +103,28 @@ class SendOrAskBizumActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.remove).setOnClickListener {
             amountText.text = "0,00"
             commaPressed = false
+        }
+
+        sendButton.setOnClickListener {
+            val bizumViewModel: Bizum_ViewModel by viewModels()
+
+            bizumViewModel.makeBizum.observe(this) { makeBizumState ->
+                when(makeBizumState) {
+                    is MakeBizumState.Success -> {
+
+                    }
+
+                    is MakeBizumState.UserNotFound -> {
+
+                    }
+
+                    is MakeBizumState.Error -> {
+
+                    }
+                }
+            }
+
+            bizumViewModel.makeBizum(amountText.text.toString().toDouble(), phoneField.text.toString());
         }
     }
 
