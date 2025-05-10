@@ -25,9 +25,6 @@ data class AccountEntity(
     @ColumnInfo(name = "account_id")
     @SerializedName("account_id") val account_id: String,
 
-    @ColumnInfo(name = "proprietary_id")
-    @SerializedName("proprietary_id") val proprietary_id: Long,
-
     @ColumnInfo(name = "total_balance")
     @SerializedName("total_balance") val totalBalance: Double
 )

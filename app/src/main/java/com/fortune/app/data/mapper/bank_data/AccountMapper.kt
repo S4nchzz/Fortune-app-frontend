@@ -8,7 +8,6 @@ object AccountMapper {
         return AccountModel(
             id = accountEntity.id,
             accountId = accountEntity.account_id,
-            proprietaryId = accountEntity.proprietary_id,
             totalBalance = accountEntity.totalBalance
         )
     }
@@ -17,7 +16,6 @@ object AccountMapper {
         return AccountEntity(
             id = accountModel.id,
             account_id = accountModel.accountId,
-            proprietary_id = accountModel.proprietaryId,
             totalBalance = accountModel.totalBalance
         )
     }

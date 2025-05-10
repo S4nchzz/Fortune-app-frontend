@@ -1,6 +1,8 @@
 package com.fortune.app.ui.view.app
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,6 +16,17 @@ class BizumActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bizum)
         adjustScreenInsets()
 
+        findViewById<LinearLayout>(R.id.send_bizum).setOnClickListener {
+            val openSend = Intent(this@BizumActivity, SendOrAskBizumActivity::class.java)
+            openSend.putExtra("ask", false)
+            startActivity(openSend)
+        }
+
+        findViewById<LinearLayout>(R.id.ask_bizum).setOnClickListener {
+            val openSend = Intent(this@BizumActivity, SendOrAskBizumActivity::class.java)
+            openSend.putExtra("ask", true)
+            startActivity(openSend)
+        }
     }
 
     private fun adjustScreenInsets() {
