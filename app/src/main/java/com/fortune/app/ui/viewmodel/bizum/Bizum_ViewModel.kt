@@ -19,9 +19,9 @@ class Bizum_ViewModel @Inject constructor(
     private val _makeBizum = MutableLiveData<MakeBizumState>()
     val makeBizum: LiveData<MakeBizumState> = _makeBizum
 
-    fun makeBizum(amount: Double, phone: String) {
+    fun makeBizum(amount: Double, phone: String, description: String) {
         viewModelScope.launch {
-            val response = bizumAPIRepositoryImpl.makeBizum("Bearer ${tokenManager.getToken()}", amount, phone)
+            val response = bizumAPIRepositoryImpl.makeBizum("Bearer ${tokenManager.getToken()}", amount, phone, description)
             _makeBizum.value = response
         }
     }

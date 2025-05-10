@@ -108,26 +108,53 @@ class SendOrAskBizumActivity : AppCompatActivity() {
             commaPressed = false
         }
 
-        sendButton.setOnClickListener {
-            val bizumViewModel: Bizum_ViewModel by viewModels()
+        val bizumViewModel: Bizum_ViewModel by viewModels()
 
-            bizumViewModel.makeBizum.observe(this) { makeBizumState ->
-                when(makeBizumState) {
-                    is MakeBizumState.Success -> {
-                        SuccessOrFail_Dialog(false, "El bizum se ha enviado correctamente al destinatario.").show(supportFragmentManager, "Bizum sended")
-                    }
+        bizumViewModel.makeBizum.observe(this) { makeBizumState ->
+            when(makeBizumState) {
+                is MakeBizumState.Success -> {
+                    SuccessOrFail_Dialog(false, "El bizum se ha enviado correctamente al destinatario.").show(supportFragmentManager, "Bizum sended")
+                }
 
-                    is MakeBizumState.UserNotFound -> {
-                        SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono").show(supportFragmentManager, "Bizum not sended")
-                    }
+                is MakeBizumState.UserNotFound -> {
+                    SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono").show(supportFragmentManager, "Bizum not sended")
+                }
 
-                    is MakeBizumState.Error -> {
-                        SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
-                    }
+                is MakeBizumState.Error -> {
+                    SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
                 }
             }
+        }
 
-            bizumViewModel.makeBizum(amountText.text.toString().toDouble(), phoneField.text.toString());
+        sendButton.setOnClickListener {
+            var ensureAmountFormat = amountText.text.toString();
+
+            if (ensureAmountFormat.contains(",") && ensureAmountFormat.contains(".")) {
+                ensureAmountFormat.replace(".", "_");
+                ensureAmountFormat.replace(",", ".");
+                ensureAmountFormat = ensureAmountFormat.replace("_", ".");
+            } else if (ensureAmountFormat.contains(",")) {
+                ensureAmountFormat = ensureAmountFormat.replace(",", ".")
+            }
+
+            val contidion1: Boolean = ensureAmountFormat.toDouble() <= 2000
+            val contidion2: Boolean = phoneField.text.toString().length == 9 && (phoneField.text.startsWith("6") || phoneField.text.startsWith("7"))
+
+            if (contidion1 && contidion2) {
+                val description = findViewById<EditText>(R.id.description_field)
+                phoneLayout.error = ""
+
+                bizumViewModel.makeBizum(ensureAmountFormat.toDouble(), phoneField.text.toString(), description.text.toString());
+                return@setOnClickListener
+            }
+
+            if (!contidion1) {
+                bizumError.text = "La cantidad enviada no puede superar los 2000 €."
+            }
+
+            if (!contidion2) {
+                bizumError.text = "Asegurese de introducir un numero de telefono valido"
+            }
         }
     }
 

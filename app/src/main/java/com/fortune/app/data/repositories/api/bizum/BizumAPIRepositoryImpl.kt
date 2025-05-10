@@ -15,9 +15,9 @@ class BizumAPIRepositoryImpl @Inject constructor(
 ) : BizumAPIRepository {
     private val bizumAPIService = retrofit.create(BizumAPIRest::class.java)
 
-    override suspend fun makeBizum(token: String, amount: Double, phone: String): MakeBizumState {
+    override suspend fun makeBizum(token: String, amount: Double, phone: String, description: String): MakeBizumState {
         return withContext(Dispatchers.IO) {
-            val response = bizumAPIService.makeBizum(token, MakeBizumRequest(amount, phone))
+            val response = bizumAPIService.makeBizum(token, MakeBizumRequest(amount, phone, description))
 
             if (response.code() == 200) {
                 MakeBizumState.Success

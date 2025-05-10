@@ -44,26 +44,6 @@
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="20dp"
-            android:hint="Telefono">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/disabled2"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:maxLength="9"
-                android:inputType="numberDecimal"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,18 +61,61 @@
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="50dp"/>
+
         <TextView
             android:id="@+id/error_bizum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/error"/>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Telefono">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/disabled2"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:maxLength="9"
+                android:inputType="numberDecimal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/description_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Descripcion">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/disabled2"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:maxLength="9"
+                android:maxLines="2"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/send_money_bizum"
             android:layout_width="300dp"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
             android:background="@drawable/button_disabled"
             android:text="Enviar"
             android:enabled="false"
@@ -116,199 +139,187 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/seven"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="0"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="7"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/eight"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="1"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="8"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nine"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="2"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="9"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
         </TableRow>
 
         <TableRow android:gravity="center">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/four"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="0"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="4"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/five"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="1"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="5"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/six"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="2"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="6"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
         </TableRow>
 
         <TableRow android:gravity="center">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/one"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="0"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="1"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/two"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="1"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="2"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/three"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="2"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="3"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
         </TableRow>
 
         <TableRow android:gravity="center">
             <ImageButton
                 android:id="@+id/remove"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
                 android:src="@drawable/remove_icon"
                 android:backgroundTint="@color/app"
                 android:contentDescription="Remove"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:scaleType="centerInside" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/zero"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="1"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/comma"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_column="2"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                android:padding="10dp"
-                android:textColor="@color/white"
+                android:padding="6dp"
                 android:text=","
-                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textSize="26sp"
                 app:cornerRadius="0dp"
                 android:backgroundTint="@color/app"
-                app:rippleColor="@color/app_lighter"/>
+                app:rippleColor="@color/app_lighter" />
         </TableRow>
 
     </TableLayout>
-
 </LinearLayout>

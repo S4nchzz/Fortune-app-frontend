@@ -1,5 +1,7 @@
 package com.fortune.app.domain.repository.api.bizum
 
+import com.fortune.app.domain.state.MakeBizumState
+
 interface BizumAPIRepository {
-    suspend fun makeBizum(s: String, amount: Double, phone: String): Any
+    suspend fun makeBizum(s: String, amount: Double, phone: String, description: String): MakeBizumState
 }
