@@ -15,7 +15,7 @@
         android:textColor="@color/disabled1"/>
 
     <TextView
-        android:id="@+id/bizum_from"
+        android:id="@+id/bizum_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

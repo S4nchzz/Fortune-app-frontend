@@ -15,7 +15,9 @@ import com.fortune.app.network.response.bizum.MyBizumsResponse
 import com.fortune.app.ui.adapters.bizums.BizumItem
 import com.fortune.app.ui.adapters.cards.BizumAdapter
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BizumActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,7 @@ class BizumActivity : AppCompatActivity() {
                     myBizumState.bizumList.forEach { item ->
                         bizumItems.add(BizumItem(
                             item.date,
-                            item.from,
+                            item.to,
                             item.amount,
                             item.description,
                             item.amountIn
