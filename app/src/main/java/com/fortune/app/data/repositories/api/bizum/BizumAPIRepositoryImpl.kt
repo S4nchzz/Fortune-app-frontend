@@ -4,7 +4,9 @@ import com.fortune.app.data.config.api.bank_data.AccountAPIRest
 import com.fortune.app.data.config.api.bizum.BizumAPIRest
 import com.fortune.app.domain.repository.api.bizum.BizumAPIRepository
 import com.fortune.app.domain.state.MakeBizumState
+import com.fortune.app.domain.state.MyBizumsState
 import com.fortune.app.network.request.bizum.MakeBizumRequest
+import com.fortune.app.network.response.bizum.MyBizumsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -25,6 +27,24 @@ class BizumAPIRepositoryImpl @Inject constructor(
                 MakeBizumState.UserNotFound
             } else {
                 MakeBizumState.Error
+            }
+        }
+    }
+
+    override suspend fun getBizums(token: String): MyBizumsState {
+        return withContext(Dispatchers.IO) {
+            val response = bizumAPIService.getBizums(token)
+
+            if (response.code() == 200 && response.body() != null) {
+                val bizumList: MutableList<MyBizumsResponse> = mutableListOf()
+
+                response.body()!!.forEach { myBizumsResponse ->
+                    bizumList.add(myBizumsResponse)
+                }
+
+                MyBizumsState.Success(bizumList)
+            } else {
+                MyBizumsState.Error
             }
         }
     }
