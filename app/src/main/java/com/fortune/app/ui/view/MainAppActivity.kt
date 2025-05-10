@@ -46,6 +46,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainAppActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var loadingDialog: AlertDialog
+    private var currentAppAmount = 0.0
 
     override fun onResume() {
         super.onResume()
@@ -78,7 +79,7 @@ class MainAppActivity : AppCompatActivity() {
         generalActionListeners()
 
         setProfile()
-        setAccount()
+        setAccountBalance()
         setCards()
 
         loadingDialog.dismiss()
@@ -98,7 +99,20 @@ class MainAppActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.make_bizum).setOnClickListener {
+            getAccountBalance { accountState ->
+                when(accountState) {
+                    is AccountState.Success -> {
+                        currentAppAmount = accountState.accountModel.totalBalance
+                    }
+
+                    is AccountState.Error -> {
+                        currentAppAmount = 0.0
+                    }
+                }
+            }
+
             val openBizum = Intent(this, BizumActivity::class.java)
+            openBizum.putExtra("currentAmount", currentAppAmount)
             startActivity(openBizum)
         }
 
@@ -137,19 +151,33 @@ class MainAppActivity : AppCompatActivity() {
         userViewModel.getCards()
     }
 
-    private fun setAccount() {
+    private fun setAccountBalance() {
+        getAccountBalance { accountState ->
+            when(accountState) {
+                is AccountState.Success -> {
+                    findViewById<TextView>(R.id.account_total_balance).text = "${accountState.accountModel.totalBalance} €"
+                    currentAppAmount = accountState.accountModel.totalBalance
+                }
+
+                is AccountState.Error -> {
+
+                }
+            }
+        }
+    }
+
+    private fun getAccountBalance(callback: (AccountState) -> Unit) {
         val userViewModel: User_ViewModel by viewModels()
 
         userViewModel.account.observe(this) { accountState ->
             when(accountState) {
                 is AccountState.Success -> {
-                    findViewById<TextView>(R.id.account_total_balance).text = "${accountState.accountModel.totalBalance} €"
+                    callback(accountState)
+
                 }
 
                 is AccountState.Error -> {
-                    val openMain = Intent(this@MainAppActivity, MainActivity::class.java)
-                    startActivity(openMain)
-                    finish()
+
                 }
             }
         }

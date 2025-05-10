@@ -19,12 +19,14 @@ class BizumActivity : AppCompatActivity() {
         findViewById<LinearLayout>(R.id.send_bizum).setOnClickListener {
             val openSend = Intent(this@BizumActivity, SendOrAskBizumActivity::class.java)
             openSend.putExtra("ask", false)
+            openSend.putExtra("currentAmount", intent.getDoubleExtra("currentAmount", 0.0))
             startActivity(openSend)
         }
 
         findViewById<LinearLayout>(R.id.ask_bizum).setOnClickListener {
             val openSend = Intent(this@BizumActivity, SendOrAskBizumActivity::class.java)
             openSend.putExtra("ask", true)
+            openSend.putExtra("currentAmount", intent.getDoubleExtra("currentAmount", 0.0))
             startActivity(openSend)
         }
     }
