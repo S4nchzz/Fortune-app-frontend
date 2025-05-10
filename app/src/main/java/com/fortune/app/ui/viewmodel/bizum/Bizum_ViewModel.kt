@@ -9,9 +9,10 @@ import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.MakeBizumState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class Bizum_ViewModel constructor(
+class Bizum_ViewModel @Inject constructor(
     val bizumAPIRepositoryImpl: BizumAPIRepositoryImpl,
     val tokenManager: TokenManager
 ) : ViewModel() {

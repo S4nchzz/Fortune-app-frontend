@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/error"/>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/send_money_bizum"
             android:layout_width="300dp"
             android:layout_height="70dp"

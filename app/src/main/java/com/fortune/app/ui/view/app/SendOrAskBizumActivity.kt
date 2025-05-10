@@ -14,9 +14,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.domain.state.MakeBizumState
+import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SendOrAskBizumActivity : AppCompatActivity() {
     private var isAsking: Boolean = false
     private var totalBalance: Double = 0.0
@@ -111,15 +114,15 @@ class SendOrAskBizumActivity : AppCompatActivity() {
             bizumViewModel.makeBizum.observe(this) { makeBizumState ->
                 when(makeBizumState) {
                     is MakeBizumState.Success -> {
-
+                        SuccessOrFail_Dialog(false, "El bizum se ha enviado correctamente al destinatario.").show(supportFragmentManager, "Bizum sended")
                     }
 
                     is MakeBizumState.UserNotFound -> {
-
+                        SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono").show(supportFragmentManager, "Bizum not sended")
                     }
 
                     is MakeBizumState.Error -> {
-
+                        SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
                     }
                 }
             }
