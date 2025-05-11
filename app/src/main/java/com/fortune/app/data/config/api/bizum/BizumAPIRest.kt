@@ -14,4 +14,7 @@ interface BizumAPIRest {
 
     @POST("/b_operations/bizum/getBizums")
     suspend fun getBizums(@Header("Authorization") token: String): Response<List<MyBizumsResponse>>
+
+    @POST("/b_operations/bizum/requestBizum")
+    suspend fun requestBizum(@Header("Authorization") token: String, @Body makeBizumRequest: MakeBizumRequest): Response<Unit>
 }

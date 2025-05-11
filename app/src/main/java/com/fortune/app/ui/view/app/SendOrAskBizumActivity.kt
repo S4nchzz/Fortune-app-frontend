@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.domain.state.AccountBalanceState
-import com.fortune.app.domain.state.MakeBizumState
+import com.fortune.app.domain.state.BizumState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
@@ -120,15 +120,31 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
         bizumViewModel.makeBizum.observe(this) { makeBizumState ->
             when(makeBizumState) {
-                is MakeBizumState.Success -> {
+                is BizumState.Success -> {
                     SuccessOrFail_Dialog(false, "El bizum se ha enviado correctamente al destinatario.").show(supportFragmentManager, "Bizum sended")
                 }
 
-                is MakeBizumState.UserNotFound -> {
+                is BizumState.UserNotFound -> {
                     SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono").show(supportFragmentManager, "Bizum not sended")
                 }
 
-                is MakeBizumState.Error -> {
+                is BizumState.Error -> {
+                    SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
+                }
+            }
+        }
+
+        bizumViewModel.requestBizum.observe(this) { makeBizumState ->
+            when(makeBizumState) {
+                is BizumState.Success -> {
+                    SuccessOrFail_Dialog(false, "Se ha solicitado el bizum al destinatario.").show(supportFragmentManager, "Bizum sended")
+                }
+
+                is BizumState.UserNotFound -> {
+                    SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono").show(supportFragmentManager, "Bizum not sended")
+                }
+
+                is BizumState.Error -> {
                     SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
                 }
             }
@@ -153,10 +169,14 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
             val condition3: Boolean = currentBalance >= ensureAmountFormat.toDouble()
 
-            if (contidion1 && contidion2 && condition3) {
+            if (contidion1 && contidion2 && (condition3 || isAsking)) {
                 val description = findViewById<EditText>(R.id.description_field)
 
-                bizumViewModel.makeBizum(ensureAmountFormat.toDouble(), phoneField.text.toString(), description.text.toString());
+                if (!isAsking) {
+                    bizumViewModel.makeBizum(ensureAmountFormat.toDouble(), phoneField.text.toString(), description.text.toString());
+                } else {
+                    bizumViewModel.requestBizum(ensureAmountFormat.toDouble(), phoneField.text.toString(), description.text.toString())
+                }
                 loadingDialog.dismiss()
                 return@setOnClickListener
             }
@@ -177,7 +197,7 @@ class SendOrAskBizumActivity : AppCompatActivity() {
              * that an api response can return a new
              * value, hes choosing 0,0 by default probably
              */
-            if (!condition3) {
+            if (!condition3 && !isAsking) {
                 bizumError.text = "No dispone de la cantidad elegida."
                 return@setOnClickListener
             }
