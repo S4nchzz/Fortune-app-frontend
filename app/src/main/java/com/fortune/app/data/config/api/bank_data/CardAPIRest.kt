@@ -43,4 +43,7 @@ interface CardAPIRest {
 
     @POST("/b_operations/card/addAccountBalance")
     suspend fun addNewBalance(@Header("Authorization") token: String, @Body newBalance: CardUpdateAccBalanceRequest): Response<NewBalanceResponse>
+
+    @GET("/b_operations/account/addNewCard")
+    suspend fun addNewCard(@Header("Authorization") token: String): Response<Unit>
 }

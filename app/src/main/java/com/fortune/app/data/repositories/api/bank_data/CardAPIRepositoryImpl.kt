@@ -14,6 +14,7 @@ import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
+import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
 import com.fortune.app.domain.state.NewBalanceState
 import com.fortune.app.network.request.account.CardUpdateAccBalanceRequest
@@ -141,6 +142,18 @@ class CardAPIRepositoryImpl @Inject constructor(
                 NewBalanceState.Success(response.body()!!.balanceUpdated)
             } else {
                 NewBalanceState.Error
+            }
+        }
+    }
+
+    override suspend fun addNewCard(token: String): DefaultState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.addNewCard(token)
+
+            if (response.code() == 200) {
+                DefaultState.Success
+            } else {
+                DefaultState.Error
             }
         }
     }

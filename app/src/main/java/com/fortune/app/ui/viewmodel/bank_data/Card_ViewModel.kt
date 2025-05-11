@@ -111,4 +111,14 @@ class Card_ViewModel @Inject constructor(
             _addBalanceState.value = responseState
         }
     }
+
+    private val _addNewCard = MutableLiveData<DefaultState>()
+    val addNewCard: LiveData<DefaultState> = _addNewCard
+
+    fun addCard() {
+        viewModelScope.launch {
+            val responseState = cardAPIRepositoryImpl.addNewCard("Bearer ${tokenManager.getToken()}")
+            _addNewCard.value = responseState
+        }
+    }
 }
