@@ -99,7 +99,7 @@
                         android:clickable="true"
                         android:background="@drawable/bizum_buttons_animation"
                         android:elevation="50dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginBottom="10dp">
                     <ImageView
                             android:clickable="false"
                             android:focusable="false"
@@ -148,7 +148,8 @@
                         android:gravity="center_vertical"
                         android:clickable="true"
                         android:background="@drawable/bizum_buttons_animation"
-                        android:elevation="50dp">
+                        android:elevation="50dp"
+                        android:layout_marginBottom="10dp">
                     <ImageView
                             android:clickable="false"
                             android:focusable="false"
@@ -191,7 +192,58 @@
                             android:padding="25dp"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/view_requested_bizums"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:background="@drawable/bizum_buttons_animation"
+                    android:elevation="50dp">
+                    <ImageView
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/request_bizum_icon"
+                        android:padding="22dp"
+                        android:contentDescription="Request bizum"/>
+
+                    <LinearLayout
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ver solicitudes de bizum."
+                            android:textColor="@color/white"
+                            android:textSize="20dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ver solicitudes."
+                            android:textColor="@color/disabled1"
+                            android:textSize="15dp"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/open_item_arrow_right"
+                        android:contentDescription="Open item"
+                        android:scaleType="fitCenter"
+                        android:padding="25dp"/>
                 </LinearLayout>
+
+
+            </LinearLayout>
             </LinearLayout>
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
