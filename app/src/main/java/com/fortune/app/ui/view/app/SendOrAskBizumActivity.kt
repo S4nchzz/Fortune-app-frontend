@@ -13,8 +13,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
+import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.MakeBizumState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
+import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SendOrAskBizumActivity : AppCompatActivity() {
     private var isAsking: Boolean = false
-    private var totalBalance: Double = 0.0
     private var commaPressed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +34,12 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
         this.isAsking = intent.getBooleanExtra("ask", false)
 
-        totalBalance = intent.getDoubleExtra("currentAmount", 0.0)
-        manageButtonLogic()
+        getCurrentBalance{ accountBalance ->
+            manageButtonLogic(accountBalance)
+        }
     }
 
-    private fun manageButtonLogic() {
+    private fun manageButtonLogic(currentBalance: Double) {
         val buttonNumberList = arrayOf(
             R.id.zero,
             R.id.one,
@@ -62,6 +64,8 @@ class SendOrAskBizumActivity : AppCompatActivity() {
                 phoneLayout.error = "Introduzca un numero valido."
                 sendButton.isEnabled = false
                 return@addTextChangedListener
+            } else if (phone.length == 9) {
+                phoneLayout.error = ""
             }
 
             sendButton.isEnabled = true
@@ -128,21 +132,24 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
         sendButton.setOnClickListener {
             var ensureAmountFormat = amountText.text.toString();
+            phoneLayout.error = ""
+            bizumError.text = ""
 
             if (ensureAmountFormat.contains(",") && ensureAmountFormat.contains(".")) {
-                ensureAmountFormat.replace(".", "_");
-                ensureAmountFormat.replace(",", ".");
+                ensureAmountFormat = ensureAmountFormat.replace(".", "_");
+                ensureAmountFormat = ensureAmountFormat.replace(",", ".");
                 ensureAmountFormat = ensureAmountFormat.replace("_", ".");
             } else if (ensureAmountFormat.contains(",")) {
                 ensureAmountFormat = ensureAmountFormat.replace(",", ".")
             }
 
-            val contidion1: Boolean = ensureAmountFormat.toDouble() <= 2000
+            val contidion1: Boolean = ensureAmountFormat.toDouble() < 2000
             val contidion2: Boolean = phoneField.text.toString().length == 9 && (phoneField.text.startsWith("6") || phoneField.text.startsWith("7"))
 
-            if (contidion1 && contidion2) {
+            val condition3: Boolean = currentBalance >= ensureAmountFormat.toDouble()
+
+            if (contidion1 && contidion2 && condition3) {
                 val description = findViewById<EditText>(R.id.description_field)
-                phoneLayout.error = ""
 
                 bizumViewModel.makeBizum(ensureAmountFormat.toDouble(), phoneField.text.toString(), description.text.toString());
                 return@setOnClickListener
@@ -150,12 +157,43 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
             if (!contidion1) {
                 bizumError.text = "La cantidad enviada no puede superar los 2000 €."
+                return@setOnClickListener
             }
 
             if (!contidion2) {
                 bizumError.text = "Asegurese de introducir un numero de telefono valido"
+                return@setOnClickListener
+            }
+
+            /**
+             * Fake warning, this warning is happening
+             * because the compiler cannot analyze
+             * that an api response can return a new
+             * value, hes choosing 0,0 by default probably
+             */
+            if (!condition3) {
+                bizumError.text = "No dispone de la cantidad elegida."
+                return@setOnClickListener
             }
         }
+    }
+
+    private fun getCurrentBalance(callback: (Double) -> Unit) {
+        val accountViewModel: Account_ViewModel by viewModels()
+        accountViewModel.accountBalanceState.observe(this) { accountBalanceState ->
+            when(accountBalanceState) {
+                is AccountBalanceState.Success -> {
+                    callback(accountBalanceState.accountBalanceResponse.accountBalance)
+                }
+
+                is AccountBalanceState.Error -> {
+                    callback(0.0)
+                }
+            }
+        }
+
+
+        accountViewModel.getAccountBalance()
     }
 
     private fun adjustScreenInsets() {

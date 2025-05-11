@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
 import com.fortune.app.data.secure.TokenManager
+import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.PaymentSimulationState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,6 +39,16 @@ class Account_ViewModel @Inject constructor(
         viewModelScope.launch {
             val responseState = accountAPIRepositoryImpl.simulatePayment("Bearer ${tokenManager.getToken()}", amount, receptorEntity, cardUUID)
             _simulatePaymentState.value = responseState
+        }
+    }
+
+    private val _accountBalanceState = MutableLiveData<AccountBalanceState>()
+    val accountBalanceState: LiveData<AccountBalanceState> = _accountBalanceState
+
+    fun getAccountBalance() {
+        viewModelScope.launch {
+            val responseState = accountAPIRepositoryImpl.getAccountBalance("Bearer ${tokenManager.getToken()}")
+            _accountBalanceState.value = responseState
         }
     }
 }
