@@ -28,6 +28,7 @@ import com.fortune.app.MainActivity
 import com.fortune.app.R
 import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.user.UProfileModel
+import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.UProfileState
@@ -38,6 +39,7 @@ import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.view.app.BizumActivity
 import com.fortune.app.ui.view.app.ConfigActivity
 import com.fortune.app.ui.view.app.SecurityActivity
+import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +49,8 @@ class MainAppActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var loadingDialog: AlertDialog
     private var currentAppAmount = 0.0
+    private val accountViewModel: Account_ViewModel by viewModels()
+
 
     override fun onResume() {
         super.onResume()
@@ -99,16 +103,8 @@ class MainAppActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.make_bizum).setOnClickListener {
-            getAccountBalance { accountState ->
-                when(accountState) {
-                    is AccountState.Success -> {
-                        currentAppAmount = accountState.accountModel.totalBalance
-                    }
-
-                    is AccountState.Error -> {
-                        currentAppAmount = 0.0
-                    }
-                }
+            getAccountBalance { balance ->
+                currentAppAmount = balance
             }
 
             val openBizum = Intent(this, BizumActivity::class.java)
@@ -152,37 +148,26 @@ class MainAppActivity : AppCompatActivity() {
     }
 
     private fun setAccountBalance() {
-        getAccountBalance { accountState ->
-            when(accountState) {
-                is AccountState.Success -> {
-                    findViewById<TextView>(R.id.account_total_balance).text = "${accountState.accountModel.totalBalance} €"
-                    currentAppAmount = accountState.accountModel.totalBalance
-                }
-
-                is AccountState.Error -> {
-
-                }
-            }
+        getAccountBalance { balance ->
+            findViewById<TextView>(R.id.account_total_balance).text = "${balance} €"
+            currentAppAmount = balance
         }
     }
 
-    private fun getAccountBalance(callback: (AccountState) -> Unit) {
-        val userViewModel: User_ViewModel by viewModels()
-
-        userViewModel.account.observe(this) { accountState ->
-            when(accountState) {
-                is AccountState.Success -> {
-                    callback(accountState)
-
+    private fun getAccountBalance(callback: (Double) -> Unit) {
+        accountViewModel.accountBalanceState.observe(this) { accountBalanceState ->
+            when(accountBalanceState) {
+                is AccountBalanceState.Success -> {
+                    callback(accountBalanceState.accountBalanceResponse.accountBalance)
                 }
 
-                is AccountState.Error -> {
-
+                is AccountBalanceState.Error -> {
+                    callback(0.0)
                 }
             }
         }
 
-        userViewModel.getAccount()
+        accountViewModel.getAccountBalance()
     }
 
     private fun setProfile() {
