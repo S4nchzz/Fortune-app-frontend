@@ -1,5 +1,7 @@
 package com.fortune.app.ui.view.app
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.widget.Button
@@ -8,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -25,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SendOrAskBizumActivity : AppCompatActivity() {
     private var isAsking: Boolean = false
     private var commaPressed: Boolean = false
+    private lateinit var loadingDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,6 +135,7 @@ class SendOrAskBizumActivity : AppCompatActivity() {
         }
 
         sendButton.setOnClickListener {
+            loadDialog()
             var ensureAmountFormat = amountText.text.toString();
             phoneLayout.error = ""
             bizumError.text = ""
@@ -152,6 +157,7 @@ class SendOrAskBizumActivity : AppCompatActivity() {
                 val description = findViewById<EditText>(R.id.description_field)
 
                 bizumViewModel.makeBizum(ensureAmountFormat.toDouble(), phoneField.text.toString(), description.text.toString());
+                loadingDialog.dismiss()
                 return@setOnClickListener
             }
 
@@ -180,13 +186,17 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
     private fun getCurrentBalance(callback: (Double) -> Unit) {
         val accountViewModel: Account_ViewModel by viewModels()
+
+        loadDialog()
         accountViewModel.accountBalanceState.observe(this) { accountBalanceState ->
             when(accountBalanceState) {
                 is AccountBalanceState.Success -> {
+                    loadingDialog.dismiss()
                     callback(accountBalanceState.accountBalanceResponse.accountBalance)
                 }
 
                 is AccountBalanceState.Error -> {
+                    loadingDialog.dismiss()
                     callback(0.0)
                 }
             }
@@ -194,6 +204,15 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
 
         accountViewModel.getAccountBalance()
+    }
+
+    private fun loadDialog() {
+        loadingDialog = AlertDialog.Builder(this@SendOrAskBizumActivity)
+            .setView(R.layout.dialog_loading)
+            .create()
+        loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loadingDialog.setCancelable(false)
+        loadingDialog.show()
     }
 
     private fun adjustScreenInsets() {
