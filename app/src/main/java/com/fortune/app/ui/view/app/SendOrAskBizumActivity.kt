@@ -132,6 +132,8 @@ class SendOrAskBizumActivity : AppCompatActivity() {
                     SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
                 }
             }
+
+            loadingDialog.dismiss()
         }
 
         bizumViewModel.requestBizum.observe(this) { makeBizumState ->
@@ -148,10 +150,11 @@ class SendOrAskBizumActivity : AppCompatActivity() {
                     SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
                 }
             }
+
+            loadingDialog.dismiss()
         }
 
         sendButton.setOnClickListener {
-            loadDialog()
             var ensureAmountFormat = amountText.text.toString();
             phoneLayout.error = ""
             bizumError.text = ""
@@ -170,6 +173,7 @@ class SendOrAskBizumActivity : AppCompatActivity() {
             val condition3: Boolean = currentBalance >= ensureAmountFormat.toDouble()
 
             if (contidion1 && contidion2 && (condition3 || isAsking)) {
+                loadDialog()
                 val description = findViewById<EditText>(R.id.description_field)
 
                 if (!isAsking) {
@@ -177,7 +181,6 @@ class SendOrAskBizumActivity : AppCompatActivity() {
                 } else {
                     bizumViewModel.requestBizum(ensureAmountFormat.toDouble(), phoneField.text.toString(), description.text.toString())
                 }
-                loadingDialog.dismiss()
                 return@setOnClickListener
             }
 
