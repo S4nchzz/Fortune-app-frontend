@@ -4,8 +4,9 @@ import com.fortune.app.data.config.api.bizum.BizumAPIRest
 import com.fortune.app.domain.repository.api.bizum.BizumAPIRepository
 import com.fortune.app.domain.state.BizumState
 import com.fortune.app.domain.state.MyBizumsState
+import com.fortune.app.domain.state.RequestedBizumState
 import com.fortune.app.network.request.bizum.MakeBizumRequest
-import com.fortune.app.network.response.bizum.MyBizumsResponse
+import com.fortune.app.network.response.bizum.BizumsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -35,7 +36,7 @@ class BizumAPIRepositoryImpl @Inject constructor(
             val response = bizumAPIService.getBizums(token)
 
             if (response.code() == 200 && response.body() != null) {
-                val bizumList: MutableList<MyBizumsResponse> = mutableListOf()
+                val bizumList: MutableList<BizumsResponse> = mutableListOf()
 
                 response.body()!!.forEach { myBizumsResponse ->
                     bizumList.add(myBizumsResponse)
@@ -58,6 +59,21 @@ class BizumAPIRepositoryImpl @Inject constructor(
                 BizumState.UserNotFound
             } else {
                 BizumState.Error
+            }
+        }
+    }
+
+    override suspend fun getRequestBizums(token: String): RequestedBizumState {
+        return withContext(Dispatchers.IO) {
+            val response = bizumAPIService.getRequestBizums(token)
+
+            if (response.code() == 200 && response.body() != null) {
+                val requestBizumList: MutableList<BizumsResponse> = mutableListOf()
+                response.body()!!.forEach { item -> requestBizumList.add(item) }
+
+                RequestedBizumState.Success(requestBizumList)
+            } else {
+                RequestedBizumState.Error
             }
         }
     }

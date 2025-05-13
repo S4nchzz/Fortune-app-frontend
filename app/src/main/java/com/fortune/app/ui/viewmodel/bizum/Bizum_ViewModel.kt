@@ -9,6 +9,7 @@ import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.BizumState
 import com.fortune.app.domain.state.MyBizumsState
+import com.fortune.app.domain.state.RequestedBizumState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -45,6 +46,16 @@ class Bizum_ViewModel @Inject constructor(
         viewModelScope.launch {
             val response = bizumAPIRepositoryImpl.requestBizum("Bearer ${tokenManager.getToken()}", amount, phone, description)
             _requestBizum.value = response
+        }
+    }
+
+    private val _myRequestBizums = MutableLiveData<RequestedBizumState>()
+    val myRequestBizums: LiveData<RequestedBizumState> = _myRequestBizums
+
+    fun getMyRequestBizums() {
+        viewModelScope.launch {
+            val response = bizumAPIRepositoryImpl.getRequestBizums("Bearer ${tokenManager.getToken()}")
+            _myRequestBizums.value = response
         }
     }
 }

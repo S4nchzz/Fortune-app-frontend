@@ -97,8 +97,6 @@ class SendOrAskBizumActivity : AppCompatActivity() {
                     if (amountText.text.toString().split(",")[1].length > 1) {
                         return@setOnClickListener
                     }
-
-
                     amountText.text = "${amountText.text}${button.text}"
                 }
             }

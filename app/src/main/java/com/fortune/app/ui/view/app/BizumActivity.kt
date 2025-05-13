@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.domain.state.MyBizumsState
-import com.fortune.app.network.response.bizum.MyBizumsResponse
 import com.fortune.app.ui.adapters.bizums.BizumItem
 import com.fortune.app.ui.adapters.cards.BizumAdapter
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
@@ -72,6 +71,11 @@ class BizumActivity : AppCompatActivity() {
             val openSend = Intent(this@BizumActivity, SendOrAskBizumActivity::class.java)
             openSend.putExtra("ask", true)
             startActivity(openSend)
+        }
+
+        findViewById<LinearLayout>(R.id.view_requested_bizums).setOnClickListener {
+            val openViewBizumRequests = Intent(this@BizumActivity, RequestBizumActivity::class.java)
+            startActivity(openViewBizumRequests)
         }
     }
 

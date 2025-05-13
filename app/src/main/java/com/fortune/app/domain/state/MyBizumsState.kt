@@ -1,9 +1,8 @@
 package com.fortune.app.domain.state
 
-import com.fortune.app.network.response.bizum.MyBizumsResponse
-import java.util.Date
+import com.fortune.app.network.response.bizum.BizumsResponse
 
 sealed class MyBizumsState() {
-    data class Success(var bizumList: List<MyBizumsResponse> = arrayListOf()): MyBizumsState()
+    data class Success(var bizumList: List<BizumsResponse> = arrayListOf()): MyBizumsState()
     object Error: MyBizumsState()
 }

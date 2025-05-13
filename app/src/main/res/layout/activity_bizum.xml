@@ -219,14 +219,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ver solicitudes de bizum."
+                            android:text="Ver solicitudes."
                             android:textColor="@color/white"
                             android:textSize="20dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ver solicitudes."
+                            android:text="Ver solicitudes de bizum."
                             android:textColor="@color/disabled1"
                             android:textSize="15dp"/>
                     </LinearLayout>

@@ -3,7 +3,7 @@ package com.fortune.app.network.response.bizum
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
-data class MyBizumsResponse(
+data class BizumsResponse(
     @SerializedName("date")
     val date: Date,
 
@@ -17,4 +17,5 @@ data class MyBizumsResponse(
     val description: String,
 
     @SerializedName("amountIn")
-    val amountIn: Boolean)
+    val amountIn: Boolean
+)
