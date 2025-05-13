@@ -6,10 +6,9 @@ import com.fortune.app.domain.state.BizumState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.MyBizumsState
 import com.fortune.app.domain.state.RequestedBizumState
-import com.fortune.app.network.request.bizum.DenyBizumRequest
+import com.fortune.app.network.request.bizum.BizumIDRequest
 import com.fortune.app.network.request.bizum.MakeBizumRequest
 import com.fortune.app.network.response.bizum.BizumsResponse
-import hilt_aggregated_deps._com_fortune_app_ui_viewmodel_bizum_Bizum_ViewModel_HiltModules_KeyModule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -83,7 +82,19 @@ class BizumAPIRepositoryImpl @Inject constructor(
 
     override suspend fun denyBizumRequest(token: String, bizumID: Int): DefaultState {
         return withContext(Dispatchers.IO) {
-            val response = bizumAPIService.denyBizumRequest(token, DenyBizumRequest(bizumID))
+            val response = bizumAPIService.denyBizumRequest(token, BizumIDRequest(bizumID))
+
+            if (response.code() == 200) {
+                DefaultState.Success
+            } else {
+                DefaultState.Error
+            }
+        }
+    }
+
+    override suspend fun acceptBizumRequest(token: String, bizumID: Int): DefaultState {
+        return withContext(Dispatchers.IO) {
+            val response = bizumAPIService.acceptBizumRequest(token, BizumIDRequest(bizumID))
 
             if (response.code() == 200) {
                 DefaultState.Success

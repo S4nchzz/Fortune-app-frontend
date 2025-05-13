@@ -44,7 +44,21 @@ class BizumRequestAcceptOrDeny : AppCompatActivity() {
     }
 
     private fun manageAcceptButton(bizumID: Int) {
+        findViewById<Button>(R.id.btn_accept).setOnClickListener {
+            bizumViewmodel.acceptBizum.observe(this) { acceptState ->
+                when(acceptState) {
+                    is DefaultState.Success -> {
+                        SuccessOrFail_Dialog(false, "Se ha enviado el pago correspondiente.").show(supportFragmentManager, "Bizum request accept")
+                    }
 
+                    is DefaultState.Error -> {
+                        SuccessOrFail_Dialog(true, "Hubo un problema al realizar la peticion").show(supportFragmentManager, "Bizum request accept error")
+                    }
+                }
+            }
+
+            bizumViewmodel.acceptBizum(bizumID)
+        }
     }
 
     private fun manageDenyButton(bizumID: Int) {

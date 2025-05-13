@@ -1,3 +1,3 @@
 package com.fortune.app.network.request.bizum
 
-data class DenyBizumRequest(val bizumID: Int)
+data class BizumIDRequest(val bizumID: Int)
