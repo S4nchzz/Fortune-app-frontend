@@ -45,6 +45,7 @@ class BizumActivity : AppCompatActivity() {
 
                     myBizumState.bizumList.forEach { item ->
                         bizumItems.add(BizumItem(
+                            item.id,
                             item.date,
                             item.from,
                             item.amount,
@@ -74,6 +75,7 @@ class BizumActivity : AppCompatActivity() {
 
                     requestBizumState.requestedBizums.forEach { item ->
                         rbizumItemList.add(BizumItem(
+                            id = item.id,
                             date = item.date,
                             from = item.from,
                             amount = item.amount,
@@ -81,7 +83,6 @@ class BizumActivity : AppCompatActivity() {
                             amountIn = item.amountIn
                         ))
                     }
-
 
                     val dpPerItem = 120
                     val scale = this.resources.displayMetrics.density

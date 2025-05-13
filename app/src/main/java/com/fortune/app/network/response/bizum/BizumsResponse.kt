@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 data class BizumsResponse(
+    @SerializedName("id")
+    val id: Int,
+
     @SerializedName("date")
     val date: Date,
 

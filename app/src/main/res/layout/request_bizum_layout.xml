@@ -7,9 +7,11 @@
     android:background="@drawable/recent_bizum_background">
 
 <LinearLayout
+        android:id="@+id/request_bizum_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:clickable="true"
         android:padding="15dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,14 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"/>
-
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/request_bizum_year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
-                android:textStyle="italic|bold"/>
         </LinearLayout>
 
         <TextView

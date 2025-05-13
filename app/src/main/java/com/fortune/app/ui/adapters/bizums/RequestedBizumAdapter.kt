@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.ui.adapters.bizums.BizumItem
+import com.fortune.app.ui.view.app.BizumRequestAcceptOrDeny
 import com.fortune.app.ui.view.app.CardDetailActivity
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -21,10 +23,11 @@ class RequestedBizumAdapter(
 ) : RecyclerView.Adapter<RequestedBizumAdapter.RequestBizumHolder>() {
     inner class RequestBizumHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date = itemView.findViewById<TextView>(R.id.request_bizum_date)
-        val year = itemView.findViewById<TextView>(R.id.request_bizum_year)
         val from = itemView.findViewById<TextView>(R.id.request_bizum_from)
         val desc = itemView.findViewById<TextView>(R.id.request_bizum_description)
         val amount = itemView.findViewById<TextView>(R.id.request_bizum_amount)
+        val ll = itemView.findViewById<LinearLayout>(R.id.request_bizum_ll)
+        val context = itemView.context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestBizumHolder {
@@ -34,6 +37,12 @@ class RequestedBizumAdapter(
     }
 
     override fun onBindViewHolder(holder: RequestBizumHolder, position: Int) {
+        holder.ll.setOnClickListener {
+            val openRequestBizumSendOrDeny = Intent(holder.context, BizumRequestAcceptOrDeny::class.java)
+            openRequestBizumSendOrDeny.putExtra("bizumID", bizumItems[position].id)
+            holder.context.startActivity(openRequestBizumSendOrDeny)
+        }
+
         val sdf = SimpleDateFormat("dd MMM", Locale.getDefault())
         holder.date.text = sdf.format(bizumItems.get(position).date).uppercase()
 
