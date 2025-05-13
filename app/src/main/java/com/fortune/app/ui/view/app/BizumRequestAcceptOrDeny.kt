@@ -9,14 +9,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
+import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
+import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BizumRequestAcceptOrDeny : AppCompatActivity() {
     private val bizumViewmodel: Bizum_ViewModel by viewModels()
+    private val accountViewmodel: Account_ViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +35,7 @@ class BizumRequestAcceptOrDeny : AppCompatActivity() {
 
         loadBizumData(date, from, description, amount)
 
-        manageAcceptButton(bizumID)
+        manageAcceptButton(bizumID, amount)
         manageDenyButton(bizumID)
     }
 
@@ -43,21 +46,42 @@ class BizumRequestAcceptOrDeny : AppCompatActivity() {
         findViewById<TextView>(R.id.request_final_bizum_amount).text = "${amount} €"
     }
 
-    private fun manageAcceptButton(bizumID: Int) {
-        findViewById<Button>(R.id.btn_accept).setOnClickListener {
-            bizumViewmodel.acceptBizum.observe(this) { acceptState ->
-                when(acceptState) {
-                    is DefaultState.Success -> {
-                        SuccessOrFail_Dialog(false, "Se ha enviado el pago correspondiente.").show(supportFragmentManager, "Bizum request accept")
-                    }
+    private fun manageAcceptButton(bizumID: Int, bizumAmount: Double) {
+        bizumViewmodel.acceptBizum.observe(this) { acceptState ->
+            when(acceptState) {
+                is DefaultState.Success -> {
+                    SuccessOrFail_Dialog(false, "Se ha enviado el pago correspondiente.").show(supportFragmentManager, "Bizum request accept")
+                }
 
-                    is DefaultState.Error -> {
-                        SuccessOrFail_Dialog(true, "Hubo un problema al realizar la peticion").show(supportFragmentManager, "Bizum request accept error")
-                    }
+                is DefaultState.Error -> {
+                    SuccessOrFail_Dialog(true, "Hubo un problema al realizar la peticion").show(supportFragmentManager, "Bizum request accept error")
                 }
             }
+        }
 
-            bizumViewmodel.acceptBizum(bizumID)
+        accountViewmodel.accountBizumBalanceState.observe(this) { accountBalanceState ->
+            when(accountBalanceState) {
+                is AccountBalanceState.Success -> {
+                    if (accountBalanceState.accountBalanceResponse.accountBalance >= bizumAmount) {
+                        bizumViewmodel.acceptBizum(bizumID)
+                    } else {
+                        SuccessOrFail_Dialog(true, "No dispone del balance necesario para realizar esta operacion.").show(supportFragmentManager, "Operation balance")
+                    }
+                }
+
+                is AccountBalanceState.Error -> {
+                    SuccessOrFail_Dialog(true, "Ha ocurrido un error inesperado.").show(supportFragmentManager, "Operation error")
+                    findViewById<Button>(R.id.btn_accept).isEnabled = true
+                    findViewById<Button>(R.id.btn_deny).isEnabled = true
+                }
+            }
+        }
+
+        findViewById<Button>(R.id.btn_accept).setOnClickListener{
+            findViewById<Button>(R.id.btn_accept).isEnabled = false
+            findViewById<Button>(R.id.btn_deny).isEnabled = false
+
+            accountViewmodel.getAccountBalanceBizum()
         }
     }
 

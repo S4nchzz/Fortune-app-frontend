@@ -51,4 +51,14 @@ class Account_ViewModel @Inject constructor(
             _accountBalanceState.value = responseState
         }
     }
+
+    private val _accountBizumBalanceState = MutableLiveData<AccountBalanceState>()
+    val accountBizumBalanceState: LiveData<AccountBalanceState> = _accountBizumBalanceState
+
+    fun getAccountBalanceBizum() {
+        viewModelScope.launch {
+            val responseState = accountAPIRepositoryImpl.getAccountBalance("Bearer ${tokenManager.getToken()}")
+            _accountBizumBalanceState.value = responseState
+        }
+    }
 }
