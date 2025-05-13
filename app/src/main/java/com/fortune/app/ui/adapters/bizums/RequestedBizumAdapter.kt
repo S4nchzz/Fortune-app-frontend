@@ -21,6 +21,7 @@ class RequestedBizumAdapter(
 ) : RecyclerView.Adapter<RequestedBizumAdapter.RequestBizumHolder>() {
     inner class RequestBizumHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date = itemView.findViewById<TextView>(R.id.request_bizum_date)
+        val year = itemView.findViewById<TextView>(R.id.request_bizum_year)
         val from = itemView.findViewById<TextView>(R.id.request_bizum_from)
         val desc = itemView.findViewById<TextView>(R.id.request_bizum_description)
         val amount = itemView.findViewById<TextView>(R.id.request_bizum_amount)
@@ -39,11 +40,7 @@ class RequestedBizumAdapter(
         holder.from.text = bizumItems.get(position).from
         holder.desc.text = bizumItems.get(position).description
 
-        holder.amount.text = if (bizumItems[position].amountIn) {
-            bizumItems[position].amount.toString()
-        } else {
-            "-${bizumItems[position].amount}"
-        }
+        holder.amount.text = "${bizumItems[position].amount} €"
     }
 
     override fun getItemCount() = bizumItems.size
