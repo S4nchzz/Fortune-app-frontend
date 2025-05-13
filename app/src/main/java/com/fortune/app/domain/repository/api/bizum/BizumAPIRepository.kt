@@ -15,4 +15,5 @@ interface BizumAPIRepository {
     ): BizumState
 
     suspend fun getRequestBizums(s: String): RequestedBizumState
+    suspend fun denyBizumRequest(s: String, bizumID: Int): Any
 }

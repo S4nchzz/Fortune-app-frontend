@@ -1,5 +1,6 @@
 package com.fortune.app.ui.adapters.cards
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.DrawableContainer.DrawableContainerState
@@ -39,8 +40,21 @@ class RequestedBizumAdapter(
     override fun onBindViewHolder(holder: RequestBizumHolder, position: Int) {
         holder.ll.setOnClickListener {
             val openRequestBizumSendOrDeny = Intent(holder.context, BizumRequestAcceptOrDeny::class.java)
+
             openRequestBizumSendOrDeny.putExtra("bizumID", bizumItems[position].id)
+
+            val sdf = SimpleDateFormat("dd MMM", Locale.getDefault())
+            openRequestBizumSendOrDeny.putExtra("date", sdf.format(bizumItems[position].date).uppercase())
+
+            openRequestBizumSendOrDeny.putExtra("from", bizumItems[position].from)
+            openRequestBizumSendOrDeny.putExtra("description", bizumItems[position].description)
+            openRequestBizumSendOrDeny.putExtra("amount", bizumItems[position].amount)
+
             holder.context.startActivity(openRequestBizumSendOrDeny)
+
+            if (holder.context is Activity) {
+                holder.context.finish()
+            }
         }
 
         val sdf = SimpleDateFormat("dd MMM", Locale.getDefault())

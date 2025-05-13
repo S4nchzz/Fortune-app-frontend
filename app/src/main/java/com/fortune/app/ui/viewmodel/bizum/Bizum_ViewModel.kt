@@ -58,4 +58,14 @@ class Bizum_ViewModel @Inject constructor(
             _myRequestBizums.value = response
         }
     }
+
+    private val _denyBizum = MutableLiveData<DefaultState>()
+    val denyBizum: LiveData<DefaultState> = _denyBizum
+
+    fun denyBizum(bizumID: Int) {
+        viewModelScope.launch {
+            val response = bizumAPIRepositoryImpl.denyBizumRequest("Bearer ${tokenManager.getToken()}", bizumID)
+            _denyBizum.value = response
+        }
+    }
 }
