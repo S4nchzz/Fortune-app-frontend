@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="app">#0D0E0D</color>
+    <color name="app_close_original">#0F110F</color>
     <color name="app_lighter">#151715</color>
     <color name="app_lighter2">#111411</color>
     <color name="dialog">#1D1A1A</color>
