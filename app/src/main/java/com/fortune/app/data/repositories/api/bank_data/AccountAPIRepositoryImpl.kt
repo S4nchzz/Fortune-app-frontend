@@ -4,6 +4,7 @@ import com.fortune.app.data.mapper.bank_data.AccountMapper
 import com.fortune.app.data.config.api.bank_data.AccountAPIRest
 import com.fortune.app.domain.repository.api.bank_Data.AccountApiRepository
 import com.fortune.app.domain.state.AccountBalanceState
+import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.PaymentSimulationState
@@ -64,6 +65,18 @@ class AccountAPIRepositoryImpl @Inject constructor(
                 AccountBalanceState.Success(response.body()!!)
             } else {
                 AccountBalanceState.Error
+            }
+        }
+    }
+
+    override suspend fun getAccountData(token: String): AccountDataState {
+        return withContext(Dispatchers.IO) {
+            val response = accountAPIService.getAccountData(token)
+
+            if (response.code() == 200 && response.body() != null) {
+                AccountDataState.Success(response.body()!!.accountID, response.body()!!.accountBalance)
+            } else {
+                AccountDataState.Error
             }
         }
     }

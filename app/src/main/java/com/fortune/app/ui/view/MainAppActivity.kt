@@ -36,6 +36,7 @@ import com.fortune.app.ui.adapters.cards.CardAdapter
 import com.fortune.app.ui.adapters.cards.CardItem
 import com.fortune.app.ui.dialogs.AddMoney_Dialog
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
+import com.fortune.app.ui.view.app.AccountActivity
 import com.fortune.app.ui.view.app.BizumActivity
 import com.fortune.app.ui.view.app.ConfigActivity
 import com.fortune.app.ui.view.app.SecurityActivity
@@ -90,6 +91,11 @@ class MainAppActivity : AppCompatActivity() {
     }
 
     private fun generalActionListeners() {
+        findViewById<TextView>(R.id.account_total_balance).setOnClickListener {
+            val openAccountDetails = Intent(this@MainAppActivity, AccountActivity::class.java)
+            startActivity(openAccountDetails)
+        }
+
         findViewById<ImageButton>(R.id.add_money).setOnClickListener {
             AddMoney_Dialog{ balanceAdded, newAmount ->
                 if (balanceAdded) {

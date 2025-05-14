@@ -9,8 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
 import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.AccountBalanceState
+import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.PaymentSimulationState
+import com.fortune.app.network.response.account.AccountDataResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -59,6 +61,16 @@ class Account_ViewModel @Inject constructor(
         viewModelScope.launch {
             val responseState = accountAPIRepositoryImpl.getAccountBalance("Bearer ${tokenManager.getToken()}")
             _accountBizumBalanceState.value = responseState
+        }
+    }
+
+    private val _accountDataState = MutableLiveData<AccountDataState>()
+    val accountDataState: LiveData<AccountDataState> = _accountDataState
+
+    fun getAccountData() {
+        viewModelScope.launch {
+            val responseState = accountAPIRepositoryImpl.getAccountData("Bearer ${tokenManager.getToken()}")
+            _accountDataState.value = responseState
         }
     }
 }

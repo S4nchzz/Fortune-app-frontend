@@ -4,6 +4,7 @@ import com.fortune.app.BuildConfig
 import com.fortune.app.data.entities.bank_data.AccountEntity
 import com.fortune.app.network.request.movement.SimulatePaymentRequest
 import com.fortune.app.network.response.account.AccountBalanceResponse
+import com.fortune.app.network.response.account.AccountDataResponse
 import com.fortune.app.network.response.account.PaymentSimulationResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -24,4 +25,7 @@ interface AccountAPIRest {
 
     @GET("/b_operations/account/getAccountBalance")
     suspend fun getAccountBalance(@Header("Authorization") token: String): Response<AccountBalanceResponse>
+
+    @GET("/b_operations/account/getAccountData")
+    suspend fun getAccountData(@Header("Authorization") token: String): Response<AccountDataResponse>
 }
