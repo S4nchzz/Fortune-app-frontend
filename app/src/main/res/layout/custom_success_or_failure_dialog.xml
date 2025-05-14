@@ -30,7 +30,7 @@
             android:layout_marginBottom="24dp" />
 
     <Button
-            android:id="@+id/btn_login_after_acc_creation"
+            android:id="@+id/btn_close_sof"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"

@@ -12,13 +12,13 @@ import androidx.fragment.app.DialogFragment
 import com.airbnb.lottie.LottieAnimationView
 import com.fortune.app.R
 
-class SuccessOrFail_Dialog(val errorEncountered: Boolean, val message: String) : DialogFragment() {
+class SuccessOrFail_Dialog(val errorEncountered: Boolean, val message: String, val onClose: () -> Unit = {}) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext())
         val inflater = requireActivity().layoutInflater
         val view = inflater.inflate(R.layout.custom_success_or_failure_dialog, null)
 
-        val closeDialogToActivityButton = view.findViewById<Button>(R.id.btn_login_after_acc_creation)
+        val closeDialogToActivityButton = view.findViewById<Button>(R.id.btn_close_sof)
         val textViewMessage = view.findViewById<TextView>(R.id.dialog_message_acc_creation)
         val lottieView = view.findViewById<LottieAnimationView>(R.id.image)
 
@@ -34,6 +34,7 @@ class SuccessOrFail_Dialog(val errorEncountered: Boolean, val message: String) :
         lottieView.playAnimation()
 
         closeDialogToActivityButton.setOnClickListener {
+            onClose()
             this.dismiss()
         }
 

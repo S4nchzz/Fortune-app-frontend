@@ -21,7 +21,7 @@ class AccountCreation_Dialog(val errorEncountered: Boolean, val message: String)
         val inflater = requireActivity().layoutInflater
         val view = inflater.inflate(R.layout.custom_success_or_failure_dialog, null)
 
-        val closeDialogToActivityButton = view.findViewById<Button>(R.id.btn_login_after_acc_creation)
+        val closeDialogToActivityButton = view.findViewById<Button>(R.id.btn_close_sof)
         val textViewMessage = view.findViewById<TextView>(R.id.dialog_message_acc_creation)
         val lottieView = view.findViewById<LottieAnimationView>(R.id.image)
 

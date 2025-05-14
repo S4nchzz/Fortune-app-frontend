@@ -50,11 +50,15 @@ class BizumRequestAcceptOrDeny : AppCompatActivity() {
         bizumViewmodel.acceptBizum.observe(this) { acceptState ->
             when(acceptState) {
                 is DefaultState.Success -> {
-                    SuccessOrFail_Dialog(false, "Se ha enviado el pago correspondiente.").show(supportFragmentManager, "Bizum request accept")
+                    SuccessOrFail_Dialog(false, "Se ha enviado el pago correspondiente."){
+                        this@BizumRequestAcceptOrDeny.finish()
+                    }.show(supportFragmentManager, "Bizum request accept")
                 }
 
                 is DefaultState.Error -> {
-                    SuccessOrFail_Dialog(true, "Hubo un problema al realizar la peticion").show(supportFragmentManager, "Bizum request accept error")
+                    SuccessOrFail_Dialog(true, "Hubo un problema al realizar la peticion"){
+                        this@BizumRequestAcceptOrDeny.finish()
+                    }.show(supportFragmentManager, "Bizum request accept error")
                 }
             }
         }
@@ -65,12 +69,16 @@ class BizumRequestAcceptOrDeny : AppCompatActivity() {
                     if (accountBalanceState.accountBalanceResponse.accountBalance >= bizumAmount) {
                         bizumViewmodel.acceptBizum(bizumID)
                     } else {
-                        SuccessOrFail_Dialog(true, "No dispone del balance necesario para realizar esta operacion.").show(supportFragmentManager, "Operation balance")
+                        SuccessOrFail_Dialog(true, "No dispone del balance necesario para realizar esta operacion."){
+                            this@BizumRequestAcceptOrDeny.finish()
+                        }.show(supportFragmentManager, "Operation balance")
                     }
                 }
 
                 is AccountBalanceState.Error -> {
-                    SuccessOrFail_Dialog(true, "Ha ocurrido un error inesperado.").show(supportFragmentManager, "Operation error")
+                    SuccessOrFail_Dialog(true, "Ha ocurrido un error inesperado."){
+                        this@BizumRequestAcceptOrDeny.finish()
+                    }.show(supportFragmentManager, "Operation error")
                     findViewById<Button>(R.id.btn_accept).isEnabled = true
                     findViewById<Button>(R.id.btn_deny).isEnabled = true
                 }
@@ -89,11 +97,15 @@ class BizumRequestAcceptOrDeny : AppCompatActivity() {
         bizumViewmodel.denyBizum.observe(this) { deleteState ->
             when(deleteState) {
                 is DefaultState.Success -> {
-                    SuccessOrFail_Dialog(false, "Se ha denegado la peticion").show(supportFragmentManager, "Bizum request denied")
+                    SuccessOrFail_Dialog(false, "Se ha denegado la peticion") {
+                        this@BizumRequestAcceptOrDeny.finish()
+                    }.show(supportFragmentManager, "Bizum request denied")
                 }
 
                 is DefaultState.Error -> {
-                    SuccessOrFail_Dialog(true, "Hubo un problema al denegar la peticion").show(supportFragmentManager, "Bizum request denied error")
+                    SuccessOrFail_Dialog(true, "Hubo un problema al denegar la peticion"){
+                        this@BizumRequestAcceptOrDeny.finish()
+                    }.show(supportFragmentManager, "Bizum request denied error")
                 }
             }
         }
