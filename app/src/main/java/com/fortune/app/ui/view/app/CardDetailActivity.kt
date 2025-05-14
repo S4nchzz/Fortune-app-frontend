@@ -20,11 +20,11 @@ import com.fortune.app.R
 import com.fortune.app.domain.state.CardBalanceState
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
-import com.fortune.app.domain.state.CardMovementState
+import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.LockCardState
-import com.fortune.app.ui.adapters.cardMovements.MovementCardAdapter
-import com.fortune.app.ui.adapters.cardMovements.MovementCardItem
+import com.fortune.app.ui.adapters.movements.MovementAdapter
+import com.fortune.app.ui.adapters.movements.MovementItem
 import com.fortune.app.ui.dialogs.SignOperation_Dialog
 import com.fortune.app.ui.dialogs.SimulatePayment_Dialog
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
@@ -292,17 +292,17 @@ class CardDetailActivity : AppCompatActivity() {
 
         cardViewModel.movementState.observe(this) { cardMovementState ->
             when(cardMovementState) {
-                is CardMovementState.Success -> {
-                    val cardAdapterItems: MutableList<MovementCardItem> = mutableListOf()
+                is MovementState.Success -> {
+                    val cardAdapterItems: MutableList<MovementItem> = mutableListOf()
 
-                    cardMovementState.cardMovementModel.forEach { cardMovement ->
-                        cardAdapterItems.add(MovementCardItem(cardMovement.date, cardMovement.entityReceiver, cardMovement.amount))
+                    cardMovementState.movementModel.forEach { cardMovement ->
+                        cardAdapterItems.add(MovementItem(cardMovement.date, cardMovement.entityReceiver, cardMovement.amount))
                     }
 
-                    rView.adapter = MovementCardAdapter(cardAdapterItems)
+                    rView.adapter = MovementAdapter(cardAdapterItems)
                 }
 
-                is CardMovementState.Error -> {
+                is MovementState.Error -> {
                     // show dialog with error finding data
                 }
 

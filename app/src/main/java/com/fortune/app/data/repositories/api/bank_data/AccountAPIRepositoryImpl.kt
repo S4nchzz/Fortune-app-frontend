@@ -2,17 +2,18 @@ package com.fortune.app.data.repositories.api.bank_data
 
 import com.fortune.app.data.mapper.bank_data.AccountMapper
 import com.fortune.app.data.config.api.bank_data.AccountAPIRest
+import com.fortune.app.data.mapper.bank_data.CardMovementMapper
+import com.fortune.app.domain.model.bank_data.MovementModel
 import com.fortune.app.domain.repository.api.bank_Data.AccountApiRepository
 import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.PaymentSimulationState
 import com.fortune.app.network.request.movement.SimulatePaymentRequest
-import com.fortune.app.network.response.account.PaymentSimulationResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -77,6 +78,22 @@ class AccountAPIRepositoryImpl @Inject constructor(
                 AccountDataState.Success(response.body()!!.accountID, response.body()!!.accountBalance)
             } else {
                 AccountDataState.Error
+            }
+        }
+    }
+
+    override suspend fun getAccountMovements(token: String): MovementState {
+        return withContext(Dispatchers.IO) {
+            val response = accountAPIService.getAccountMovements(token)
+
+            if (response.code() == 200 && response.body() != null) {
+                val accountMovementModel: MutableList<MovementModel> = mutableListOf()
+                response.body()!!.forEach { item ->
+                    accountMovementModel.add(CardMovementMapper.mapToDomain(item))
+                }
+                MovementState.Success(accountMovementModel)
+            } else {
+                MovementState.Error
             }
         }
     }

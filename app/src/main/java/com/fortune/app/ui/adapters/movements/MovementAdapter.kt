@@ -1,6 +1,5 @@
-package com.fortune.app.ui.adapters.cardMovements
+package com.fortune.app.ui.adapters.movements
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import java.time.format.TextStyle
 import java.util.Date
 import java.util.Locale
 
-class MovementCardAdapter(val movementItems: List<MovementCardItem>) : RecyclerView.Adapter<MovementCardAdapter.PaymentActivityHolder>(){
+class MovementAdapter(val movementItems: List<MovementItem>) : RecyclerView.Adapter<MovementAdapter.PaymentActivityHolder>(){
     inner class PaymentActivityHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val mDate = itemView.findViewById<TextView>(R.id.movement_date)
         val mYear = itemView.findViewById<TextView>(R.id.movement_year)

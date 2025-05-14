@@ -7,8 +7,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
 import com.fortune.app.domain.state.AccountDataState
+import com.fortune.app.domain.state.MovementState
+import com.fortune.app.ui.adapters.movements.MovementAdapter
+import com.fortune.app.ui.adapters.movements.MovementItem
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +30,36 @@ class AccountActivity : AppCompatActivity() {
         adjustScreenInsets()
 
         requestAccountData()
+        loadRViewData()
+    }
+
+    private fun loadRViewData() {
+        accountViewmodel.accountMovement.observe(this) { movementAccountState ->
+            when(movementAccountState) {
+                is MovementState.Success -> {
+                    val movementItems: MutableList<MovementItem> = mutableListOf()
+
+                    movementAccountState.movementModel.forEach { item ->
+                        movementItems.add(
+                            MovementItem(
+                                mDate = item.date,
+                                mReceiver = item.entityReceiver,
+                                mAmount = item.amount
+                            )
+                        )
+                    }
+
+                    findViewById<RecyclerView>(R.id.account_rview).adapter = MovementAdapter(movementItems)
+                }
+
+                is MovementState.Error -> {
+
+                }
+            }
+
+        }
+
+        accountViewmodel.getAccountMovements()
     }
 
     private fun requestAccountData() {

@@ -2,6 +2,7 @@ package com.fortune.app.data.config.api.bank_data
 
 import com.fortune.app.BuildConfig
 import com.fortune.app.data.entities.bank_data.AccountEntity
+import com.fortune.app.data.entities.bank_data.CardMovementEntity
 import com.fortune.app.network.request.movement.SimulatePaymentRequest
 import com.fortune.app.network.response.account.AccountBalanceResponse
 import com.fortune.app.network.response.account.AccountDataResponse
@@ -28,4 +29,7 @@ interface AccountAPIRest {
 
     @GET("/b_operations/account/getAccountData")
     suspend fun getAccountData(@Header("Authorization") token: String): Response<AccountDataResponse>
+
+    @GET("/b_operations/account/getAccountMovements")
+    suspend fun getAccountMovements(@Header("Authorization") token: String): Response<List<CardMovementEntity>>
 }

@@ -6,16 +6,16 @@ import com.fortune.app.data.entities.bank_data.CardEntity
 import com.fortune.app.data.entities.bank_data.CardMovementEntity
 import com.fortune.app.data.mapper.bank_data.CardMovementMapper
 import com.fortune.app.domain.model.bank_data.CardModel
-import com.fortune.app.domain.model.bank_data.CardMovementModel
+import com.fortune.app.domain.model.bank_data.MovementModel
 import com.fortune.app.domain.repository.api.bank_Data.CardRepository
 import com.fortune.app.domain.state.CardBalanceState
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
-import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
+import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.NewBalanceState
 import com.fortune.app.network.request.account.CardUpdateAccBalanceRequest
 import com.fortune.app.network.request.card.CardUUIDApiRequest
@@ -46,19 +46,19 @@ class CardAPIRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun findMovements(token: String, card_uuid: String): CardMovementState {
+    override suspend fun findMovements(token: String, card_uuid: String): MovementState {
         return withContext(Dispatchers.IO) {
             val response = cardAPIService.findMovements(token, CardUUIDApiRequest(card_uuid))
 
             if (response.code() == 200 && response.body() != null) {
-                val domainMovement: MutableList<CardMovementModel> = mutableListOf()
+                val domainMovement: MutableList<MovementModel> = mutableListOf()
                 response.body()!!.forEach { movementEntity : CardMovementEntity ->
                     domainMovement.add(CardMovementMapper.mapToDomain(movementEntity))
                 }
 
-                CardMovementState.Success(domainMovement)
+                MovementState.Success(domainMovement)
             } else {
-                CardMovementState.Error
+                MovementState.Error
             }
         }
     }

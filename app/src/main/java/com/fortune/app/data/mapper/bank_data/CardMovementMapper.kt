@@ -1,11 +1,11 @@
 package com.fortune.app.data.mapper.bank_data
 
 import com.fortune.app.data.entities.bank_data.CardMovementEntity
-import com.fortune.app.domain.model.bank_data.CardMovementModel
+import com.fortune.app.domain.model.bank_data.MovementModel
 
 object CardMovementMapper {
-    fun mapToDomain(cardMovementEntity: CardMovementEntity): CardMovementModel {
-        return CardMovementModel(
+    fun mapToDomain(cardMovementEntity: CardMovementEntity): MovementModel {
+        return MovementModel(
             amount = cardMovementEntity.amount,
             date = cardMovementEntity.date,
             entityReceiver = cardMovementEntity.entityReceiver,
@@ -13,12 +13,12 @@ object CardMovementMapper {
         )
     }
 
-    fun mapToEntity(cardMovementModel: CardMovementModel): CardMovementEntity {
+    fun mapToEntity(movementModel: MovementModel): CardMovementEntity {
         return CardMovementEntity(
-            amount = cardMovementModel.amount,
-            date = cardMovementModel.date,
-            entityReceiver = cardMovementModel.entityReceiver,
-            entitySender = cardMovementModel.entitySender
+            amount = movementModel.amount,
+            date = movementModel.date,
+            entityReceiver = movementModel.entityReceiver,
+            entitySender = movementModel.entitySender
         )
     }
 }

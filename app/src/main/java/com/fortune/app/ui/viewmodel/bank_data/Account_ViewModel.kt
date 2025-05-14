@@ -11,6 +11,7 @@ import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.PaymentSimulationState
 import com.fortune.app.network.response.account.AccountDataResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -71,6 +72,16 @@ class Account_ViewModel @Inject constructor(
         viewModelScope.launch {
             val responseState = accountAPIRepositoryImpl.getAccountData("Bearer ${tokenManager.getToken()}")
             _accountDataState.value = responseState
+        }
+    }
+
+    private val _accountMovement = MutableLiveData<MovementState>()
+    val accountMovement: LiveData<MovementState> = _accountMovement
+
+    fun getAccountMovements() {
+        viewModelScope.launch {
+            val responseState = accountAPIRepositoryImpl.getAccountMovements("Bearer ${tokenManager.getToken()}")
+            _accountMovement.value = responseState
         }
     }
 }

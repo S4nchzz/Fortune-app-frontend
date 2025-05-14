@@ -6,19 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
 import com.fortune.app.data.secure.TokenManager
-import com.fortune.app.domain.model.bank_data.CardModel
-import com.fortune.app.domain.model.bank_data.CardMovementModel
 import com.fortune.app.domain.state.CardBalanceState
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
-import com.fortune.app.domain.state.CardMovementState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
+import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.NewBalanceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,8 +23,8 @@ class Card_ViewModel @Inject constructor(
     val cardAPIRepositoryImpl: CardAPIRepositoryImpl,
     val tokenManager: TokenManager
 ) : ViewModel() {
-    private val _movementState = MutableLiveData<CardMovementState?>()
-    val movementState: LiveData<CardMovementState?> = _movementState
+    private val _movementState = MutableLiveData<MovementState?>()
+    val movementState: LiveData<MovementState?> = _movementState
 
     fun findCardMovements(card_uuid: String) {
         viewModelScope.launch {
