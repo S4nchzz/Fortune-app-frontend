@@ -12,6 +12,8 @@ import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class AccountActivity : AppCompatActivity() {
@@ -31,7 +33,11 @@ class AccountActivity : AppCompatActivity() {
             when(accountDataState) {
                 is AccountDataState.Success -> {
                     findViewById<TextView>(R.id.account_id).text = accountDataState.accountID
-                    findViewById<TextView>(R.id.account_amount).text = accountDataState.accountBalance.toString()
+
+                    val formattedBalance = NumberFormat.getCurrencyInstance(Locale("es", "ES"))
+                        .format(accountDataState.accountBalance)
+                        .replace("€", " €")
+                    findViewById<TextView>(R.id.account_amount).text = formattedBalance
                 }
 
                 is AccountDataState.Error -> {
