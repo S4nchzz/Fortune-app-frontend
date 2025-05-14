@@ -9,6 +9,7 @@
 
     <item>
         <shape>
+            <solid android:color="@color/app_lighter"/>
             <corners android:radius="10dp"/>
         </shape>
     </item>
