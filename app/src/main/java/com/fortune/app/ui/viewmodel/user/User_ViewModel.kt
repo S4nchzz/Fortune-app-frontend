@@ -54,4 +54,14 @@ class User_ViewModel @Inject constructor(
             _cards.value = cardState
         }
     }
+
+    private val _transferCards = MutableLiveData<CardState>()
+    val transferCards: LiveData<CardState> = _transferCards
+
+    fun transferCards() {
+        viewModelScope.launch {
+            val cardState = cardAPIRepositoryImpl.findCards("Bearer ${tokenManager.getToken()}")
+            _transferCards.value = cardState
+        }
+    }
 }

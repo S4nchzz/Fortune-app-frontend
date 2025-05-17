@@ -1,5 +1,6 @@
 package com.fortune.app.ui.view.app
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -63,10 +64,19 @@ class CardDetailActivity : AppCompatActivity() {
     }
 
     private fun configEventButtons() {
+        transferLocalMoney()
         simulatePayment()
         viewCardNumber()
         lockButton()
         getCvvButton()
+    }
+
+    private fun transferLocalMoney() {
+        findViewById<ImageButton>(R.id.transfer_money).setOnClickListener {
+            val openTransferMoney = Intent(this@CardDetailActivity, TransferLocalMoney::class.java)
+            startActivity(openTransferMoney)
+            finish()
+        }
     }
 
     private fun simulatePayment() {

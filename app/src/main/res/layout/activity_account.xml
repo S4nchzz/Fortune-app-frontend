@@ -62,7 +62,6 @@
                     android:id="@+id/account_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ASKLD12-FFOAS8-2KFKS9-123"
                     android:textColor="@color/disabled1"
                     android:layout_marginBottom="10dp"
                     android:textSize="14sp"/>
@@ -79,7 +78,6 @@
                     android:id="@+id/account_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6.861,57 €"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:layout_marginBottom="10dp"
@@ -91,7 +89,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Actividad"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"
             android:textColor="@color/white"
