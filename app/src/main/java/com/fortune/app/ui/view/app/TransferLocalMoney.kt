@@ -171,7 +171,7 @@ class TransferLocalMoney : AppCompatActivity() {
                                         }
 
                                         is DefaultState.Error -> {
-                                            SuccessOrFail_Dialog(false, "Hubo un error al transferir el dinero."){
+                                            SuccessOrFail_Dialog(true, "Hubo un error al transferir el dinero."){
                                                 finish()
                                             }.show(supportFragmentManager, "Money transfer error")
                                         }
@@ -192,7 +192,7 @@ class TransferLocalMoney : AppCompatActivity() {
                             }
 
                             is CardBalanceState.Error -> {
-                                SuccessOrFail_Dialog(false, "Ha ocurrido un error inesperado."){
+                                SuccessOrFail_Dialog(true, "Ha ocurrido un error inesperado."){
                                     finish()
                                 }.show(supportFragmentManager, "Unexpected error")
                             }
@@ -203,7 +203,7 @@ class TransferLocalMoney : AppCompatActivity() {
                 }
 
                 is CardUniqueState.Error -> {
-                    SuccessOrFail_Dialog(false, "Ha ocurrido un error inesperado."){
+                    SuccessOrFail_Dialog(true, "Ha ocurrido un error inesperado."){
                         finish()
                     }.show(supportFragmentManager, "Unexpected error")
                 }
