@@ -5,6 +5,7 @@ import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
+import com.fortune.app.domain.state.CardUniqueState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
 import com.fortune.app.domain.state.MovementState
@@ -21,4 +22,6 @@ interface CardRepository {
     suspend fun getCardBalance(s: String, cardUuid: String): CardBalanceState
     suspend fun addNewBalance(newBalance: Double, s: String): NewBalanceState
     suspend fun addNewCard(token: String): DefaultState
+    suspend fun getCardByUUID(s: String, uuid: String): CardUniqueState
+    suspend fun transferBalance(s: String, fromCardUUID: String, toCardUUID: String, balance: Double): DefaultState
 }

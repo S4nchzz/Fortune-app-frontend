@@ -10,6 +10,7 @@ import com.fortune.app.domain.state.CardBalanceState
 import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardNumberState
+import com.fortune.app.domain.state.CardUniqueState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
 import com.fortune.app.domain.state.MovementState
@@ -99,6 +100,16 @@ class Card_ViewModel @Inject constructor(
         }
     }
 
+    private val _cardBalanceStateTransfer = MutableLiveData<CardBalanceState>()
+    val cardBalanceStateTransfer: LiveData<CardBalanceState> = _cardBalanceStateTransfer
+
+    fun cardBalanceStateTransfer(card_uuid: String) {
+        viewModelScope.launch {
+            val responseState = cardAPIRepositoryImpl.getCardBalance("Bearer ${tokenManager.getToken()}", card_uuid)
+            _cardBalanceStateTransfer.value = responseState
+        }
+    }
+
     private val _addBalanceState = MutableLiveData<NewBalanceState>()
     val addBalanceState: LiveData<NewBalanceState> = _addBalanceState
 
@@ -116,6 +127,26 @@ class Card_ViewModel @Inject constructor(
         viewModelScope.launch {
             val responseState = cardAPIRepositoryImpl.addNewCard("Bearer ${tokenManager.getToken()}")
             _addNewCard.value = responseState
+        }
+    }
+
+    private val _cardDataUUIDState = MutableLiveData<CardUniqueState>()
+    val cardDataUUIDState: LiveData<CardUniqueState> = _cardDataUUIDState
+
+    fun getCardByUUID(uuid: String) {
+        viewModelScope.launch {
+            val responseState = cardAPIRepositoryImpl.getCardByUUID("Bearer ${tokenManager.getToken()}", uuid)
+            _cardDataUUIDState.value = responseState
+        }
+    }
+
+    private val _transferBalance = MutableLiveData<DefaultState>()
+    val transferBalance: LiveData<DefaultState> = _transferBalance
+
+    fun transferBalance(fromCardUUID: String, toCardUUID: String, balance: Double) {
+        viewModelScope.launch {
+            val responseState = cardAPIRepositoryImpl.transferBalance("Bearer ${tokenManager.getToken()}", fromCardUUID, toCardUUID, balance)
+            _transferBalance.value = responseState
         }
     }
 }

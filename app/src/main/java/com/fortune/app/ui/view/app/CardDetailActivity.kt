@@ -74,6 +74,7 @@ class CardDetailActivity : AppCompatActivity() {
     private fun transferLocalMoney() {
         findViewById<ImageButton>(R.id.transfer_money).setOnClickListener {
             val openTransferMoney = Intent(this@CardDetailActivity, TransferLocalMoney::class.java)
+            openTransferMoney.putExtra("card_uuid", intent.getStringExtra("card_uuid").toString())
             startActivity(openTransferMoney)
             finish()
         }

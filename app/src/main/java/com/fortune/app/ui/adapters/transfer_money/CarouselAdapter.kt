@@ -1,20 +1,20 @@
 package com.fortune.app.ui.adapters.cards
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
-import com.fortune.app.ui.view.app.CardDetailActivity
 import java.text.NumberFormat
 import java.util.Locale
 
 class CarouselAdapter(
     private val context: Context,
-    private val cardItems: List<CardItem>
+    private val cardItems: List<CardItem>,
+    private val callback: (String) -> Unit
 ) : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {
     inner class CarouselViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardTypeTextView: TextView = itemView.findViewById(R.id.card_type)
@@ -40,7 +40,7 @@ class CarouselAdapter(
         holder.cardBalanceTextView.text = "${formattedBalance}"
 
         holder.itemView.setOnClickListener {
-            
+            callback(cardItems.get(position).cardUUID)
         }
     }
 

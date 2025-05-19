@@ -2,8 +2,11 @@ package com.fortune.app.data.config.api.bank_data
 
 import com.fortune.app.data.entities.bank_data.CardEntity
 import com.fortune.app.data.entities.bank_data.CardMovementEntity
+import com.fortune.app.domain.model.bank_data.CardModel
+import com.fortune.app.domain.state.CardUniqueState
 import com.fortune.app.network.request.account.CardUpdateAccBalanceRequest
 import com.fortune.app.network.request.card.CardUUIDApiRequest
+import com.fortune.app.network.request.card.TransferBalanceApiRequest
 import com.fortune.app.network.response.account.NewBalanceResponse
 import com.fortune.app.network.response.card.CardBalanceResponse
 import com.fortune.app.network.response.card.CardCvvResponse
@@ -46,4 +49,10 @@ interface CardAPIRest {
 
     @GET("/b_operations/account/addNewCard")
     suspend fun addNewCard(@Header("Authorization") token: String): Response<Unit>
+
+    @POST("/b_operations/card/findCardByUUID")
+    suspend fun getCardByUUID(@Header("Authorization") token: String, @Body cardUUIDApiRequest: CardUUIDApiRequest): Response<CardModel>
+
+    @POST("/b_operations/card/transferBalance")
+    suspend fun transferBalance(@Header("Authorization") token: String, @Body transferBalanceApiRequest: TransferBalanceApiRequest): Response<Unit>
 }

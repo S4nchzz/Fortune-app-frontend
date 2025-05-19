@@ -60,7 +60,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/carouselRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="145dp"
                 android:clipToPadding="false"
                 android:paddingStart="60dp"
                 android:paddingEnd="60dp"
@@ -71,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:text="EUR"
                 android:textColor="@color/disabled1"
                 android:fontFamily="sans-serif-thin"
@@ -90,9 +91,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="20dp"
                 android:text="Eliga una tarjeta para realizar la transferencia"
                 android:layout_gravity="center"
                 android:textColor="@color/disabled1"/>
+
+            <Button
+                android:id="@+id/transfer_money_btn"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_disabled"
+                android:text="Enviar"
+                android:enabled="false"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:backgroundTint="@null"
+                app:iconGravity="textStart" />
         </LinearLayout>
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -107,14 +125,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/seven"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="7"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -122,14 +140,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/eight"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="8"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -137,14 +155,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/nine"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="9"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -154,14 +172,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/four"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="4"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -169,14 +187,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/five"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="5"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -184,14 +202,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/six"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="6"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -201,14 +219,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/one"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="1"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -216,14 +234,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/two"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="2"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -231,14 +249,14 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/three"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="3"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -248,27 +266,27 @@
                 <ImageButton
                     android:id="@+id/remove"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:src="@drawable/remove_icon"
                     android:backgroundTint="@color/app"
                     android:contentDescription="Remove"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:scaleType="centerInside" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/zero"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text="0"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
@@ -276,19 +294,20 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/comma"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="64dp"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:padding="6dp"
+                    android:padding="4dp"
                     android:text=","
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="22sp"
                     app:cornerRadius="0dp"
                     android:backgroundTint="@color/app"
                     app:rippleColor="@color/app_lighter" />
             </TableRow>
 
         </TableLayout>
+
     </LinearLayout>
 </LinearLayout>

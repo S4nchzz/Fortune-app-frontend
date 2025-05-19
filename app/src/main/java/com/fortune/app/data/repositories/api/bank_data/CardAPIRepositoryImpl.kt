@@ -13,12 +13,14 @@ import com.fortune.app.domain.state.CardCvvState
 import com.fortune.app.domain.state.CardExpDateState
 import com.fortune.app.domain.state.CardNumberState
 import com.fortune.app.domain.state.CardState
+import com.fortune.app.domain.state.CardUniqueState
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LockCardState
 import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.NewBalanceState
 import com.fortune.app.network.request.account.CardUpdateAccBalanceRequest
 import com.fortune.app.network.request.card.CardUUIDApiRequest
+import com.fortune.app.network.request.card.TransferBalanceApiRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -149,6 +151,30 @@ class CardAPIRepositoryImpl @Inject constructor(
     override suspend fun addNewCard(token: String): DefaultState {
         return withContext(Dispatchers.IO) {
             val response = cardAPIService.addNewCard(token)
+
+            if (response.code() == 200) {
+                DefaultState.Success
+            } else {
+                DefaultState.Error
+            }
+        }
+    }
+
+    override suspend fun getCardByUUID(token: String, uuid: String): CardUniqueState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.getCardByUUID(token, CardUUIDApiRequest(uuid))
+
+            if (response.code() == 200 && response.body() != null) {
+                CardUniqueState.Success(response.body()!!)
+            } else {
+                CardUniqueState.Error
+            }
+        }
+    }
+
+    override suspend fun transferBalance(token: String, fromCardUUID: String, toCardUUID: String, balance: Double): DefaultState {
+        return withContext(Dispatchers.IO) {
+            val response = cardAPIService.transferBalance(token, TransferBalanceApiRequest(fromCardUUID, toCardUUID, balance))
 
             if (response.code() == 200) {
                 DefaultState.Success
