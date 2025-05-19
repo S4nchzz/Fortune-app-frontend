@@ -8,6 +8,7 @@ import com.fortune.app.domain.repository.api.auth.AuthApiRepository
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.LoginState
 import com.fortune.app.domain.state.RegisterState
+import com.fortune.app.network.request.auth.ChangePasswordRequest
 import com.fortune.app.network.request.auth.CreateDigitalSignRequest
 import com.fortune.app.network.request.auth.LoginRequest
 import com.fortune.app.network.request.auth.RegisterRequest
@@ -72,6 +73,18 @@ class AuthAPIRepositoryImpl @Inject constructor(
                 } else {
                     DefaultState.Error
                 }
+            } else {
+                DefaultState.Error
+            }
+        }
+    }
+
+    override suspend fun changePassword(token: String, password: String): DefaultState {
+        return withContext(Dispatchers.IO) {
+            val response = authApiService.changePassword(token, ChangePasswordRequest(password))
+
+            if (response.code() == 200) {
+                DefaultState.Success
             } else {
                 DefaultState.Error
             }

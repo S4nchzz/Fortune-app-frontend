@@ -1,17 +1,24 @@
 package com.fortune.app.ui.view.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import com.fortune.app.MainActivity
 import com.fortune.app.R
+import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
+import com.fortune.app.ui.viewmodel.auth.Auth_ViewModel
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChangePasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +67,29 @@ class ChangePasswordActivity : AppCompatActivity() {
                 SuccessOrFail_Dialog(true, "Las contraseñas no coinciden.").show(supportFragmentManager, "Passwords doesnt match")
             }
 
+            val authViewmodel: Auth_ViewModel by viewModels()
 
+            authViewmodel.changePasswordState.observe(this) { changePasswordState ->
+                when(changePasswordState) {
+                    is DefaultState.Success -> {
+                        SuccessOrFail_Dialog(false, "Contraseña cambiada correctamente, se cerrara la sesion."){
+                            val openMain = Intent(this@ChangePasswordActivity, MainActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            }
+                            startActivity(openMain)
+                            finish()
+                        }.show(supportFragmentManager, "Password changed")
+                    }
 
+                    is DefaultState.Error -> {
+                        SuccessOrFail_Dialog(false, "Ha ocurrido un error al cambiar la contraseña."){
+                            finish()
+                        }.show(supportFragmentManager, "Password changed")
+                    }
+                }
+            }
+
+            authViewmodel.changePassword(passField1.text.toString())
         }
     }
 

@@ -77,4 +77,14 @@ class Auth_ViewModel @Inject constructor(
     fun resetLoginObserve() {
         this._login.value = null
     }
+
+    private val _changePasswordState = MutableLiveData<DefaultState>()
+    val changePasswordState: LiveData<DefaultState> = _changePasswordState
+
+    fun changePassword(password: String) {
+        viewModelScope.launch {
+            val signOperationState = authAPIRepositoryImpl.changePassword("Bearer ${tokenManager.getToken()}", password)
+            _changePasswordState.value = signOperationState
+        }
+    }
 }

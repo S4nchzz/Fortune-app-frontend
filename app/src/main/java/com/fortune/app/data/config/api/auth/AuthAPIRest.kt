@@ -1,6 +1,7 @@
 package com.fortune.app.data.config.api.auth
 
 import com.fortune.app.BuildConfig
+import com.fortune.app.network.request.auth.ChangePasswordRequest
 import com.fortune.app.network.request.auth.CreateDigitalSignRequest
 import com.fortune.app.network.request.auth.LoginRequest
 import com.fortune.app.network.request.auth.RegisterRequest
@@ -26,4 +27,7 @@ interface AuthAPIRest {
 
     @POST("/auth/signOperation")
     suspend fun signOperation(@Header("Authorization") token: String, @Body createDigitalSignRequest: CreateDigitalSignRequest): Response<AuthDSOperation>
+
+    @POST("/auth/changePassword")
+    suspend fun changePassword(@Header("Authorization") tokentoken: String, @Body changePasswordRequest: ChangePasswordRequest): Response<Unit>
 }
