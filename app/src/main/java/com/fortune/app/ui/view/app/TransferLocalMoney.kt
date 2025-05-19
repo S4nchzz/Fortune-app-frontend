@@ -155,7 +155,7 @@ class TransferLocalMoney : AppCompatActivity() {
                     cardViewModel.cardBalanceStateTransfer.observe(this) { cardBalanceState ->
                         when(cardBalanceState) {
                             is CardBalanceState.Success -> {
-                                if (amountText.text.toString().toDouble() < cardBalanceState.card_balance) {
+                                if (amountText.text.toString().toDouble() > cardBalanceState.card_balance) {
                                     SuccessOrFail_Dialog(true, "El importe elegido es superior al de la tarjeta que realiza la transferencia."){
                                         finish()
                                     }.show(supportFragmentManager, "Card canot be transfered")
