@@ -14,4 +14,9 @@ class TokenManager @Inject constructor(val application: Application) {
         val sharedPrefs = application.applicationContext.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         return sharedPrefs.getString("auth_token", null)
     }
+
+    fun dropToken() {
+        val sharedPrefs = application.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        sharedPrefs.edit().remove("auth_token").apply()
+    }
 }

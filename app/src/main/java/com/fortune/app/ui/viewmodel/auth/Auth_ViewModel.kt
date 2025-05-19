@@ -83,8 +83,13 @@ class Auth_ViewModel @Inject constructor(
 
     fun changePassword(password: String) {
         viewModelScope.launch {
-            val signOperationState = authAPIRepositoryImpl.changePassword("Bearer ${tokenManager.getToken()}", password)
-            _changePasswordState.value = signOperationState
+            val changePasswordState = authAPIRepositoryImpl.changePassword("Bearer ${tokenManager.getToken()}", password)
+
+            if (changePasswordState is DefaultState.Success) {
+                tokenManager.dropToken()
+            }
+
+            _changePasswordState.value = changePasswordState
         }
     }
 }

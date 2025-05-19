@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.fortune.app.MainActivity
 import com.fortune.app.R
+import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.auth.Auth_ViewModel
@@ -76,6 +77,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                             val openMain = Intent(this@ChangePasswordActivity, MainActivity::class.java).apply {
                                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             }
+
                             startActivity(openMain)
                             finish()
                         }.show(supportFragmentManager, "Password changed")
