@@ -92,4 +92,14 @@ class Auth_ViewModel @Inject constructor(
             _changePasswordState.value = changePasswordState
         }
     }
+
+    private val _changeDigitalSignState = MutableLiveData<DefaultState>()
+    val changeDigitalSignState: LiveData<DefaultState> = _changeDigitalSignState
+
+    fun resetDigitalSign(completePin: Int) {
+        viewModelScope.launch {
+            val changeDigitalSignState = authAPIRepositoryImpl.resetDigitalSign("Bearer ${tokenManager.getToken()}", completePin)
+            _changeDigitalSignState.value = changeDigitalSignState
+        }
+    }
 }

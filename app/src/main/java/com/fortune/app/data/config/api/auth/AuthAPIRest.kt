@@ -1,6 +1,6 @@
 package com.fortune.app.data.config.api.auth
 
-import com.fortune.app.BuildConfig
+import com.fortune.app.network.request.auth.ChangeDigitalSignRequest
 import com.fortune.app.network.request.auth.ChangePasswordRequest
 import com.fortune.app.network.request.auth.CreateDigitalSignRequest
 import com.fortune.app.network.request.auth.LoginRequest
@@ -10,10 +10,8 @@ import com.fortune.app.network.response.auth.LoginResponse
 import retrofit2.Response
 import retrofit2.http.Body
 
-import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface AuthAPIRest {
     @POST("/auth/login")
@@ -30,4 +28,7 @@ interface AuthAPIRest {
 
     @POST("/auth/changePassword")
     suspend fun changePassword(@Header("Authorization") tokentoken: String, @Body changePasswordRequest: ChangePasswordRequest): Response<Unit>
+
+    @POST("/auth/changeDigitalSign")
+    suspend fun resetDigitalSign(@Header("Authorization") token: String, @Body changeDigitalSignRequest: ChangeDigitalSignRequest): Response<Unit>
 }

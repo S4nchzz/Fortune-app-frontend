@@ -12,4 +12,5 @@ interface AuthApiRepository {
     suspend fun createDigitalSign(token: String, ds: Int): DefaultState
     suspend fun signOperation(token: String, ds: Int): DefaultState
     suspend fun changePassword(s: String, password: String): DefaultState
+    suspend fun resetDigitalSign(s: String, completePin: Int): DefaultState
 }

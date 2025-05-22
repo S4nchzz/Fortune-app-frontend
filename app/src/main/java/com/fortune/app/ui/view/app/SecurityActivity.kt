@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -64,6 +63,12 @@ class SecurityActivity : AppCompatActivity() {
                 R.id.reset_password -> {
                     val openResetPassword = Intent(this@SecurityActivity, ChangePasswordActivity::class.java)
                     startActivity(openResetPassword)
+                    true
+                }
+
+                R.id.change_digital_sign -> {
+                    val openChangeDigitalSignActivity = Intent(this@SecurityActivity, ChangeDigitalSignActivity::class.java)
+                    startActivity(openChangeDigitalSignActivity)
                     true
                 }
 
