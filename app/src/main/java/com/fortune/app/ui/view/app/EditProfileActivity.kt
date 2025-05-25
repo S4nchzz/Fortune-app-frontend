@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -73,6 +74,8 @@ class EditProfileActivity : AppCompatActivity() {
         userViewmodel.profileToUpdate.observe(this) { profileToUpdateState ->
             when(profileToUpdateState) {
                 is ProfileToUpdateState.Success -> {
+                    findViewById<TextView>(R.id.to_show_name).setText(profileToUpdateState.profileToUpdateResponse.name)
+
                     findViewById<EditText>(R.id.nameField).setText(profileToUpdateState.profileToUpdateResponse.name)
                     findViewById<EditText>(R.id.addressField).setText(profileToUpdateState.profileToUpdateResponse.address)
                     findViewById<EditText>(R.id.identityDocumentField).setText(profileToUpdateState.profileToUpdateResponse.identityDocument)
