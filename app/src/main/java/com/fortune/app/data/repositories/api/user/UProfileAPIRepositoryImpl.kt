@@ -43,7 +43,7 @@ class UProfileAPIRepositoryImpl @Inject constructor(
 
     override suspend fun updateProfile(token: String, updateProfileRequest: UpdateProfileRequest): DefaultState {
         return withContext(Dispatchers.IO) {
-            val response = uProfileAPIService.updateProfile(updateProfileRequest)
+            val response = uProfileAPIService.updateProfile(token, updateProfileRequest)
 
             if (response.code() == 200) {
                 DefaultState.Success

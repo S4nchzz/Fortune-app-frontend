@@ -81,6 +81,7 @@ class User_ViewModel @Inject constructor(
     fun updateProfile(name: String, address: String, identityDocument: String, email: String, phone: String) {
         viewModelScope.launch {
             val updated = uProfileAPIRepository.updateProfile("Bearer ${tokenManager.getToken()}", UpdateProfileRequest(name, address, identityDocument, email, phone))
+            _profileUpdated.value = updated
         }
     }
 }

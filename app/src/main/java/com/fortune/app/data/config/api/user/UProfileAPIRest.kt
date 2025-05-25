@@ -5,6 +5,7 @@ import com.fortune.app.data.entities.user.UProfileEntity
 import com.fortune.app.network.request.profile.UpdateProfileRequest
 import com.fortune.app.network.response.profile.ProfileToUpdateResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -17,6 +18,6 @@ interface UProfileAPIRest {
     @GET("/user/getUpdateProfile")
     suspend fun getProfileToUpdate(@Header("Authorization") token: String): Response<ProfileToUpdateResponse>
 
-    @GET("/user/updateProfile")
-    suspend fun updateProfile(updateProfileRequest: UpdateProfileRequest): Response<Unit>
+    @POST("/user/updateProfile")
+    suspend fun updateProfile(@Header("Authorization") token: String, @Body updateProfileRequest: UpdateProfileRequest): Response<Unit>
 }

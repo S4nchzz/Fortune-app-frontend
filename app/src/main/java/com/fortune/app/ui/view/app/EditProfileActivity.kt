@@ -1,5 +1,6 @@
 package com.fortune.app.ui.view.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -8,7 +9,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.fortune.app.MainActivity
 import com.fortune.app.R
+import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.ProfileToUpdateState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
@@ -28,6 +31,31 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun manageSendData() {
         val userViewmodel: User_ViewModel by viewModels()
+        userViewmodel.profileUpdated.observe(this) { updated ->
+            when(updated) {
+                is DefaultState.Success -> {
+                    SuccessOrFail_Dialog(false, "Se ha actualizado el perfil correctamente, por favor, vuelva a iniciar sesión"){
+                        val openMain = Intent(this@EditProfileActivity, MainActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+
+                        startActivity(openMain)
+                        finish()
+                    }.show(supportFragmentManager, "Profile updated")
+                }
+
+                is DefaultState.Error -> {
+                    SuccessOrFail_Dialog(true, "No se ha podido actualizar el perfil, vuelva a iniciar sesión"){
+                        val openMain = Intent(this@EditProfileActivity, MainActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+
+                        startActivity(openMain)
+                        finish()
+                    }.show(supportFragmentManager, "Profile updated")
+                }
+            }
+        }
 
         val update = findViewById<Button>(R.id.btn_update_profile).setOnClickListener {
             val name = findViewById<EditText>(R.id.nameField).text
