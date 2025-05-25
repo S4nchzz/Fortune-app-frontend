@@ -4,6 +4,7 @@ import com.fortune.app.data.config.api.user.UProfileAPIRest
 import com.fortune.app.data.mapper.user.UProfileMapper
 import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.repository.api.user.UProfileAPIRepository
+import com.fortune.app.domain.state.ProfileToUpdateState
 import com.fortune.app.domain.state.UProfileState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -22,6 +23,18 @@ class UProfileAPIRepositoryImpl @Inject constructor(
                 UProfileState.Success(UProfileMapper.mapToDomain(response.body()!!))
             } else {
                 UProfileState.Error
+            }
+        }
+    }
+
+    override suspend fun getProfileToUpdate(token: String): ProfileToUpdateState {
+        return withContext(Dispatchers.IO) {
+            val response = uProfileAPIService.getProfileToUpdate(token)
+
+            if (response.code() == 200 && response.body() != null) {
+                ProfileToUpdateState.Success(response.body()!!)
+            } else {
+                ProfileToUpdateState.Error
             }
         }
     }

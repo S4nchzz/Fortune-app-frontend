@@ -39,6 +39,7 @@ import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.view.app.AccountActivity
 import com.fortune.app.ui.view.app.BizumActivity
 import com.fortune.app.ui.view.app.ConfigActivity
+import com.fortune.app.ui.view.app.EditProfileActivity
 import com.fortune.app.ui.view.app.SecurityActivity
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
@@ -72,6 +73,11 @@ class MainAppActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.balance_info).setOnClickListener {
             it.performLongClick() // Simulate long click
+        }
+
+        findViewById<ImageView>(R.id.open_profile).setOnClickListener{
+            val openProfile = Intent(this@MainAppActivity, EditProfileActivity::class.java)
+            startActivity(openProfile)
         }
 
         slideMenuConfiguration()
@@ -244,7 +250,8 @@ class MainAppActivity : AppCompatActivity() {
         navView?.setNavigationItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.personal_data -> {
-                    Toast.makeText(this, "Personal", Toast.LENGTH_SHORT).show()
+                    val openProfile = Intent(this@MainAppActivity, EditProfileActivity::class.java)
+                    startActivity(openProfile)
                     true
                 }
 

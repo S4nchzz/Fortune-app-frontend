@@ -7,12 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.fortune.app.data.repositories.api.bank_data.AccountAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.bank_data.CardAPIRepositoryImpl
 import com.fortune.app.data.repositories.api.user.UProfileAPIRepositoryImpl
-import com.fortune.app.data.repositories.api.user.UserAPIRepositoryImpl
 import com.fortune.app.data.secure.TokenManager
-import com.fortune.app.domain.repository.api.user.UProfileAPIRepository
-import com.fortune.app.domain.repository.api.user.UserAPIRepository
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.CardState
+import com.fortune.app.domain.state.ProfileToUpdateState
 import com.fortune.app.domain.state.UProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -62,6 +60,16 @@ class User_ViewModel @Inject constructor(
         viewModelScope.launch {
             val cardState = cardAPIRepositoryImpl.findCards("Bearer ${tokenManager.getToken()}")
             _transferCards.value = cardState
+        }
+    }
+
+    private val _profileToUpdate = MutableLiveData<ProfileToUpdateState>()
+    val profileToUpdate: LiveData<ProfileToUpdateState> = _profileToUpdate
+
+    fun getProfileToUpdate() {
+        viewModelScope.launch {
+            val profileToUpdateState = uProfileAPIRepository.getProfileToUpdate("Bearer ${tokenManager.getToken()}")
+            _profileToUpdate.value = profileToUpdateState
         }
     }
 }
