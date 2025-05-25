@@ -1,6 +1,7 @@
 package com.fortune.app.ui.view.app
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -22,6 +23,21 @@ class EditProfileActivity : AppCompatActivity() {
         adjustScreenInsets()
 
         configureFields()
+        manageSendData()
+    }
+
+    private fun manageSendData() {
+        val userViewmodel: User_ViewModel by viewModels()
+
+        val update = findViewById<Button>(R.id.btn_update_profile).setOnClickListener {
+            val name = findViewById<EditText>(R.id.nameField).text
+            val address = findViewById<EditText>(R.id.addressField).text
+            val identityDocument = findViewById<EditText>(R.id.identityDocumentField).text
+            val email = findViewById<EditText>(R.id.emailField).text
+            val phone = findViewById<EditText>(R.id.phoneField).text
+
+            userViewmodel.updateProfile(name.toString(), address.toString(), identityDocument.toString(), email.toString(), phone.toString())
+        }
     }
 
     private fun configureFields() {
@@ -43,7 +59,6 @@ class EditProfileActivity : AppCompatActivity() {
                 }
             }
         }
-
 
         userViewmodel.getProfileToUpdate()
     }
