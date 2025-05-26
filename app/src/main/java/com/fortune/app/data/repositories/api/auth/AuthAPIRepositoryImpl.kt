@@ -25,7 +25,7 @@ class AuthAPIRepositoryImpl @Inject constructor(
 
     override suspend fun register(userDTO: UserDTO, uProfileDTO: UProfileDTO): RegisterState {
         return withContext(Dispatchers.IO) {
-            val response = authApiService.register(RegisterRequest(userDTO.identityDocument, userDTO.email, userDTO.password, uProfileDTO.name, uProfileDTO.phone, uProfileDTO.address))
+            val response = authApiService.register(RegisterRequest(userDTO.identityDocument, userDTO.email, userDTO.password, uProfileDTO.name, uProfileDTO.phone, uProfileDTO.address, uProfileDTO.base64Image))
             if (response.code() == 201) {
                 RegisterState.Success
             } else if (response.code() == 409){

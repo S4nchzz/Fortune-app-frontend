@@ -30,6 +30,7 @@
             android:textSize="37sp" />
 
     <ImageButton
+            android:id="@+id/pfp"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:scaleType="centerCrop"
