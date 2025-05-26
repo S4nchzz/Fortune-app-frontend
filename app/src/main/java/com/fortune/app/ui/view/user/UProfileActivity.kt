@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
@@ -31,10 +32,12 @@ import java.io.ByteArrayOutputStream
 class UProfileActivity : AppCompatActivity() {
     private lateinit var loadingDialog: AlertDialog
     private lateinit var imageButton: ImageButton
+    private var imageChoose: Boolean = false
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             imageButton.setImageURI(it)
+            imageChoose = true
         }
     }
 
@@ -65,40 +68,47 @@ class UProfileActivity : AppCompatActivity() {
     private fun handleFullRegister(name: String, address: String, phone: String) {
         val authViewmodel: Auth_ViewModel by viewModels()
 
-        if (checkData(name, address, phone)) {
-            val uProfileDTO = UProfileDTO(name, address, phone, getBase64Image(imageButton.drawable))
-            val userDTO = intent.getSerializableExtra("userDTO", UserDTO::class.java)
+        val imageDrawable: Drawable? = if (!imageChoose) {
+            null
+        } else {
+            imageButton.drawable
+        }
 
-            loadingDialog = AlertDialog.Builder(this@UProfileActivity)
-                .setView(R.layout.dialog_loading)
-                .create()
-            loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            loadingDialog.setCancelable(false)
-            loadingDialog.show()
+        val uProfileDTO = UProfileDTO(name, address, phone, getBase64Image(imageDrawable))
+        val userDTO = intent.getSerializableExtra("userDTO", UserDTO::class.java)
 
-            authViewmodel.register.observe(this) { registerState ->
-                loadingDialog.dismiss()
+        loadingDialog = AlertDialog.Builder(this@UProfileActivity)
+            .setView(R.layout.dialog_loading)
+            .create()
+        loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        loadingDialog.setCancelable(false)
+        loadingDialog.show()
 
-                when(registerState) {
-                    is RegisterState.Success -> {
-                        AccountCreation_Dialog(false, "Se ha creado la cuenta correctamente. por favor, inicie sesion para finalizar la configuracion de la cuenta").show(supportFragmentManager, "Account successfully created")
-                    }
+        authViewmodel.register.observe(this) { registerState ->
+            loadingDialog.dismiss()
 
-                    is RegisterState.UserAlreadyExistsError -> {
-                        AccountCreation_Dialog(true, "El usuario ya existe, por favor, intentelo de nuevo.").show(supportFragmentManager, "Account already exists")
-                    }
+            when(registerState) {
+                is RegisterState.Success -> {
+                    AccountCreation_Dialog(false, "Se ha creado la cuenta correctamente. por favor, inicie sesion para finalizar la configuracion de la cuenta").show(supportFragmentManager, "Account successfully created")
+                }
 
-                    is RegisterState.UnexpectedError -> {
-                        AccountCreation_Dialog(true, "Ha ocurrido un error inesperado").show(supportFragmentManager, "Unexpected error")
-                    }
+                is RegisterState.UserAlreadyExistsError -> {
+                    AccountCreation_Dialog(true, "El usuario ya existe, por favor, intentelo de nuevo.").show(supportFragmentManager, "Account already exists")
+                }
+
+                is RegisterState.UnexpectedError -> {
+                    AccountCreation_Dialog(true, "Ha ocurrido un error inesperado").show(supportFragmentManager, "Unexpected error")
                 }
             }
-
-            authViewmodel.register(userDTO, uProfileDTO)
         }
+        authViewmodel.register(userDTO, uProfileDTO)
     }
 
-    private fun getBase64Image(drawable: Drawable): String {
+    private fun getBase64Image(drawable: Drawable?): String? {
+        if (drawable == null) {
+            return null
+        }
+
         val bitmap = (drawable as BitmapDrawable).bitmap
 
         val outputStream = ByteArrayOutputStream()

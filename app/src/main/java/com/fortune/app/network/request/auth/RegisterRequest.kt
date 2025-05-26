@@ -7,5 +7,5 @@ data class RegisterRequest(
     val name: String,
     val phone: String,
     val address: String,
-    val base64Image: String,
+    val base64Image: String?,
 )

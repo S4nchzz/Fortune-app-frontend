@@ -16,5 +16,8 @@ data class ProfileToUpdateResponse(
     val email: String,
 
     @SerializedName("phone")
-    val phone: String
+    val phone: String,
+
+    @SerializedName("pfp")
+    val pfp: String
 )
