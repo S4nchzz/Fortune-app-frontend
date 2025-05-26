@@ -5,6 +5,7 @@ import com.fortune.app.data.mapper.user.UProfileMapper
 import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.repository.api.user.UProfileAPIRepository
 import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.ProfileImageState
 import com.fortune.app.domain.state.ProfileToUpdateState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.network.request.profile.UpdateProfileRequest

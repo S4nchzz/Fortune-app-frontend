@@ -38,6 +38,5 @@ data class UProfileEntity(
     @ColumnInfo(name = "phone")
     @SerializedName("phone") val phone: String,
 
-    //@ColumnInfo(name = "pfp")
-    //@SerializedName("pfp") val profilePicture: ByteArray
+    @SerializedName("pfp") val profilePicture: String
 ): Serializable

@@ -11,7 +11,8 @@ object UProfileMapper {
             userId = uProfileEntity.user_id,
             name = uProfileEntity.name,
             address = uProfileEntity.address,
-            phone = uProfileEntity.phone
+            phone = uProfileEntity.phone,
+            pfp = uProfileEntity.profilePicture
         )
     }
 
@@ -22,7 +23,8 @@ object UProfileMapper {
             user_id = uProfileModel.userId,
             name = uProfileModel.name,
             address = uProfileModel.address,
-            phone = uProfileModel.phone
+            phone = uProfileModel.phone,
+            profilePicture = uProfileModel.pfp
         )
     }
 }

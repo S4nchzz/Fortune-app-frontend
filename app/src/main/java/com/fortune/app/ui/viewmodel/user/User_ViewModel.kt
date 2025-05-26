@@ -11,6 +11,7 @@ import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.CardState
 import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.ProfileImageState
 import com.fortune.app.domain.state.ProfileToUpdateState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.network.request.profile.UpdateProfileRequest
@@ -32,6 +33,16 @@ class User_ViewModel @Inject constructor(
         viewModelScope.launch {
             val userDataState = uProfileAPIRepository.getProfile("Bearer ${tokenManager.getToken()}")
             _profile.value = userDataState
+        }
+    }
+
+    private val _navProfile = MutableLiveData<UProfileState>()
+    val navProfile: LiveData<UProfileState> = _navProfile
+
+    fun getNavProfile() {
+        viewModelScope.launch {
+            val userDataState = uProfileAPIRepository.getProfile("Bearer ${tokenManager.getToken()}")
+            _navProfile.value = userDataState
         }
     }
 

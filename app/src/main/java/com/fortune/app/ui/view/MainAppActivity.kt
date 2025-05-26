@@ -1,9 +1,12 @@
 package com.fortune.app.ui.view
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -31,6 +34,7 @@ import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.CardState
+import com.fortune.app.domain.state.ProfileImageState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.ui.adapters.cards.CardAdapter
 import com.fortune.app.ui.adapters.cards.CardItem
@@ -52,6 +56,8 @@ class MainAppActivity : AppCompatActivity() {
     private lateinit var loadingDialog: AlertDialog
     private var currentAppAmount = 0.0
     private val accountViewModel: Account_ViewModel by viewModels()
+    private var pfpBitmap: Bitmap? = null
+    private var name = ""
 
 
     override fun onResume() {
@@ -186,9 +192,18 @@ class MainAppActivity : AppCompatActivity() {
         val userViewModel: User_ViewModel by viewModels()
 
         getProfile {
-            findViewById<TextView>(R.id.client_name).text =
-                it?.name
+            findViewById<TextView>(R.id.client_name).text = it?.name
+            val base64String = it?.pfp
+            if (!base64String.isNullOrEmpty()) {
+                val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+                findViewById<ImageView>(R.id.open_profile).setImageBitmap(bitmap)
+            } else {
+                findViewById<ImageView>(R.id.open_profile)
+                    .setImageResource(R.drawable.profile_default_profile_icon)
+            }
         }
+
         userViewModel.getProfile()
     }
 
@@ -218,12 +233,31 @@ class MainAppActivity : AppCompatActivity() {
         val navView = findViewById<NavigationView>(R.id.nav_view)
 
         val navHeader = LayoutInflater.from(this).inflate(R.layout.nav_header_layout, null)
+        val userViewmodel: User_ViewModel by viewModels()
 
-        getProfile { profileModel ->
-            navHeader.findViewById<TextView>(R.id.nav_view_header_uname).text = profileModel?.name
+        userViewmodel.navProfile.observe(this) { profileState ->
+            when(profileState) {
+                is UProfileState.Success -> {
+                    navHeader.findViewById<TextView>(R.id.nav_view_header_uname).text = profileState.uProfileModel.name
+                    val base64String = profileState.uProfileModel.pfp
+                    if (!base64String.isNullOrEmpty()) {
+                        val decodedBytes = Base64.decode(base64String, Base64.DEFAULT)
+                        val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+                        navHeader.findViewById<ImageView>(R.id.nav_view_header_upicture).setImageBitmap(bitmap)
+                    } else {
+                        navHeader.findViewById<ImageView>(R.id.nav_view_header_upicture)
+                            .setImageResource(R.drawable.profile_default_profile_icon)
+                    }
+                }
+
+                is UProfileState.Error -> {
+                    navHeader.findViewById<ImageView>(R.id.nav_view_header_upicture)
+                        .setImageResource(R.drawable.profile_default_profile_icon)
+                }
+            }
         }
 
-//      navHeader.findViewById<TextView>(R.id.nav_view_header_upicture).text = getProfile().pfp <- Default picture temporally
+        userViewmodel.getNavProfile()
 
         navView.addHeaderView(navHeader)
 
