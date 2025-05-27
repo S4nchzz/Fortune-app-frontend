@@ -217,27 +217,12 @@
                     android:textStyle="bold"
                     android:textSize="22dp"
                     android:text="Recent"/>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp">
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/add_person_icon"
-                        android:layout_marginRight="10dp"/>
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/add_person_icon"
-                        android:layout_marginRight="10dp"/>
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/add_person_icon"
-                        android:layout_marginRight="10dp"/>
-            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fast_contacts_rview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
         </LinearLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

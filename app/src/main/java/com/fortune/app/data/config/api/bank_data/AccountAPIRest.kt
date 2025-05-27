@@ -35,5 +35,5 @@ interface AccountAPIRest {
     suspend fun getAccountMovements(@Header("Authorization") token: String): Response<List<CardMovementEntity>>
 
     @GET("/b_operations/account/getFastContacts")
-    suspend fun getFastContacts(token: String): Response<List<FastContactResponse>>
+    suspend fun getFastContacts(@Header("Authorization") token: String): Response<List<FastContactResponse>>
 }

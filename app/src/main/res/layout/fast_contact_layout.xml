@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_layout"
+    android:clickable="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:background="@drawable/shadow_rounded_fast_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:id="@+id/rview_item_pfp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="Pfp"
+            android:clipToOutline="true"
+            android:background="@drawable/img_rounded"/>
+        <TextView
+            android:id="@+id/rview_item_name"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

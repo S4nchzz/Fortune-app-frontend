@@ -39,6 +39,8 @@ import com.fortune.app.domain.state.ProfileImageState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.ui.adapters.cards.CardAdapter
 import com.fortune.app.ui.adapters.cards.CardItem
+import com.fortune.app.ui.adapters.fastContacts.FastContactAdapter
+import com.fortune.app.ui.adapters.fastContacts.FastContactItem
 import com.fortune.app.ui.dialogs.AddMoney_Dialog
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.view.app.AccountActivity
@@ -57,8 +59,6 @@ class MainAppActivity : AppCompatActivity() {
     private lateinit var loadingDialog: AlertDialog
     private var currentAppAmount = 0.0
     private val accountViewModel: Account_ViewModel by viewModels()
-    private var pfpBitmap: Bitmap? = null
-    private var name = ""
 
 
     override fun onResume() {
@@ -231,10 +231,21 @@ class MainAppActivity : AppCompatActivity() {
 
     private fun setFastContacts() {
         val accountViewmodel: Account_ViewModel by viewModels()
-        accountViewmodel.fastContacts.observe(this) { fastContacState ->
-            when(fastContacState) {
+        accountViewmodel.fastContacts.observe(this) { fastContactState ->
+            when(fastContactState) {
                 is FastContactsState.Success -> {
-                    
+                    val contactListItem: MutableList<FastContactItem> = mutableListOf()
+                    fastContactState.contactResponseList.forEach { item ->
+                        contactListItem.add(
+                            FastContactItem(
+                                item.pfp,
+                                item.name,
+                                item.to_id
+                            )
+                        )
+                    }
+
+                    findViewById<RecyclerView>(R.id.fast_contacts_rview).adapter = FastContactAdapter(contactListItem)
                 }
 
                 is FastContactsState.Error -> {}
