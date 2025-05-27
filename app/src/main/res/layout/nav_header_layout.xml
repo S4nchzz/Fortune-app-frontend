@@ -12,6 +12,8 @@
             android:id="@+id/nav_view_header_upicture"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:clipToOutline="true"
+            android:background="@drawable/img_rounded"
             android:layout_marginTop="20dp"
             android:src="@drawable/profile_default_profile_icon"
             android:contentDescription="Profile image"/>
