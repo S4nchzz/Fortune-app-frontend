@@ -12,4 +12,5 @@ interface UProfileAPIRepository {
     suspend fun getProfileToUpdate(s: String): ProfileToUpdateState
     suspend fun updateProfile(s: String, updateProfileRequest: UpdateProfileRequest): DefaultState
     suspend fun getPhone(s: String, userid: Long): UserPhoneState
+    suspend fun getProfileByUserID(s: String, userID: Long): UProfileState?
 }

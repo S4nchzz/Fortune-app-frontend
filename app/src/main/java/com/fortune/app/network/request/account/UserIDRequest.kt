@@ -1,5 +1,5 @@
 package com.fortune.app.network.request.account
 
-data class UserPhoneRequest(
+data class UserIDRequest(
     val userID: Long
 )

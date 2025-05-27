@@ -106,4 +106,14 @@ class User_ViewModel @Inject constructor(
             _fastContactPhone.value = phoneState
         }
     }
+
+    private val _fastContactProfile = MutableLiveData<UProfileState>()
+    val fastContactProfile: LiveData<UProfileState> = _fastContactProfile
+
+    fun getProfileFastContact(userID: Long) {
+        viewModelScope.launch {
+            val fastContactProfile = uProfileAPIRepository.getProfileByUserID("Bearer ${tokenManager.getToken()}", userID)
+            _fastContactProfile.value = fastContactProfile
+        }
+    }
 }

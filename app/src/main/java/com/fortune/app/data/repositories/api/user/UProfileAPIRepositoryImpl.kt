@@ -2,14 +2,12 @@ package com.fortune.app.data.repositories.api.user
 
 import com.fortune.app.data.config.api.user.UProfileAPIRest
 import com.fortune.app.data.mapper.user.UProfileMapper
-import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.repository.api.user.UProfileAPIRepository
 import com.fortune.app.domain.state.DefaultState
-import com.fortune.app.domain.state.ProfileImageState
 import com.fortune.app.domain.state.ProfileToUpdateState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.domain.state.UserPhoneState
-import com.fortune.app.network.request.account.UserPhoneRequest
+import com.fortune.app.network.request.account.UserIDRequest
 import com.fortune.app.network.request.profile.UpdateProfileRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -58,12 +56,24 @@ class UProfileAPIRepositoryImpl @Inject constructor(
 
     override suspend fun getPhone(token: String, userid: Long): UserPhoneState {
         return withContext(Dispatchers.IO) {
-            val response = uProfileAPIService.getPhone(token, UserPhoneRequest(userid))
+            val response = uProfileAPIService.getPhone(token, UserIDRequest(userid))
 
             if (response.code() == 200 && response.body() != null) {
                 UserPhoneState.Success(response.body()!!.phone)
             } else {
                 UserPhoneState.Error
+            }
+        }
+    }
+
+    override suspend fun getProfileByUserID(token: String, userID: Long): UProfileState {
+        return withContext(Dispatchers.IO) {
+            val response = uProfileAPIService.getProfileByUserID(token, UserIDRequest(userID))
+
+            if (response.code() == 200 && response.body() != null) {
+                UProfileState.Success(UProfileMapper.mapToDomain(response.body()!!))
+            } else {
+                UProfileState.Error
             }
         }
     }

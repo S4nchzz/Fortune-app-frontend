@@ -56,6 +56,7 @@ class FastContactAdapter(
             val context = holder.layout.context
             val openFastContactOperate = Intent(context, FastContactOperate::class.java)
             openFastContactOperate.putExtra("to_id", fastContactList[position].to_id)
+
             context.startActivity(openFastContactOperate)
         }
     }

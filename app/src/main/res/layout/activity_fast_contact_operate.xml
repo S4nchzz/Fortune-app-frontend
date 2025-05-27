@@ -45,8 +45,8 @@
         android:layout_gravity="center">
         <ImageView
             android:id="@+id/fast_contact_pfp"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
             android:layout_gravity="center"
             android:background="@drawable/img_rounded"
             android:clipToOutline="true"
