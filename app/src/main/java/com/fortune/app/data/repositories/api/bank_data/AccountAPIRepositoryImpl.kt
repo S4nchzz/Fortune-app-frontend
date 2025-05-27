@@ -9,9 +9,11 @@ import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.FastContactsState
 import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.PaymentSimulationState
 import com.fortune.app.network.request.movement.SimulatePaymentRequest
+import com.fortune.app.network.response.account.FastContactResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -94,6 +96,24 @@ class AccountAPIRepositoryImpl @Inject constructor(
                 MovementState.Success(accountMovementModel)
             } else {
                 MovementState.Error
+            }
+        }
+    }
+
+    override suspend fun getFastContacts(token: String): FastContactsState {
+        return withContext(Dispatchers.IO) {
+            val response = accountAPIService.getFastContacts(token)
+
+            if (response.code() == 200 && response.body() != null) {
+                var fastContactList: List<FastContactResponse>? = response.body()
+
+                if (fastContactList == null) {
+                    fastContactList = listOf()
+                }
+
+                FastContactsState.Success(fastContactList)
+            } else {
+                FastContactsState.Error
             }
         }
     }

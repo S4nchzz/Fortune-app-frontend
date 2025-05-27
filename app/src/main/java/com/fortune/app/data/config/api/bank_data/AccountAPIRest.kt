@@ -6,6 +6,7 @@ import com.fortune.app.data.entities.bank_data.CardMovementEntity
 import com.fortune.app.network.request.movement.SimulatePaymentRequest
 import com.fortune.app.network.response.account.AccountBalanceResponse
 import com.fortune.app.network.response.account.AccountDataResponse
+import com.fortune.app.network.response.account.FastContactResponse
 import com.fortune.app.network.response.account.PaymentSimulationResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -32,4 +33,7 @@ interface AccountAPIRest {
 
     @GET("/b_operations/account/getAccountMovements")
     suspend fun getAccountMovements(@Header("Authorization") token: String): Response<List<CardMovementEntity>>
+
+    @GET("/b_operations/account/getFastContacts")
+    suspend fun getFastContacts(token: String): Response<List<FastContactResponse>>
 }

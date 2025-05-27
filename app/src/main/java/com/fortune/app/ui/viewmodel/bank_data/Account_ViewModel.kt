@@ -11,6 +11,7 @@ import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.FastContactsState
 import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.PaymentSimulationState
 import com.fortune.app.network.response.account.AccountDataResponse
@@ -82,6 +83,16 @@ class Account_ViewModel @Inject constructor(
         viewModelScope.launch {
             val responseState = accountAPIRepositoryImpl.getAccountMovements("Bearer ${tokenManager.getToken()}")
             _accountMovement.value = responseState
+        }
+    }
+
+    private val _fastContacts = MutableLiveData<FastContactsState>()
+    val fastContacts: LiveData<FastContactsState> = _fastContacts
+
+    fun getFastContacts() {
+        viewModelScope.launch {
+            val fastContacState = accountAPIRepositoryImpl.getFastContacts("Bearer ${tokenManager.getToken()}")
+            _fastContacts.value = fastContacState
         }
     }
 }

@@ -34,6 +34,7 @@ import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.CardState
+import com.fortune.app.domain.state.FastContactsState
 import com.fortune.app.domain.state.ProfileImageState
 import com.fortune.app.domain.state.UProfileState
 import com.fortune.app.ui.adapters.cards.CardAdapter
@@ -98,7 +99,7 @@ class MainAppActivity : AppCompatActivity() {
         setProfile()
         setAccountBalance()
         setCards()
-
+        setFastContacts()
         loadingDialog.dismiss()
     }
 
@@ -226,6 +227,21 @@ class MainAppActivity : AppCompatActivity() {
         }
 
         userViewModel.getProfile()
+    }
+
+    private fun setFastContacts() {
+        val accountViewmodel: Account_ViewModel by viewModels()
+        accountViewmodel.fastContacts.observe(this) { fastContacState ->
+            when(fastContacState) {
+                is FastContactsState.Success -> {
+                    
+                }
+
+                is FastContactsState.Error -> {}
+            }
+        }
+
+        accountViewmodel.getFastContacts()
     }
 
     private fun slideMenuConfiguration() {

@@ -4,6 +4,7 @@ import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.AccountDataState
 import com.fortune.app.domain.state.AccountState
 import com.fortune.app.domain.state.DefaultState
+import com.fortune.app.domain.state.FastContactsState
 import com.fortune.app.domain.state.MovementState
 import com.fortune.app.domain.state.PaymentSimulationState
 import com.fortune.app.network.response.account.AccountBalanceResponse
@@ -17,4 +18,5 @@ interface AccountApiRepository {
     suspend fun getAccountBalance(token: String): AccountBalanceState
     suspend fun getAccountData(s: String): AccountDataState
     suspend fun getAccountMovements(s: String): MovementState
+    suspend fun getFastContacts(s: String): FastContactsState
 }
