@@ -14,6 +14,7 @@ import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.domain.state.ProfileImageState
 import com.fortune.app.domain.state.ProfileToUpdateState
 import com.fortune.app.domain.state.UProfileState
+import com.fortune.app.domain.state.UserPhoneState
 import com.fortune.app.network.request.profile.UpdateProfileRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -93,6 +94,16 @@ class User_ViewModel @Inject constructor(
         viewModelScope.launch {
             val updated = uProfileAPIRepository.updateProfile("Bearer ${tokenManager.getToken()}", UpdateProfileRequest(name, address, identityDocument, email, phone))
             _profileUpdated.value = updated
+        }
+    }
+
+    private val _fastContactPhone = MutableLiveData<UserPhoneState>()
+    val fastContactPhone: LiveData<UserPhoneState> = _fastContactPhone
+
+    fun getUserPhone(userid: Long) {
+        viewModelScope.launch {
+            val phoneState = uProfileAPIRepository.getPhone("Bearer ${tokenManager.getToken()}", userid)
+            _fastContactPhone.value = phoneState
         }
     }
 }

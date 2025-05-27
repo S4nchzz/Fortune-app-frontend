@@ -1,5 +1,6 @@
 package com.fortune.app.ui.adapters.fastContacts
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.R
+import com.fortune.app.ui.view.app.FastContactOperate
 
 
 class FastContactAdapter(
@@ -51,7 +53,10 @@ class FastContactAdapter(
         holder.name.text = fastContactList[position].name
 
         holder.layout.setOnClickListener {
-            // TODO: Open view to make operation
+            val context = holder.layout.context
+            val openFastContactOperate = Intent(context, FastContactOperate::class.java)
+            openFastContactOperate.putExtra("to_id", fastContactList[position].to_id)
+            context.startActivity(openFastContactOperate)
         }
     }
 

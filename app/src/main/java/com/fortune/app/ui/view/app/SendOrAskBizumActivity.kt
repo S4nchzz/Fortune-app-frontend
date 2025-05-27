@@ -18,9 +18,11 @@ import androidx.core.widget.addTextChangedListener
 import com.fortune.app.R
 import com.fortune.app.domain.state.AccountBalanceState
 import com.fortune.app.domain.state.BizumState
+import com.fortune.app.domain.state.UserPhoneState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
+import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,8 +40,36 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
         this.isAsking = intent.getBooleanExtra("ask", false)
 
+        manageIfFastOperation(intent.getBooleanExtra("fast_operation", false))
+
         getCurrentBalance{ accountBalance ->
             manageButtonLogic(accountBalance)
+        }
+    }
+
+    private fun manageIfFastOperation(fastOperation: Boolean) {
+        val userViewmodel: User_ViewModel by viewModels()
+        userViewmodel.fastContactPhone.observe(this) { phoneState ->
+            when (phoneState) {
+                is UserPhoneState.Success -> {
+                    val phoneField = findViewById<EditText>(R.id.phone_field)
+                    phoneField.setText(phoneState.phone)
+                    phoneField.isEnabled = false
+
+                    val sendButton = findViewById<Button>(R.id.send_money_bizum)
+                    sendButton.isEnabled = true
+                }
+
+                is UserPhoneState.Error -> {
+                    SuccessOrFail_Dialog(true, "No se ha podido obtener datos requeridos del usuario elegido."){
+                        finish()
+                    }.show(supportFragmentManager, "Phone state error")
+                }
+            }
+        }
+
+        if (fastOperation) {
+            userViewmodel.getUserPhone(intent.getLongExtra("to_id", -1))
         }
     }
 
