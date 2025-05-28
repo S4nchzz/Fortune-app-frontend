@@ -31,30 +31,30 @@ class SecurityActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.go_back).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-        
+
         manageSecurityButton()
     }
 
     private fun manageSecurityButton() {
         val navigationView = findViewById<NavigationView>(R.id.security_navigation_view)
+        cardViewmodel.addNewCard.observe(this) { defaultState ->
+            when(defaultState) {
+                is DefaultState.Success -> {
+                    SuccessOrFail_Dialog(false, "Se ha creado la tarjeta correctamente.").show(supportFragmentManager, "Card creation")
+                    loadingDialog.dismiss()
+                }
+
+                is DefaultState.Error -> {
+                    SuccessOrFail_Dialog(true, "Hubo un problema al crear la tarjeta.").show(supportFragmentManager, "Card creation")
+                    loadingDialog.dismiss()
+                }
+            }
+        }
+
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.add_card -> {
                     loadDialog()
-                    cardViewmodel.addNewCard.observe(this) { defaultState ->
-                        when(defaultState) {
-                            is DefaultState.Success -> {
-                                SuccessOrFail_Dialog(false, "Se ha creado la tarjeta correctamente.").show(supportFragmentManager, "Card creation")
-                                loadingDialog.dismiss()
-                            }
-
-                            is DefaultState.Error -> {
-                                SuccessOrFail_Dialog(true, "Hubo un problema al crear la tarjeta.").show(supportFragmentManager, "Card creation")
-                                loadingDialog.dismiss()
-                            }
-                        }
-                    }
-
                     cardViewmodel.addCard()
                     true
                 }
