@@ -7,6 +7,7 @@ import android.text.Editable
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -44,6 +45,10 @@ class SendOrAskBizumActivity : AppCompatActivity() {
 
         getCurrentBalance{ accountBalance ->
             manageButtonLogic(accountBalance)
+        }
+
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

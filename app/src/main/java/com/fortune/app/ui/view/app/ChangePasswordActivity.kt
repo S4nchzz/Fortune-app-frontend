@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,10 @@ class ChangePasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_change_password)
         adjustScreenInsets()
 
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        
         manageChangeEvents()
     }
 

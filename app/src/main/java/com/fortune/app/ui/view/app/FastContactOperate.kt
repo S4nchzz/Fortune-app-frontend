@@ -24,6 +24,10 @@ class FastContactOperate : AppCompatActivity() {
         setContentView(R.layout.activity_fast_contact_operate)
         adjustScreenInsets()
 
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        
         setupBasicInfo()
         manageActionButtons()
     }

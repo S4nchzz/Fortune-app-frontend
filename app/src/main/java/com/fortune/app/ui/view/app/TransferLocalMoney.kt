@@ -3,6 +3,7 @@ package com.fortune.app.ui.view.app
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -35,6 +36,10 @@ class TransferLocalMoney : AppCompatActivity() {
         setContentView(R.layout.activity_transfer_local_money)
         adjustScreenInsets()
 
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        
         configRview()
         manageButtonLogic()
     }

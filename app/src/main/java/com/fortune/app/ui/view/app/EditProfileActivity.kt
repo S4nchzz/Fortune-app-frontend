@@ -29,6 +29,10 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_profile)
         adjustScreenInsets()
 
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        
         configureFields()
         manageSendData()
     }

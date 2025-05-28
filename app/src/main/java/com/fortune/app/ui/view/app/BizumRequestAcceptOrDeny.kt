@@ -2,6 +2,7 @@ package com.fortune.app.ui.view.app
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -27,6 +28,10 @@ class BizumRequestAcceptOrDeny : AppCompatActivity() {
         setContentView(R.layout.activity_bizum_request_accept_or_deny)
         adjustScreenInsets()
 
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        
         val bizumID = intent.getIntExtra("bizumID", 0)
         val date = intent.getStringExtra("date")
         val from = intent.getStringExtra("from")

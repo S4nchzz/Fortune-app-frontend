@@ -48,6 +48,10 @@ class CardDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_card_detail)
         adjustScreenInsets()
 
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        
         loadCardData()
         rViewAdapterConfig()
     }

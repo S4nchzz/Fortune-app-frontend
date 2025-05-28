@@ -2,6 +2,7 @@ package com.fortune.app.ui.view.app
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -27,6 +28,10 @@ class BizumActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_bizum)
         adjustScreenInsets()
+
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         bizumRView()
         requestBizumRview()

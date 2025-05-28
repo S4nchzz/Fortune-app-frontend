@@ -1,6 +1,7 @@
 package com.fortune.app.ui.view.app
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -28,6 +29,10 @@ class AccountActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_account)
         adjustScreenInsets()
+
+        findViewById<ImageView>(R.id.go_back).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         requestAccountData()
         loadRViewData()

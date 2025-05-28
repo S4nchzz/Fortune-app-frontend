@@ -31,8 +31,7 @@ class SecurityActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.go_back).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-
-
+        
         manageSecurityButton()
     }
 

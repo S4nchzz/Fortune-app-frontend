@@ -24,6 +24,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
+                        android:layout_marginTop="16dp"
                         android:layout_height="wrap_content"
                         android:padding="16dp">
 
@@ -34,13 +35,6 @@
                             android:src="@drawable/go_back_arrow"
                             android:contentDescription="Go back"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/menu_trigger_icon"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
