@@ -69,7 +69,7 @@ class UProfileActivity : AppCompatActivity() {
         val authViewmodel: Auth_ViewModel by viewModels()
 
         val imageDrawable: Drawable? = if (!imageChoose) {
-            null
+            ContextCompat.getDrawable(this, R.drawable.profile_default_profile_icon)
         } else {
             imageButton.drawable
         }
