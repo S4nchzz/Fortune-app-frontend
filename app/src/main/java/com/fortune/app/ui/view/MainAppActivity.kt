@@ -18,6 +18,7 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -85,6 +86,8 @@ class MainAppActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.balance_info).setOnClickListener {
             it.performLongClick() // Simulate long click
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {override fun handleOnBackPressed() {}})
 
         findViewById<ImageView>(R.id.open_profile).setOnClickListener{
             val openProfile = Intent(this@MainAppActivity, EditProfileActivity::class.java)
@@ -395,9 +398,5 @@ class MainAppActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-
-    override fun onBackPressed() {
-
     }
 }
