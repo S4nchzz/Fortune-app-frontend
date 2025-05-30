@@ -30,6 +30,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.fortune.app.MainActivity
 import com.fortune.app.R
+import com.fortune.app.data.secure.TokenManager
 import com.fortune.app.domain.model.bank_data.CardModel
 import com.fortune.app.domain.model.user.UProfileModel
 import com.fortune.app.domain.state.AccountBalanceState
@@ -331,6 +332,15 @@ class MainAppActivity : AppCompatActivity() {
                     startActivity(openSecurity)
                     true
                 }
+                R.id.logout_lm -> {
+                    val openDefault = Intent(this@MainAppActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(openDefault)
+
+
+                    true
+                }
 
                 else -> {
                     false
@@ -360,6 +370,13 @@ class MainAppActivity : AppCompatActivity() {
                     bottomNavigationView.selectedItemId = R.id.home_bm
                     val openSec = Intent(this@MainAppActivity, SecurityActivity::class.java)
                     startActivity(openSec)
+                    true
+                }
+                R.id.logout_bm -> {
+                    val openDefault = Intent(this@MainAppActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(openDefault)
                     true
                 }
                 else -> false

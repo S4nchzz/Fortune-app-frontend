@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/home_menu" android:checked="true" android:title="Home" android:icon="@drawable/home_icon"/>
-    <item android:id="@+id/personal_data" android:title="Perfil" android:icon="@drawable/profile_icon"/>
-    <item android:id="@+id/app_config" android:title="App Config" android:icon="@drawable/config_icon"/>
-    <item android:id="@+id/security" android:title="Seguridad" android:icon="@drawable/security_config_icon"/>
+    <item android:id="@+id/personal_data" android:title="@string/perfil" android:icon="@drawable/profile_icon"/>
+    <item android:id="@+id/app_config" android:title="@string/app_config" android:icon="@drawable/config_icon"/>
+    <item android:id="@+id/security" android:title="@string/seguridad" android:icon="@drawable/security_config_icon"/>
+    <item android:id="@+id/logout_lm" android:title="@string/cerrar_sesi_n" android:icon="@drawable/logout_icon"/>
 </menu>
