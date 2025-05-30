@@ -15,7 +15,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:src="@drawable/logo_slogan"
-            android:contentDescription="Logo con slogan"/>
+            android:contentDescription="@string/logo_con_slogan"/>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="5dp"
-                android:text="Log in"
+                android:text="@string/log_in"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -43,7 +43,7 @@
                 android:layout_width="320dp"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"

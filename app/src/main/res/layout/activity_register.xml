@@ -14,14 +14,14 @@
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            android:contentDescription="Go back"
+            android:contentDescription="@string/go_back"
             android:src="@drawable/icon_go_back"
             android:backgroundTint="@color/transparent" />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¡Hola! Regístrate para comenzar."
+            android:text="@string/hola_reg_strate_para_comenzar"
             android:textColor="@color/white"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
@@ -48,7 +48,7 @@
                     android:id="@+id/register_data_identityDocument"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="DNI/NIE"
+                    android:hint="@string/dni_nie"
                     android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +61,7 @@
                     android:id="@+id/register_data_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,7 +76,7 @@
                     android:id="@+id/register_data_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +90,7 @@
                     android:id="@+id/register_data_confirm_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm password"
+                    android:hint="@string/confirm_password"
                     android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +98,7 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -115,14 +115,14 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Ya tienes una cuenta?"
+                android:text="@string/ya_tienes_una_cuenta"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
         <TextView
                 android:id="@+id/span_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Inicia sesión"
+                android:text="@string/inicia_sesi_n"
                 android:textColor="@color/blue"
                 android:textSize="16sp"
                 android:layout_marginStart="5dp"/>

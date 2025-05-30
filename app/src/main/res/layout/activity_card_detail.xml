@@ -18,7 +18,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/go_back_arrow"
-            android:contentDescription="Go back"
+            android:contentDescription="@string/go_back_4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -58,7 +58,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="45dp"
                                 android:layout_marginTop="10dp"
-                                android:text="Balance"
+                                android:text="@string/balance"
                                 android:textSize="18sp" />
 
                         <TextView
@@ -77,7 +77,7 @@
                             android:layout_width="140dp"
                             android:layout_height="45dp"
                             android:layout_marginEnd="45dp"
-                            android:text="Simular pago"
+                            android:text="@string/simular_pago"
                             android:backgroundTint="@color/button_black_background_true"
                             android:textColor="@color/white"
                             app:cornerRadius="10dp"/>
@@ -97,7 +97,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/closed_eye"
-                            android:contentDescription="Consultar PIN"
+                            android:contentDescription="@string/consultar_pin"
                             android:scaleType="centerInside"
                             android:padding="15dp"
                             android:background="@drawable/button_hover_animation"/>
@@ -107,7 +107,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/lock"
-                            android:contentDescription="Cargar tarjeta"
+                            android:contentDescription="@string/cargar_tarjeta"
                             android:scaleType="centerInside"
                             android:padding="16dp"
                             android:background="@drawable/button_hover_animation"/>
@@ -116,7 +116,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/transfer_icon"
-                            android:contentDescription="Bloquear tarjeta"
+                            android:contentDescription="@string/bloquear_tarjeta"
                             android:scaleType="centerInside"
                             android:padding="15dp"
                             android:background="@drawable/button_hover_animation"/>
@@ -126,7 +126,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/cvv_icon"
-                            android:contentDescription="Ver cvv"
+                            android:contentDescription="@string/ver_cvv"
                             android:scaleType="centerInside"
                             android:padding="15dp"
                             android:background="@drawable/button_hover_animation"/>
@@ -139,7 +139,7 @@
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:layout_marginStart="20dp"
-                        android:text="Movimientos"
+                        android:text="@string/movimientos"
                         android:textSize="22dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView

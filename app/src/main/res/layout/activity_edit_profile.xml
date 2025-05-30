@@ -18,7 +18,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/go_back_arrow"
-            android:contentDescription="Go back"
+            android:contentDescription="@string/go_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp"
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/disabled0"
-            android:text="Datos personales"
+            android:text="@string/datos_personales"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre"
+                android:text="@string/nombre"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +91,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dirección"
+                android:text="@string/direcci_n"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -110,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="NIF"
+                android:text="@string/nif"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -129,7 +129,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/email"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -148,7 +148,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telefono"
+                android:text="@string/telefono"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <com.google.android.material.textfield.TextInputLayout
@@ -170,7 +170,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="@color/white"
-                android:text="Guardar"
+                android:text="@string/guardar"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />

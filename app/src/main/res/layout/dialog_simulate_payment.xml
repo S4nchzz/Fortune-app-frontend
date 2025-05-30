@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="32sp"
-            android:text="Simular pago"
+            android:text="@string/simular_pago"
             android:textColor="@color/disabled1"
             android:textStyle="bold"
             android:gravity="center"
@@ -31,7 +31,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:hint="Entidad receptora">
+            android:hint="@string/entidad_receptora">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/receptor_entity_field"
@@ -50,7 +50,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:hint="0,00 €">
+            android:hint="@string/_0_00_e">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/amount_field"
@@ -69,7 +69,7 @@
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
             android:textStyle="bold"
-            android:text="Pagar"
+            android:text="@string/pagar"
             android:textColor="@color/black"
             android:textSize="18sp"/>
 </LinearLayout>

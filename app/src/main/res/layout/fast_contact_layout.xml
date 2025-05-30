@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:background="@drawable/shadow_rounded_fast_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Accepted"
+            android:text="@string/accepted"
             android:textSize="12sp"
             android:textColor="@color/disabled1"/>
     </LinearLayout>

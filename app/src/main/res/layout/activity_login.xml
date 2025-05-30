@@ -21,7 +21,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¡Hola! Nos alegra verte de nuevo"
+            android:text="@string/hola_nos_alegra_verte_de_nuevo"
             android:textColor="@color/white"
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
@@ -43,7 +43,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:hint="DNI/NIE">
+                android:hint="@string/dni_nie">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/login_data_dniNie"
@@ -60,7 +60,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 app:passwordToggleTint="@color/disabled2"
-                android:hint="Password"
+                android:hint="@string/password"
 
                 app:passwordToggleEnabled="true">
 
@@ -79,7 +79,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/white"
-                android:text="Log in"
+                android:text="@string/log_in"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -93,14 +93,14 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¿Aún no tienes cuenta?"
+                android:text="@string/a_n_no_tienes_cuenta"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
         <TextView
                 android:id="@+id/span_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registrate"
+                android:text="@string/registrate"
                 android:textColor="@color/blue"
                 android:textSize="16sp"
                 android:layout_marginStart="5dp"/>

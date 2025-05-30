@@ -71,14 +71,14 @@
                         android:textColor="@color/disabled0"
                         android:layout_marginEnd="5dp"
                         android:textSize="16dp"
-                        android:text="Total Balance"/>
+                        android:text="@string/total_balance"/>
 
                 <ImageView
                         android:id="@+id/balance_info"
                         android:layout_width="23dp"
                         android:layout_height="23dp"
                         android:tooltipText="Para cambiar el balance pulse en el boton 'Añadir €'."
-                        android:contentDescription="Balance info"
+                        android:contentDescription="@string/balance_info"
                         android:src="@drawable/info"/>
             </LinearLayout>
             <TextView
@@ -109,14 +109,14 @@
                         android:layout_height="60dp"
                         android:padding="20dp"
                         android:src="@drawable/plus_icon"
-                        android:contentDescription="Añadir dinero"
+                        android:contentDescription="@string/a_adir_dinero"
                         android:scaleType="centerInside"
                         android:background="@drawable/button_hover_animation"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="Añadir €"/>
+                        android:text="@string/a_adir"/>
             </LinearLayout>
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                         android:layout_height="60dp"
                         android:padding="18dp"
                         android:src="@drawable/bizum_logo"
-                        android:contentDescription="Hacer bizum"
+                        android:contentDescription="@string/hacer_bizum"
                         android:scaleType="centerInside"
                         android:background="@drawable/button_hover_animation">
                 </ImageButton>
@@ -154,14 +154,14 @@
                         android:layout_height="60dp"
                         android:padding="19dp"
                         android:src="@drawable/config_icon"
-                        android:contentDescription="Config"
+                        android:contentDescription="@string/config"
                         android:scaleType="centerInside"
                         android:background="@drawable/button_hover_animation"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="Config"/>
+                        android:text="@string/config"/>
             </LinearLayout>
 
             <LinearLayout
@@ -175,7 +175,7 @@
                         android:layout_height="60dp"
                         android:src="@drawable/security_config_icon"
                         android:padding="16dp"
-                        android:contentDescription="Seguridad"
+                        android:contentDescription="@string/seguridad"
                         android:scaleType="centerInside"
                         android:background="@drawable/button_hover_animation">
                 </ImageButton>
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:text="My Cards"
+                    android:text="@string/my_cards"
                     android:textSize="22dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -225,7 +225,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="22dp"
-                    android:text="Recent"/>
+                    android:text="@string/recent"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fast_contacts_rview"
                 android:layout_width="match_parent"

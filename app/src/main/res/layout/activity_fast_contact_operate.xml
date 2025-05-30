@@ -19,7 +19,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/go_back_arrow"
-            android:contentDescription="Go back"
+            android:contentDescription="@string/go_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="16dp"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/disabled0"
-            android:text="Contacto reciente"
+            android:text="@string/contacto_reciente"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
             android:layout_gravity="center"
             android:background="@drawable/img_rounded"
             android:clipToOutline="true"
-            android:contentDescription="PfpFastContact"/>
+            android:contentDescription="@string/pfpfastcontact"/>
 
         <TextView
             android:id="@+id/fast_contact_name"
@@ -75,7 +75,7 @@
             android:paddingBottom="20dp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:text="Acceso rapido"
+            android:text="@string/acceso_rapido"
             android:textSize="22dp"/>
 
         <LinearLayout
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/out_bizum"
                 android:padding="18dp"
-                android:contentDescription="Out bizum"/>
+                android:contentDescription="@string/out_bizum"/>
 
             <LinearLayout
                 android:clickable="false"
@@ -106,14 +106,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enviar dinero"
+                    android:text="@string/enviar_dinero"
                     android:textColor="@color/white"
                     android:textSize="20dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Envio de dinero a un movil"
+                    android:text="@string/envio_de_dinero_a_un_movil"
                     android:textColor="@color/disabled1"
                     android:textSize="15dp"/>
             </LinearLayout>
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/open_item_arrow_right"
-                android:contentDescription="Open item"
+                android:contentDescription="@string/open_item"
                 android:scaleType="fitCenter"
                 android:padding="25dp"/>
         </LinearLayout>
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/in_bizum"
                 android:padding="18dp"
-                android:contentDescription="In bizum"/>
+                android:contentDescription="@string/in_bizum"/>
 
             <LinearLayout
                 android:clickable="false"
@@ -156,14 +156,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Solicitar dinero"
+                    android:text="@string/solicitar_dinero"
                     android:textColor="@color/white"
                     android:textSize="20dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Solicitar dinero a un movil"
+                    android:text="@string/solicitar_dinero_a_un_movil"
                     android:textColor="@color/disabled1"
                     android:textSize="15dp"/>
             </LinearLayout>
@@ -174,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/open_item_arrow_right"
-                android:contentDescription="Open item"
+                android:contentDescription="@string/open_item"
                 android:scaleType="fitCenter"
                 android:padding="25dp"/>
         </LinearLayout>

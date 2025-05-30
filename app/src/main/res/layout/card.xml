@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="Balance"
+                android:text="@string/balance"
                 android:textSize="18dp"
                 android:fontFamily="sans-serif-light" />
 
@@ -70,7 +70,7 @@
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"
-                android:contentDescription="Master card logo"
+                android:contentDescription="@string/master_card_logo"
                 android:src="@drawable/master_card_logo"/>
     </LinearLayout>
 
