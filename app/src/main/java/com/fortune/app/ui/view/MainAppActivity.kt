@@ -57,6 +57,8 @@ import com.fortune.app.ui.viewmodel.user.User_ViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainAppActivity : AppCompatActivity() {
@@ -177,7 +179,11 @@ class MainAppActivity : AppCompatActivity() {
 
     private fun setAccountBalance() {
         getAccountBalance { balance ->
-            findViewById<TextView>(R.id.account_total_balance).text = "${balance} €"
+            val formattedBalance = NumberFormat.getCurrencyInstance(Locale("es", "ES"))
+                .format(balance)
+                .replace("€", " €")
+
+            findViewById<TextView>(R.id.account_total_balance).text = formattedBalance
             currentAppAmount = balance
         }
     }

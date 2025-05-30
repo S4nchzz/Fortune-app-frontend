@@ -50,6 +50,7 @@
             android:layout_gravity="center"
             android:background="@drawable/img_rounded"
             android:clipToOutline="true"
+            android:scaleType="centerCrop"
             android:contentDescription="@string/pfpfastcontact"/>
 
         <TextView

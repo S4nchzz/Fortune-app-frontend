@@ -14,6 +14,7 @@
             android:id="@+id/rview_item_pfp"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:scaleType="centerCrop"
             android:contentDescription="Pfp"
             android:clipToOutline="true"
             android:background="@drawable/img_rounded"/>

@@ -33,7 +33,7 @@ class FastContactAdapter(
     override fun onBindViewHolder(holder: FastContactViewHolder, position: Int) {
         val base64Image = fastContactList[position].pfp
 
-        if (!base64Image.isNullOrBlank()) {
+        if (base64Image.isNotBlank()) {
             try {
                 val cleanBase64 = if (base64Image.contains(",")) {
                     base64Image.substringAfter(",")
