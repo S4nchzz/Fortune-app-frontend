@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -362,8 +363,6 @@ class MainAppActivity : AppCompatActivity() {
                     true
                 }
                 R.id.home_bm -> {
-                    val openMain = Intent(this@MainAppActivity, MainAppActivity::class.java)
-                    startActivity(openMain)
                     true
                 }
                 R.id.security_bm -> {
@@ -373,6 +372,7 @@ class MainAppActivity : AppCompatActivity() {
                     true
                 }
                 R.id.logout_bm -> {
+                    bottomNavigationView.selectedItemId = R.id.home_bm
                     val openDefault = Intent(this@MainAppActivity, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
@@ -395,5 +395,9 @@ class MainAppActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    override fun onBackPressed() {
+
     }
 }

@@ -10,13 +10,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.fortune.app.MainActivity
 import com.fortune.app.R
 import com.fortune.app.domain.state.MyBizumsState
 import com.fortune.app.domain.state.RequestedBizumState
 import com.fortune.app.ui.adapters.bizums.BizumItem
 import com.fortune.app.ui.adapters.cards.BizumAdapter
 import com.fortune.app.ui.adapters.cards.RequestedBizumAdapter
+import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.ui.viewmodel.bizum.Bizum_ViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,6 +39,7 @@ class BizumActivity : AppCompatActivity() {
         bizumRView()
         requestBizumRview()
         manageSendOrRequestBizum()
+        manageBottomNavigation()
     }
 
     private fun bizumRView() {
@@ -117,6 +121,37 @@ class BizumActivity : AppCompatActivity() {
             val openSend = Intent(this@BizumActivity, SendOrAskBizumActivity::class.java)
             openSend.putExtra("ask", true)
             startActivity(openSend)
+        }
+    }
+
+    private fun manageBottomNavigation() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView.selectedItemId = R.id.bizum_bm
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bizum_bm -> {
+                    true
+                }
+                R.id.home_bm -> {
+                    val openMain = Intent(this@BizumActivity, MainAppActivity::class.java)
+                    startActivity(openMain)
+                    true
+                }
+                R.id.security_bm -> {
+                    val openSec = Intent(this@BizumActivity, SecurityActivity::class.java)
+                    startActivity(openSec)
+                    true
+                }
+                R.id.logout_bm -> {
+                    val openDefault = Intent(this@BizumActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(openDefault)
+                    true
+                }
+                else -> false
+            }
         }
     }
 

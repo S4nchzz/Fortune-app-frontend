@@ -206,7 +206,13 @@
             </LinearLayout>
         </LinearLayout>
         </ScrollView>
-        </LinearLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.App.BottomNavigationView"
+            app:menu="@menu/bottom_menu"/>
+    </LinearLayout>
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_gravity="end"

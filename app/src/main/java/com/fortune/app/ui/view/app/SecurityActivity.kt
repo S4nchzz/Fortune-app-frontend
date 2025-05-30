@@ -11,10 +11,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.fortune.app.MainActivity
 import com.fortune.app.R
 import com.fortune.app.domain.state.DefaultState
 import com.fortune.app.ui.dialogs.SuccessOrFail_Dialog
+import com.fortune.app.ui.view.MainAppActivity
 import com.fortune.app.ui.viewmodel.bank_data.Card_ViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +36,7 @@ class SecurityActivity : AppCompatActivity() {
         }
 
         manageSecurityButton()
+        manageBottomNavigation()
     }
 
     private fun manageSecurityButton() {
@@ -83,6 +87,37 @@ class SecurityActivity : AppCompatActivity() {
         loadingDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loadingDialog.setCancelable(false)
         loadingDialog.show()
+    }
+
+    private fun manageBottomNavigation() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView.selectedItemId = R.id.security_bm
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bizum_bm -> {
+                    val openBizum = Intent(this@SecurityActivity, BizumActivity::class.java)
+                    startActivity(openBizum)
+                    true
+                }
+                R.id.home_bm -> {
+                    val openMain = Intent(this@SecurityActivity, MainAppActivity::class.java)
+                    startActivity(openMain)
+                    true
+                }
+                R.id.security_bm -> {
+                    true
+                }
+                R.id.logout_bm -> {
+                    val openDefault = Intent(this@SecurityActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(openDefault)
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun adjustScreenInsets() {
