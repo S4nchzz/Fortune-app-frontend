@@ -47,6 +47,8 @@
                     android:backgroundTint="@color/transparent"
                     android:id="@+id/slide_menu_button"
                     android:layout_width="30dp"
+                    android:scaleType="fitCenter"
+                    android:padding="1dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="20dp"
                     android:src="@drawable/menu_trigger_icon"/>
@@ -105,6 +107,7 @@
                         android:id="@+id/add_money"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:padding="20dp"
                         android:src="@drawable/plus_icon"
                         android:contentDescription="Añadir dinero"
                         android:scaleType="centerInside"
@@ -126,6 +129,7 @@
                         android:id="@+id/make_bizum"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:padding="18dp"
                         android:src="@drawable/bizum_logo"
                         android:contentDescription="Hacer bizum"
                         android:scaleType="centerInside"
@@ -148,6 +152,7 @@
                         android:id="@+id/config"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:padding="19dp"
                         android:src="@drawable/config_icon"
                         android:contentDescription="Config"
                         android:scaleType="centerInside"
@@ -165,11 +170,12 @@
                     android:orientation="vertical"
                     android:gravity="center">
                 <ImageButton
-                        android:id="@+id/more"
+                        android:id="@+id/security"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/more_icon"
-                        android:contentDescription="More"
+                        android:src="@drawable/security_config_icon"
+                        android:padding="16dp"
+                        android:contentDescription="Seguridad"
                         android:scaleType="centerInside"
                         android:background="@drawable/button_hover_animation">
                 </ImageButton>
@@ -177,7 +183,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:text="Más"/>
+                        android:text="Seguridad"/>
             </LinearLayout>
         </LinearLayout>
 

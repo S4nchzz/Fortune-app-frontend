@@ -158,6 +158,7 @@
                 app:menu="@menu/bottom_menu"/>
     </LinearLayout>
 
+
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_gravity="end"

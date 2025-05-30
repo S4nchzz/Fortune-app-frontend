@@ -131,8 +131,9 @@ class MainAppActivity : AppCompatActivity() {
             startActivity(openBizum)
         }
 
-        findViewById<ImageButton>(R.id.more).setOnClickListener {
-            Toast.makeText(this, "More", Toast.LENGTH_SHORT).show()
+        findViewById<ImageButton>(R.id.security).setOnClickListener {
+            val openSecurity = Intent(this@MainAppActivity, SecurityActivity::class.java)
+            startActivity(openSecurity)
         }
 
         findViewById<ImageButton>(R.id.config).setOnClickListener {
