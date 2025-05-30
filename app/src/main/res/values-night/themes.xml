@@ -1,9 +1,31 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.Fortune" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
+        <!-- Fondo general -->
         <item name="android:windowBackground">@color/app</item>
+
+        <!-- Colores de texto por defecto -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/placeholder_text</item>
+        <item name="android:textColorHint">@color/placeholder_text</item>
+        <item name="hintTextColor">@color/placeholder_text</item>
+
+        <!-- Opcional para MaterialComponents -->
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorSurface">@color/app</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorSecondary">@color/placeholder_text</item>
+
+        <!-- Estilo general para EditText -->
+        <item name="editTextStyle">@style/Widget.Fortune.EditText</item>
     </style>
 
     <style name="Theme.Fortune" parent="Base.Theme.Fortune" />
+
+    <!-- Estilo global para EditText -->
+    <style name="Widget.Fortune.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/placeholder_text</item>
+    </style>
 </resources>
