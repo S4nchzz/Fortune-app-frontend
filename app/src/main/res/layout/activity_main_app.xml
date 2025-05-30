@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.view.MainAppActivity"
-        android:background="@drawable/gradi_background">
+        android:background="@color/app">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -235,6 +235,7 @@
         </LinearLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.App.BottomNavigationView"

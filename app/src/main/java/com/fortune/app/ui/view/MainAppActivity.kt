@@ -2,6 +2,7 @@ package com.fortune.app.ui.view
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Bitmap.Config
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -50,6 +51,7 @@ import com.fortune.app.ui.view.app.EditProfileActivity
 import com.fortune.app.ui.view.app.SecurityActivity
 import com.fortune.app.ui.viewmodel.bank_data.Account_ViewModel
 import com.fortune.app.ui.viewmodel.user.User_ViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,6 +90,7 @@ class MainAppActivity : AppCompatActivity() {
         }
 
         slideMenuConfiguration()
+        manageBottomNavigation()
         loadUserViewData()
     }
 
@@ -332,6 +335,34 @@ class MainAppActivity : AppCompatActivity() {
                 else -> {
                     false
                 }
+            }
+        }
+    }
+
+    private fun manageBottomNavigation() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        bottomNavigationView.selectedItemId = R.id.home_bm
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bizum_bm -> {
+                    bottomNavigationView.selectedItemId = R.id.home_bm
+                    val openBizum = Intent(this@MainAppActivity, BizumActivity::class.java)
+                    startActivity(openBizum)
+                    true
+                }
+                R.id.home_bm -> {
+                    val openMain = Intent(this@MainAppActivity, MainAppActivity::class.java)
+                    startActivity(openMain)
+                    true
+                }
+                R.id.security_bm -> {
+                    bottomNavigationView.selectedItemId = R.id.home_bm
+                    val openSec = Intent(this@MainAppActivity, SecurityActivity::class.java)
+                    startActivity(openSec)
+                    true
+                }
+                else -> false
             }
         }
     }

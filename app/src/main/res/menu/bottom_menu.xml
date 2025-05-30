@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/bizum_bm" android:title="Bizum" android:iconTint="@color/white" android:icon="@drawable/bizum_logo"/>
-    <item android:id="@+id/config_bm" android:title="Configuracion" android:iconTint="@color/white" android:icon="@drawable/config_icon" android:checked="true"/>
+    <item android:id="@+id/home_bm" android:title="Home" android:iconTint="@color/white" android:icon="@drawable/home_icon" android:checked="true"/>
     <item android:id="@+id/security_bm" android:title="Seguridad" android:iconTint="@color/white" android:icon="@drawable/security_config_icon"/>
 </menu>
