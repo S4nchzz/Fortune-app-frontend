@@ -113,7 +113,6 @@ class RegisterActivity : AppCompatActivity() {
         return isValid
     }
 
-
     private fun areAllFieldsFilled(): Boolean {
         val identityDocument: TextInputEditText = findViewById(R.id.register_data_identityDocument)
         val email: TextInputEditText = findViewById(R.id.register_data_email)

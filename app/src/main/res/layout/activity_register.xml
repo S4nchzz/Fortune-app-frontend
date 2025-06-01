@@ -46,6 +46,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/register_data_identityDocument"
+                    android:maxLength="9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/dni_nie"

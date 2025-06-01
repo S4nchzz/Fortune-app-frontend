@@ -17,6 +17,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.text.isDigitsOnly
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fortune.app.R
@@ -25,6 +26,7 @@ import com.fortune.app.data.entities.user.dto.UserDTO
 import com.fortune.app.domain.state.RegisterState
 import com.fortune.app.ui.dialogs.AccountCreation_Dialog
 import com.fortune.app.ui.viewmodel.auth.Auth_ViewModel
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 
@@ -51,11 +53,15 @@ class UProfileActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        val name: EditText = findViewById(R.id.profile_name_data)
-        val address: EditText = findViewById(R.id.profile_address_data)
-        val phone: EditText = findViewById(R.id.profile_phone_data)
+        val name: EditText = findViewById(R.id.name_field)
+        val address: EditText = findViewById(R.id.address_field)
+        val phone: EditText = findViewById(R.id.phone_field)
 
         findViewById<Button?>(R.id.btn_confirm_profile).setOnClickListener {
+            if (!validateFields()) {
+                return@setOnClickListener
+            }
+
             handleFullRegister(name.text.toString(), address.text.toString(), phone.text.toString())
         }
 
@@ -63,6 +69,46 @@ class UProfileActivity : AppCompatActivity() {
         imageButton.setOnClickListener {
             pickImageLauncher.launch("image/**")
         }
+    }
+
+    private fun validateFields(): Boolean {
+        val nameLayout: TextInputLayout = findViewById(R.id.name_layout)
+        val addressLayout: TextInputLayout = findViewById(R.id.address_layout)
+        val phoneLayout: TextInputLayout = findViewById(R.id.phone_layout)
+
+        val nameField: EditText = findViewById(R.id.name_field)
+        val addressField: EditText = findViewById(R.id.address_field)
+        val phoneField: EditText = findViewById(R.id.phone_field)
+
+        if (nameField.text.isNullOrEmpty()) {
+            addressLayout.error = null
+            phoneLayout.error = null
+            nameLayout.error = "Este campo no puede estar vacio."
+            return false
+        }
+
+        if (addressField.text.isNullOrEmpty()) {
+            nameLayout.error = null
+            phoneLayout.error = null
+            addressLayout.error = "Este campo no puede estar vacio."
+            return false
+        }
+
+        if (phoneField.text.isNullOrEmpty()) {
+            nameLayout.error = null
+            addressLayout.error = null
+            phoneLayout.error = "Este campo no puede estar vacio."
+            return false
+        }
+
+        if (!phoneField.text.isDigitsOnly() || phoneField.text.length != 9) {
+            nameLayout.error = null
+            addressLayout.error = null
+            phoneLayout.error = "Introduzca un numero valido. (9 cifras sin prefijo (+34  por defecto))"
+            return false
+        }
+
+        return true
     }
 
     private fun handleFullRegister(name: String, address: String, phone: String) {

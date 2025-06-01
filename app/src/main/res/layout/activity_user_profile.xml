@@ -32,8 +32,8 @@
 
     <ImageButton
             android:id="@+id/pfp"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:scaleType="centerCrop"
             android:src="@drawable/icon_edit_profile"
             android:layout_gravity="center"
@@ -44,6 +44,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
         <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -53,7 +54,7 @@
                 android:hint="@string/nombre">
 
             <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/profile_name_data"
+                    android:id="@+id/name_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/disabled2"
@@ -63,6 +64,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/address_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -71,7 +73,7 @@
                 android:hint="@string/direcci_n">
 
             <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/profile_address_data"
+                    android:id="@+id/address_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/disabled2"
@@ -81,6 +83,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -89,7 +92,8 @@
                 android:hint="@string/telf">
 
             <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/profile_phone_data"
+                    android:id="@+id/phone_field"
+                    android:maxLength="9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/disabled2"
