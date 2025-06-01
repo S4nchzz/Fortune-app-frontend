@@ -48,6 +48,7 @@
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/login_data_dniNie"
                     android:layout_width="match_parent"
+                    android:maxLength="9"
                     android:layout_height="70dp"
                     android:inputType="text" />
 
