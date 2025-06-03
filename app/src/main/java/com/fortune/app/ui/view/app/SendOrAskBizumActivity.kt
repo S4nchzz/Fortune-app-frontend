@@ -117,10 +117,18 @@ class SendOrAskBizumActivity : AppCompatActivity() {
             findViewById<Button>(id).setOnClickListener {
                 val button = it as Button
 
+                if (button.id == R.id.zero && (amountText.text.length == 1 && amountText.text == "0")) {
+                    return@setOnClickListener
+                }
+
                 if (!commaPressed) {
                     if (amountText.text.length > 4 || amountText.text.toString().replace(",", ".").toDouble() > 2000) {
                         bizumError.text = "No se permiten pagos de mas de 2000€"
                         return@setOnClickListener
+                    }
+
+                    if (amountText.text.length == 1 && button.id != R.id.zero && amountText.text.startsWith("0")) {
+                        amountText.text = amountText.text.removeRange(0, 1)
                     }
 
                     if (amountText.text.toString() == "0,00") {
@@ -154,15 +162,21 @@ class SendOrAskBizumActivity : AppCompatActivity() {
         bizumViewModel.makeBizum.observe(this) { makeBizumState ->
             when(makeBizumState) {
                 is BizumState.Success -> {
-                    SuccessOrFail_Dialog(false, "El bizum se ha enviado correctamente al destinatario.").show(supportFragmentManager, "Bizum sended")
+                    SuccessOrFail_Dialog(false, "El bizum se ha enviado correctamente al destinatario."){
+                        finish()
+                    }.show(supportFragmentManager, "Bizum sended")
                 }
 
                 is BizumState.UserNotFound -> {
-                    SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono").show(supportFragmentManager, "Bizum not sended")
+                    SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono"){
+                        finish()
+                    }.show(supportFragmentManager, "Bizum not sended")
                 }
 
                 is BizumState.Error -> {
-                    SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
+                    SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud."){
+                        finish()
+                    }.show(supportFragmentManager, "Bizum error")
                 }
             }
 
@@ -172,15 +186,21 @@ class SendOrAskBizumActivity : AppCompatActivity() {
         bizumViewModel.requestBizum.observe(this) { makeBizumState ->
             when(makeBizumState) {
                 is BizumState.Success -> {
-                    SuccessOrFail_Dialog(false, "Se ha solicitado el bizum al destinatario.").show(supportFragmentManager, "Bizum sended")
+                    SuccessOrFail_Dialog(false, "Se ha solicitado el bizum al destinatario."){
+                        finish()
+                    }.show(supportFragmentManager, "Bizum sended")
                 }
 
                 is BizumState.UserNotFound -> {
-                    SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono").show(supportFragmentManager, "Bizum not sended")
+                    SuccessOrFail_Dialog(true, "No se ha encontrado el destinatario, por favor, compruebe el numero de telefono"){
+                        finish()
+                    }.show(supportFragmentManager, "Bizum not sended")
                 }
 
                 is BizumState.Error -> {
-                    SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud.").show(supportFragmentManager, "Bizum error")
+                    SuccessOrFail_Dialog(true, "Hubo un error al procesar la solicitud."){
+                        finish()
+                    }.show(supportFragmentManager, "Bizum error")
                 }
             }
 
@@ -188,6 +208,11 @@ class SendOrAskBizumActivity : AppCompatActivity() {
         }
 
         sendButton.setOnClickListener {
+            if (amountText.text.toString() == "0,00" || amountText.text.toString() == "0") {
+                SuccessOrFail_Dialog(true, "Introduzca un numero valido").show(supportFragmentManager, "Invalid send button")
+                return@setOnClickListener
+            }
+
             var ensureAmountFormat = amountText.text.toString();
             phoneLayout.error = ""
             bizumError.text = ""

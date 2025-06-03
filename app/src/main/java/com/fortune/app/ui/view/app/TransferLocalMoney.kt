@@ -118,6 +118,11 @@ class TransferLocalMoney : AppCompatActivity() {
         val cardViewModel: Card_ViewModel by viewModels()
         val transferButton: Button = findViewById(R.id.transfer_money_btn)
         transferButton.setOnClickListener {
+            val toCheckText = amountText.text.toString().replace(",", "")
+            if (toCheckText.isNotEmpty() && toCheckText.all { it == '0' }) {
+                SuccessOrFail_Dialog(true, "Introduzca un numero valido").show(supportFragmentManager, "Invalid send button")
+                return@setOnClickListener
+            }
             cardViewModel.getCardByUUID(cardUUIDSelected)
         }
 
@@ -125,9 +130,17 @@ class TransferLocalMoney : AppCompatActivity() {
             findViewById<Button>(id).setOnClickListener {
                 val button = it as Button
 
+                if (button.id == R.id.zero && (amountText.text.length == 1 && amountText.text == "0")) {
+                    return@setOnClickListener
+                }
+
                 if (!commaPressed) {
                     if (amountText.text.length > 4 || amountText.text.toString().replace(",", ".").toDouble() > 2000) {
                         return@setOnClickListener
+                    }
+
+                    if (amountText.text.length == 1 && button.id != R.id.zero && amountText.text.startsWith("0")) {
+                        amountText.text = amountText.text.removeRange(0, 1)
                     }
 
                     if (amountText.text.toString() == "0,00") {
@@ -163,10 +176,20 @@ class TransferLocalMoney : AppCompatActivity() {
                 is CardUniqueState.Success -> {
                     val fromCardUUID = intent.getStringExtra("card_uuid").orEmpty()
 
+                    var ensureAmountFormat = amountText.text.toString();
+
+                    if (ensureAmountFormat.contains(",") && ensureAmountFormat.contains(".")) {
+                        ensureAmountFormat = ensureAmountFormat.replace(".", "_");
+                        ensureAmountFormat = ensureAmountFormat.replace(",", ".");
+                        ensureAmountFormat = ensureAmountFormat.replace("_", ".");
+                    } else if (ensureAmountFormat.contains(",")) {
+                        ensureAmountFormat = ensureAmountFormat.replace(",", ".")
+                    }
+
                     cardViewModel.cardBalanceStateTransfer.observe(this) { cardBalanceState ->
                         when(cardBalanceState) {
                             is CardBalanceState.Success -> {
-                                if (amountText.text.toString().toDouble() > cardBalanceState.card_balance) {
+                                if (ensureAmountFormat.toDouble() > cardBalanceState.card_balance) {
                                     SuccessOrFail_Dialog(true, "El importe elegido es superior al de la tarjeta que realiza la transferencia."){
                                         finish()
                                     }.show(supportFragmentManager, "Card canot be transfered")
@@ -187,16 +210,6 @@ class TransferLocalMoney : AppCompatActivity() {
                                             }.show(supportFragmentManager, "Money transfer error")
                                         }
                                     }
-                                }
-
-                                var ensureAmountFormat = amountText.text.toString();
-
-                                if (ensureAmountFormat.contains(",") && ensureAmountFormat.contains(".")) {
-                                    ensureAmountFormat = ensureAmountFormat.replace(".", "_");
-                                    ensureAmountFormat = ensureAmountFormat.replace(",", ".");
-                                    ensureAmountFormat = ensureAmountFormat.replace("_", ".");
-                                } else if (ensureAmountFormat.contains(",")) {
-                                    ensureAmountFormat = ensureAmountFormat.replace(",", ".")
                                 }
 
                                 cardViewModel.transferBalance(fromCardUUID, cardUUIDSelected, ensureAmountFormat.toDouble())
