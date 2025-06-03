@@ -67,6 +67,12 @@ class TransferLocalMoney : AppCompatActivity() {
                     val snapHelper = androidx.recyclerview.widget.PagerSnapHelper()
                     snapHelper.attachToRecyclerView(recyclerView)
 
+                    recyclerView.post {
+                        recyclerView.scrollToPosition(0)
+                        val holder = recyclerView.findViewHolderForAdapterPosition(0)
+                        holder?.itemView?.performClick()
+                    }
+
                     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                             super.onScrollStateChanged(recyclerView, newState)
