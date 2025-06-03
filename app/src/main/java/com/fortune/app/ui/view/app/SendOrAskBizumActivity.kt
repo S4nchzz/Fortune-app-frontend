@@ -208,7 +208,8 @@ class SendOrAskBizumActivity : AppCompatActivity() {
         }
 
         sendButton.setOnClickListener {
-            if (amountText.text.toString() == "0,00" || amountText.text.toString() == "0") {
+            val toCheckText = amountText.text.toString().replace(",", "")
+            if (toCheckText.isNotEmpty() && toCheckText.all { it == '0' }) {
                 SuccessOrFail_Dialog(true, "Introduzca un numero valido").show(supportFragmentManager, "Invalid send button")
                 return@setOnClickListener
             }
